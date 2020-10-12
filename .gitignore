@@ -1,6 +1,7 @@
 data/
 fairseq/
-mosesdecoder/*
+mosesdecoder/
+apex/
 
 
 # Byte-compiled / optimized / DLL files
