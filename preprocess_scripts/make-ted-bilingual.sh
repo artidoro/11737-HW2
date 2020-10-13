@@ -18,6 +18,7 @@ LANS=(
   aze)
 
 for i in ${!LANS[*]}; do
+  echo "------------------- 0 ---------------------"
   LAN=${LANS[$i]}
   mkdir -p "$PROC_DDIR"/"$LAN"_eng
   for f in "$RAW_DDIR"/"$LAN"_eng/*.orig.*-eng  ; do
@@ -29,6 +30,7 @@ for i in ${!LANS[*]}; do
       python preprocess_scripts/cut-corpus.py 1 < $f > $trg
     fi
   done
+  echo "------------------- 1 ---------------------"
   for f in "$RAW_DDIR"/"$LAN"_eng/*.orig.{eng,$LAN} ; do
     f1=${f/orig/mtok}
     if [ ! -f "$f1" ]; then
@@ -36,6 +38,7 @@ for i in ${!LANS[*]}; do
       cat $f | perl $TOKENIZER > $f1
     fi
   done
+  echo "------------------- 2 ---------------------"
   # learn BPE with sentencepiece
   TRAIN_FILES="$RAW_DDIR"/"$LAN"_eng/ted-train.mtok."$LAN","$RAW_DDIR"/"$LAN"_eng/ted-train.mtok.eng
   echo "learning joint BPE over ${TRAIN_FILES}..."
@@ -45,14 +48,15 @@ for i in ${!LANS[*]}; do
 	--vocab_size=$VOCAB_SIZE \
 	--character_coverage=1.0 \
 	--model_type=bpe
+  echo "------------------- 3 ---------------------"
 
   python "$SPM_ENCODE" \
 	--model="$PROC_DDIR"/"$LAN"_eng/spm"$VOCAB_SIZE".model \
 	--output_format=piece \
-	--inputs "$RAW_DDIR"/"$LAN"_eng/ted-train.mtok."$LAN" "$RAW_DDIR"/"$LAN"_eng/ted-train.mtok.eng  \
+	--inputs "$RAW_DDIR""$LAN"_eng/ted-train.mtok."$LAN" "$RAW_DDIR""$LAN"_eng/ted-train.mtok.eng  \
 	--outputs "$PROC_DDIR"/"$LAN"_eng/ted-train.spm"$VOCAB_SIZE"."$LAN" "$PROC_DDIR"/"$LAN"_eng/ted-train.spm"$VOCAB_SIZE".eng \
 	--min-len 1 --max-len 200 
- 
+  echo "------------------- 4 ---------------------"
   echo "encoding valid/test data with learned BPE..."
   for split in dev test;
   do
