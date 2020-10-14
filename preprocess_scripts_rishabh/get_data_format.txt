@@ -1,0 +1,5 @@
+cp bel_eng_withepi/*.epi bep_eng/
+cp bel_eng_withepi/*.bel-eng bep_eng/
+rm bel_eng/*.epi
+cp bel_eng/*.eng bep_eng/
+cp bel_eng/*.bel-eng same with *.bep-eng
