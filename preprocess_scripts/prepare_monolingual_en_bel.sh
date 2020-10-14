@@ -15,10 +15,10 @@ orig=orig
 tmp=$OUTDIR/tmp
 mkdir -p $OUTDIR
 mkdir -p $OUTDIR $tmp
-mkdir -p $OUTDIR $orig
-SLAN=eng
-TLAN=aze
-OLAN=aze
+mkdir -p $OUTDIR/$orig
+SLAN=bel
+TLAN=eng
+OLAN=bel
 VOCAB_SIZE=8000
 SUBSAMPLE_SIZE=100000
 RAW_DDIR=data/mono/
@@ -71,8 +71,6 @@ for ((i=0;i<${#URLS[@]};++i)); do
     fi
 done
 cd ../../../..
-
-exit /b 1
 
 echo "------------------- 0 ---------------------"
 echo "$TLAN"
