@@ -1,0 +1,17 @@
+azc is the language where aze and IPA of aze are concatenated sentence wise. (Concatenated IPA)
+bzc is the same for Belarusian
+
+azp is the language where only the IPA of aze is there. (Only IPA setup)
+bzp is the language where only the IPA of bel is there.
+
+
+ted_azeazpturtup_sepspm8000 is the full multilingual setup of aze + IPA and tur + IPA.
+Same for belbeprusrup
+
+ted_azeazp_sepspm8000 is the Multilingual M20 setup of aze and azp (IPA of aze). (M2O-Bilingual-IPA)
+same for belbep
+
+
+
+tex_xxx_spm8000_mbart are the results for mbart on the bilingual setup
+
