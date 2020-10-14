@@ -1,0 +1,1265 @@
+2020-10-11 19:38:09 | INFO | fairseq_cli.generate | Namespace(all_gather_list_size=16384, batch_size=32, batch_size_valid=32, beam=5, bf16=False, bpe=None, broadcast_buffers=False, bucket_cap_mb=25, checkpoint_suffix='', constraints=None, cpu=False, criterion='cross_entropy', curriculum=0, data='fairseq/data-bin/ted_belrus_sepspm8000/M2O/', data_buffer_size=10, dataset_impl=None, ddp_backend='c10d', decoder_langtok=False, decoding_format=None, device_id=0, disable_validation=False, distributed_backend='nccl', distributed_init_method=None, distributed_no_spawn=False, distributed_port=-1, distributed_rank=0, distributed_world_size=1, distributed_wrapper='DDP', diverse_beam_groups=-1, diverse_beam_strength=0.5, diversity_rate=-1.0, empty_cache_freq=0, enable_lang_ids=False, enable_reservsed_directions_shared_datasets=False, encoder_langtok=None, extra_data=None, extra_lang_pairs=None, fast_stat_sync=False, find_unused_parameters=False, fix_batches_to_gpus=False, fixed_validation_seed=None, force_anneal=None, fp16=False, fp16_init_scale=128, fp16_no_flatten_grads=False, fp16_scale_tolerance=0.0, fp16_scale_window=None, gen_subset='valid', iter_decode_eos_penalty=0.0, iter_decode_force_max_iter=False, iter_decode_max_iter=10, iter_decode_with_beam=1, iter_decode_with_external_reranker=False, keep_inference_langtok=False, lang_dict=None, lang_pairs='bel-eng,rus-eng', lang_tok_replacing_bos_eos=False, lang_tok_style='multilingual', langs=None, langtoks=None, langtoks_specs=['main'], left_pad_source='True', left_pad_target='False', lenpen=1, lm_path=None, lm_weight=0.0, load_alignments=False, local_rank=0, localsgd_frequency=3, log_format=None, log_interval=100, lr_scheduler='fixed', lr_shrink=0.1, match_source_len=False, max_len_a=0, max_len_b=200, max_source_positions=1024, max_target_positions=1024, max_tokens=None, max_tokens_valid=None, memory_efficient_bf16=False, memory_efficient_fp16=False, min_len=1, min_loss_scale=0.0001, model_overrides='{}', model_parallel_size=1, moses_no_dash_splits=False, moses_no_escape=False, moses_source_lang=None, moses_target_lang=None, nbest=1, no_beamable_mm=False, no_early_stop=False, no_progress_bar=False, no_repeat_ngram_size=0, no_seed_provided=False, nprocs_per_node=1, num_shards=1, num_workers=1, optimizer=None, path='fairseq/checkpoints/ted_belrus_sepspm8000/M2O//checkpoint_best.pt', pipeline_balance=None, pipeline_checkpoint='never', pipeline_chunks=0, pipeline_devices=None, pipeline_model_parallel=False, prefix_size=0, print_alignment=False, print_step=False, profile=False, quantization_config_path=None, quiet=False, remove_bpe='sentencepiece', replace_unk=None, required_batch_size_multiple=8, required_seq_len_multiple=1, results_path=None, retain_dropout=False, retain_dropout_modules=None, retain_iter_history=False, sacrebleu=False, sampling=False, sampling_method='concat', sampling_temperature=1.5, sampling_topk=-1, sampling_topp=-1.0, sampling_weights=None, sampling_weights_from_file=None, score_reference=False, scoring='sacrebleu', seed=1, shard_id=0, skip_invalid_size_inputs_valid_test=False, slowmo_algorithm='LocalSGD', slowmo_momentum=None, source_lang='bel', target_lang='eng', task='translation_multi_simple_epoch', temperature=1.0, tensorboard_logdir=None, threshold_loss_scale=None, tokenizer='moses', tpu=False, train_subset='train', truncate_source=False, unkpen=0, unnormalized=False, upsample_primary=1, user_dir=None, valid_subset='valid', validate_after_updates=0, validate_interval=1, validate_interval_updates=0, virtual_data_size=None, virtual_epoch_size=1000000, warmup_updates=0, zero_sharding='none')
+2020-10-11 19:38:09 | WARNING | fairseq.data.multilingual.multilingual_data_manager | External language dictionary is not provided; use lang-pairs to infer the set of supported languages. The language ordering is not stable which might cause misalignment in pretraining and finetuning.
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | inferred language list: ['bel', 'eng', 'rus']
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | [bel] dictionary: 21771 types
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | [eng] dictionary: 21771 types
+2020-10-11 19:38:09 | INFO | fairseq.tasks.translation_multi_simple_epoch | loading data for valid epoch=1/None
+2020-10-11 19:38:09 | INFO | fairseq.tasks.translation_multi_simple_epoch | mem usage: N/A
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | langtoks settings: {'main': (None, None)}
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | [valid] num of shards: {'main:bel-eng': 1}
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | main:bel-eng src_langtok: None; tgt_langtok: None
+2020-10-11 19:38:09 | INFO | fairseq.data.data_utils | loaded 248 examples from: fairseq/data-bin/ted_belrus_sepspm8000/M2O/valid.bel-eng.bel
+2020-10-11 19:38:09 | INFO | fairseq.data.data_utils | loaded 248 examples from: fairseq/data-bin/ted_belrus_sepspm8000/M2O/valid.bel-eng.eng
+2020-10-11 19:38:09 | INFO | fairseq.data.multilingual.multilingual_data_manager | fairseq/data-bin/ted_belrus_sepspm8000/M2O/ valid bel-eng 248 examples
+2020-10-11 19:38:09 | INFO | fairseq_cli.generate | loading model(s) from fairseq/checkpoints/ted_belrus_sepspm8000/M2O//checkpoint_best.pt
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | start batch sampler: mem usage: N/A
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | [valid] @batch_sampler order indices time: 0:00:00.000371
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | mem usage: N/A
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | [valid] @batch_sampler filter_by_size time: 0:00:00.001779
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | mem usage: N/A
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | [valid] @batch_sampler batch_by_size time: 0:00:00.001853
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | [valid] per epoch batch_sampler set-up time: 0:00:00.004335
+2020-10-11 19:38:11 | INFO | fairseq.tasks.translation_multi_simple_epoch | mem usage: N/A
+S-171	Гэта несапраўдны колер.
+T-171	This is in false color.
+H-171	-0.9238120913505554	It &apos;s not a vibrator .
+D-171	-0.9238120913505554	It 's not a vibrator.
+P-171	-1.1294 -0.1483 -0.0579 -0.0574 -0.0771 -0.0797 -1.0501 -5.5427 -1.2728 -0.6753 -0.0712
+S-35	Лічыце, што мне было лёгка?
+T-35	But do you think it was easy?
+H-35	-1.1921638250350952	How can I tell you that I was easy to do ?
+D-35	-1.1921638250350952	How can I tell you that I was easy to do?
+P-35	-3.5672 -0.5069 -0.2902 -1.6020 -0.8643 -1.7776 -0.4678 -0.7676 -1.8879 -0.8606 -2.0832 -0.7565 -0.0663
+S-3	Мая маці нарадзіла 16 дзяцей.
+T-3	My mother had 16 pregnancies.
+H-3	-1.2220324277877808	My mother died 36 children .
+D-3	-1.2220324277877808	My mother died 36 children.
+P-3	-0.0081 -0.3479 -2.9682 -3.9582 -1.0824 -0.1184 -0.0711
+S-244	І гэтая мапа таксама правільная.
+T-244	And this map is also accurate.
+H-244	-1.1182225942611694	And it &apos;s also the same thing .
+D-244	-1.1182225942611694	And it 's also the same thing.
+P-244	-0.1857 -3.4942 -0.9135 -0.0554 -0.0556 -0.0851 -0.2397 -1.3402 -2.9008 -3.8368 -0.2228 -0.0889
+S-70	Ведаем, куды вы накіраваліся.
+T-70	We know where you are going.
+H-70	-0.8448490500450134	You &apos;re going to go where you &apos;re going .
+D-70	-0.8448490500450134	You 're going to go where you 're going.
+P-70	-1.0178 -2.5316 -0.0631 -0.0640 -0.4175 -2.3376 -0.1067 -1.6230 -1.6509 -0.4342 -0.8943 -0.0686 -0.0608 -0.6035 -1.2376 -1.1777 -0.0735
+S-63	Працавалі з маці і дзецьмі.
+T-63	We worked with mothers and children.
+H-63	-0.9225786328315735	The mother was mother and mother .
+D-63	-0.9225786328315735	The mother was mother and mother.
+P-63	-1.5759 -0.1329 -2.4821 -1.3105 -0.3421 -1.1992 -0.2645 -0.0735
+S-54	Таму я іх запрасіла да сябе.
+T-54	So I invited them to the office.
+H-54	-1.1509108543395996	So what I &apos;ve done is that I &apos;ve got them to do .
+D-54	-1.1509108543395996	So what I 've done is that I 've got them to do.
+P-54	-0.6482 -3.8408 -0.0590 -2.6714 -0.0606 -0.0584 -0.7744 -1.5211 -0.6677 -1.8578 -0.4277 -1.5254 -0.0648 -0.0601 -1.1822 -2.9981 -1.8754 -0.3317 -2.9540 -0.5063 -0.0842
+S-10	Я пераехала ў Амерыку.
+T-10	I came to America.
+H-10	-0.9780563712120056	I &apos;m going to go to jail .
+D-10	-0.9780563712120056	I 'm going to go to jail.
+P-10	-0.2797 -1.1289 -0.0589 -0.0593 -0.6036 -2.0035 -0.0265 -3.5318 -0.5869 -3.1738 -0.2114 -0.0724
+S-220	Яны не хутчэйшыя коні.
+T-220	They are not faster horses.
+H-220	-0.7812666893005371	They &apos;re not faster .
+D-220	-0.7812666893005371	They 're not faster.
+P-220	-0.2172 -0.7035 -0.0623 -0.0612 -0.1472 -0.5158 -3.6739 -1.5742 -0.0761
+S-187	Дык як мы можам гэта зрабіць?
+T-187	Well, how do we do this?
+H-187	-0.3568806052207947	So how can we do this ?
+D-187	-0.3568806052207947	So how can we do this?
+P-187	-0.3076 -0.9142 -0.1827 -0.0503 -0.1896 -1.0960 -0.0549 -0.0597
+S-20	Я мела добрую працу,
+T-20	I had a good job.
+H-20	-1.2718414068222046	I started working on my work .
+D-20	-1.2718414068222046	I started working on my work.
+P-20	-0.7076 -2.6199 -1.5706 -1.2912 -3.0205 -0.7263 -0.1608 -0.0778
+S-210	Нам патрэбна неяк яе спрасціць.
+T-210	And we need a way to simplify it.
+H-210	-0.8719407916069031	We need to do it safe .
+D-210	-0.8719407916069031	We need to do it safe.
+P-210	-0.4923 -0.0901 -0.3348 -3.6289 -0.7880 -1.3853 -0.1845 -0.0717
+S-5	Уявіце, якім было маё дзяцінства.
+T-5	You can imagine as a child what I went through.
+H-5	-0.5938596725463867	Imagine my childhood .
+D-5	-0.5938596725463867	Imagine my childhood.
+P-5	-0.0452 -1.7441 -0.1905 -0.9106 -0.0789
+S-130	Хутка фірма пачала расці.
+T-130	Soon, my business really started to take off.
+H-130	-1.4101392030715942	The launch launch is going to work .
+D-130	-1.4101392030715942	The launch launch is going to work.
+P-130	-1.1494 -2.5963 -1.9441 -1.4966 -0.7986 -0.3263 -3.1661 -1.1403 -0.0737
+S-113	Ідэі могуць натхняць рухі.
+T-113	Ideas can spark a movement.
+H-113	-1.9154136180877686	Electricism can be used .
+D-113	-1.9154136180877686	Electricism can be used.
+P-113	-3.7955 -2.6448 -0.6670 -3.3445 -0.0836 -2.3915 -3.7494 -0.4852 -0.0773
+S-189	Паглядзім на выяву.
+T-189	Here is an image.
+H-189	-0.682996392250061	Let &apos;s look at the back .
+D-189	-0.682996392250061	Let 's look at the back.
+P-189	-1.2907 -0.0505 -0.0560 -0.0554 -0.0623 -0.3340 -0.1730 -0.9112 -3.4915 -1.0175 -0.0710
+S-231	У блокаў ёсць назвы.
+T-231	Blocks have names.
+H-231	-0.8040261268615723	There &apos;s a name .
+D-231	-0.8040261268615723	There 's a name.
+P-231	-1.3399 -1.0800 -0.0592 -0.0628 -0.0945 -0.9393 -0.4551 -3.1330 -0.0724
+S-81	Мы маглі ісці, куды хацелі.
+T-81	We were going everywhere.
+H-81	-1.018800973892212	We could know where to go .
+D-81	-1.018800973892212	We could know where to go.
+P-81	-0.3206 -0.4310 -3.9796 -0.3450 -2.0490 -0.6405 -0.3143 -0.0703
+S-182	Вас манілі дагэтуль.
+T-182	You were lied to.
+H-182	-1.3483531475067139	It &apos;s going to be gone .
+D-182	-1.3483531475067139	It 's going to be gone.
+P-182	-4.4478 -0.7080 -0.0555 -0.0578 -0.0917 -2.7088 -0.1102 -1.3712 -3.8988 -1.3072 -0.0748
+S-21	выкладала ва ўніверсітэце.
+T-21	I was a professor at a university.
+H-21	-1.0967985391616821	You &apos;ve seen it in college .
+D-21	-1.0967985391616821	You 've seen it in college.
+P-21	-2.2281 -1.5008 -0.0617 -0.0626 -0.1850 -2.8566 -1.7525 -1.2091 -1.9826 -0.1450 -0.0806
+S-18	Дзе ж было маё сэрца?
+T-18	But where was my heart?
+H-18	-0.44549739360809326	Where was my heart ?
+D-18	-0.44549739360809326	Where was my heart?
+P-18	-0.7274 -1.3567 -0.1294 -0.0967 -0.2936 -0.0693
+S-43	Яму было 80 гадоў.
+T-43	He was 80 years old.
+H-43	-0.23520781099796295	I was 80 years old .
+D-43	-0.23520781099796295	I was 80 years old.
+P-43	-0.3274 -0.1739 -0.0978 -0.8649 -0.0044 -0.1006 -0.0774
+S-42	Я запытвала.
+T-42	I asked.
+H-42	-1.2581374645233154	I &apos;ve been edited .
+D-42	-1.2581374645233154	I 've been edited.
+P-42	-0.4169 -3.7501 -0.0613 -0.0612 -0.3151 -2.5668 -4.8119 -0.2747 -0.2414 -0.0819
+S-31	Як я магу ім дапамагчы?
+T-31	How could I help these people?
+H-31	-0.27640435099601746	How can I help them help ?
+D-31	-0.27640435099601746	How can I help them help?
+P-31	-0.1580 -0.2114 -0.0147 -0.1487 -0.3597 -0.8204 -0.4222 -0.0760
+S-40	Як я збіралася гэта рабіць?
+T-40	How am I going to do that?
+H-40	-0.8952644467353821	How was I going to do this ?
+D-40	-0.8952644467353821	How was I going to do this?
+P-40	-0.3949 -4.2374 -0.0860 -0.2368 -0.0485 -1.9373 -0.9759 -0.0756 -0.0650
+S-2	Вось чаму мне так пашчасціла.
+T-2	So I guess I was the lucky one.
+H-2	-0.2460392415523529	That &apos;s why I was so lucky .
+D-2	-0.2460392415523529	That 's why I was so lucky.
+P-2	-0.9351 -0.1675 -0.0615 -0.0583 -0.0717 -0.0243 -0.1705 -0.4845 -0.4536 -0.0886 -0.3619 -0.0750
+S-80	Хачу проста падзяліцца з вамі.
+T-80	I just want to share this with you.
+H-80	-0.6706381440162659	I just want to share with you a few things .
+D-80	-0.6706381440162659	I just want to share with you a few things.
+P-80	-1.1769 -1.3708 -0.3744 -0.0855 -0.3384 -0.1290 -0.0102 -0.6950 -2.1030 -1.3898 -0.3033 -0.0714
+S-11	Я скончыла сваю адукацыю.
+T-11	I completed my education.
+H-11	-0.9769781231880188	I &apos;ve studied my education education .
+D-11	-0.9769781231880188	I 've studied my education education.
+P-11	-0.1964 -3.8393 -0.0482 -0.0563 -0.0257 -4.0592 -0.9083 -0.1698 -0.8820 -0.4843 -0.0772
+S-158	Насамрэч, наколькі вялікага?
+T-158	So, how big?
+H-158	-1.294482707977295	In fact , how great great is it ?
+D-158	-1.294482707977295	In fact, how great great is it?
+P-158	-2.9539 -0.1572 -0.0372 -0.4908 -1.5613 -1.5247 -3.3836 -2.6155 -0.1583 -0.0624
+S-44	Ён быў мулай.
+T-44	He was a mullah.
+H-44	-1.209376335144043	He was the house .
+D-44	-1.209376335144043	He was the house.
+P-44	-0.2909 -0.0793 -1.2251 -4.1966 -1.3834 -0.0810
+S-224	(Апладысменты)
+T-224	(Applause)
+H-224	-0.0406646803021431	( Applause )
+D-224	-0.0406646803021431	(Applause)
+P-224	-0.0766 -0.0055 -0.0304 -0.0501
+S-149	(Воплескі)
+T-149	(Applause)
+H-149	-0.04083908721804619	( Applause )
+D-149	-0.04083908721804619	(Applause)
+P-149	-0.0847 -0.0080 -0.0234 -0.0472
+S-168	Так, гэта мы сказалі пра неверагодны веліч.
+T-168	So that was very big.
+H-168	-0.967732846736908	So that &apos;s what we said .
+D-168	-0.967732846736908	So that 's what we said.
+P-168	-0.3189 -3.1994 -1.1417 -0.0528 -0.0562 -0.0644 -0.9101 -0.2475 -0.6038 -3.9392 -0.1110
+S-4	З 16 дзяцей толькі 5 засталіся жывымі.
+T-4	From 16 pregnancies, five of us are alive.
+H-4	-0.9720431566238403	There &apos;s only 56 kids living there .
+D-4	-0.9720431566238403	There 's only 56 kids living there.
+P-4	-2.1569 -1.5458 -0.0655 -0.0604 -0.0928 -0.9273 -0.8958 -0.0349 -0.8443 -3.9388 -1.5187 -0.4811 -0.0741
+S-219	І вырашэнне гэтах праблем не відавочные.
+T-219	And the solutions to these problems are not obvious.
+H-219	-0.864814817905426	And it &apos;s a solution that &apos;s not complicated .
+D-219	-0.864814817905426	And it 's a solution that 's not complicated.
+P-219	-0.5352 -2.1407 -1.0952 -0.0519 -0.0565 -0.0900 -1.0537 -0.8722 -1.3608 -1.9697 -0.0603 -0.0559 -0.0840 -0.2048 -4.8981 -0.0961 -0.0768
+S-78	Гэта сведчыць аб тым, што адукацыя змяняе людзей.
+T-78	That tells you that education transforms people.
+H-78	-0.9713500738143921	That &apos;s what education is for people .
+D-78	-0.9713500738143921	That 's what education is for people.
+P-78	-2.7796 -0.4198 -0.0604 -0.0628 -0.0592 -0.9638 -1.0796 -0.7345 -3.3004 -1.0774 -1.0408 -0.0779
+S-71	Усе збеглі да дому. Ніхто не застаўся.
+T-71	They ran away home. Nobody stayed there.
+H-71	-1.157954216003418	It &apos;s one of them . Nobody &apos;s waiting for me .
+D-71	-1.157954216003418	It 's one of them. Nobody 's waiting for me.
+P-71	-3.9731 -0.5956 -0.0610 -0.0541 -0.0709 -3.2094 -1.7765 -2.7410 -0.5700 -0.2336 -3.2685 -0.0612 -0.0551 -0.1553 -2.4170 -0.2544 -1.9365 -0.4700 -0.0979
+S-38	Ці давяралі мне? Натуральна, не.
+T-38	Did they trust me? Of course not.
+H-38	-1.1157549619674683	Could I find myself ? I didn &apos;t .
+D-38	-1.1157549619674683	Could I find myself? I didn 't.
+P-38	-1.4946 -0.2034 -3.0842 -2.1275 -0.1828 -3.4494 -1.7283 -0.0826 -0.0631 -0.0587 -0.0564 -1.8902 -0.0835
+S-9	І мой бацька адправіў мяне ў Амерыку.
+T-9	So as a result, my father sent me to America.
+H-9	-1.0422006845474243	And my father came to me to America .
+D-9	-1.0422006845474243	And my father came to me to America.
+P-9	-0.6555 -0.0782 -0.1036 -2.0622 -1.1528 -1.3950 -2.1423 -2.5728 -0.1850 -0.0746
+S-19	Маё сэрца было ў Афганістане.
+T-19	My heart was in Afghanistan.
+H-19	-1.0536963939666748	My heart heart was in Afghanistan .
+D-19	-1.0536963939666748	My heart heart was in Afghanistan.
+P-19	-0.8242 -0.1402 -0.6071 -0.9857 -0.1272 -4.8208 -0.8555 -0.0689
+S-111	Трэба пазваць рэшту Апыляльнікаў!
+T-111	I need to call on the rest of the Pollinators!
+H-111	-1.6289581060409546	And you &apos;re going to sort of sort of sort of going to be able to be able to build an ambassor .
+D-111	-1.6289581060409546	And you 're going to sort of sort of sort of going to be able to be able to build an ambassor.
+P-111	-1.8818 -1.3403 -2.7723 -0.0604 -0.0592 -1.2727 -0.4289 -0.0829 -2.1830 -0.0318 -3.2514 -0.0424 -3.8603 -0.0609 -5.1572 -1.0231 -2.1444 -2.1698 -0.1328 -3.7113 -2.6775 -0.1419 -3.8380 -1.5154 -4.6407 -0.2970 -1.9835 -0.4018 -0.0769
+S-61	Мае супрацоўнікі пачалі заходзіць у кабінет.
+T-61	By that time, my staff poured into my office.
+H-61	-1.3662710189819336	My employees started to come to the office .
+D-61	-1.3662710189819336	My employees started to come to the office.
+P-61	-1.3255 -3.1672 -0.4972 -1.7330 -2.8781 -2.1415 -0.8089 -0.8223 -0.2127 -0.0762
+S-77	І... (Плясканні) Дзякуй. (Плясканні)
+T-77	And — (Applause) Thank you. (Applause)
+H-77	-0.16379667818546295	( Applause ) Thank you . ( Applause )
+D-77	-0.16379667818546295	(Applause) Thank you. (Applause)
+P-77	-0.4908 -0.0803 -0.0221 -0.1320 -0.0390 -0.6433 -0.0737 -0.0022 -0.0287 -0.1259
+S-198	Сказанае дагэтуль насамрэч зносіць галаву.
+T-198	Certainly what I 've said so far is crazy.
+H-198	-1.140231728553772	It &apos;s really exciting to walk into your head .
+D-198	-1.140231728553772	It 's really exciting to walk into your head.
+P-198	-0.5181 -0.6752 -0.0558 -0.0551 -0.0820 -1.8456 -4.3089 -0.4505 -3.2316 -2.4723 -1.0171 -0.8313 -0.3433 -0.0765
+S-55	Яны ўвайшлі. Дзевяць талібаў.
+T-55	They came, and there were nine of them — nine Taliban.
+H-55	-1.3173185586929321	They went back .
+D-55	-1.3173185586929321	They went back.
+P-55	-0.2770 -2.7119 -2.2235 -0.4839 -0.8902
+S-181	Большасць матэрыі сусвету зроблена не з атамаў.
+T-181	Most of the universe 's matter is not made up of atoms.
+H-181	-1.4942147731781006	Most of us can &apos;t do it with the atoms .
+D-181	-1.4942147731781006	Most of us can 't do it with the atoms.
+P-181	-0.0849 -0.6126 -1.9809 -3.1468 -1.8242 -0.0563 -0.0597 -0.0425 -2.2968 -3.4324 -1.7600 -1.7635 -4.5491 -0.7259 -0.0776
+S-73	На іх прыходзілі сотні жанчын, каб атрымаць адукацыю.
+T-73	Hundreds of women were there coming to get training.
+H-73	-1.0399959087371826	They came out of hundreds of women to get education .
+D-73	-1.0399959087371826	They came out of hundreds of women to get education.
+P-73	-3.0974 -3.3155 -1.7839 -0.1498 -1.0089 -0.0891 -0.1127 -0.7641 -0.9902 -0.4960 -0.5975 -0.0749
+S-29	У той момант мы гаворым аб імпульсе.
+T-29	At that moment, we talk about momentum.
+H-29	-0.9470573663711548	At that moment , we &apos;re talking to them .
+D-29	-0.9470573663711548	At that moment, we 're talking to them.
+P-29	-1.1888 -1.0005 -0.8657 -0.6130 -0.0691 -3.2926 -0.0585 -0.0588 -0.4578 -1.7766 -0.7129 -2.4129 -0.6755 -0.0761
+S-179	Трэцяе — вывучэнне вельмі малога.
+T-179	Third thing: probing the very small.
+H-179	-1.2451622486114502	The third observation is very rare .
+D-179	-1.2451622486114502	The third observation is very rare.
+P-179	-0.7478 -0.2564 -3.8191 -0.9432 -0.2530 -1.0965 -3.9439 -0.0716 -0.0750
+S-51	Вы ведаеце, што на кану вашае жыццё.
+T-51	You know your life is on the line.
+H-51	-0.48727864027023315	You know what your life looks like .
+D-51	-0.48727864027023315	You know what your life looks like.
+P-51	-0.2619 -0.1857 -1.3621 -0.3466 -0.5504 -1.0954 -0.2475 -0.2701 -0.0658
+S-17	Я хацела, каб яны жылі ў бяспецы.
+T-17	I wanted them to be safe.
+H-17	-1.1324212551116943	I wanted them to be healthy in their community .
+D-17	-1.1324212551116943	I wanted them to be healthy in their community.
+P-17	-0.6465 -0.0430 -3.4922 -0.0426 -0.5917 -2.9699 -1.8109 -0.7178 -1.9773 -0.0831 -0.0816
+S-33	Яна змяніла мяне, надала мне статус.
+T-33	It transformed me. It gave me status.
+H-33	-1.2296277284622192	She changed me , and she changed me .
+D-33	-1.2296277284622192	She changed me, and she changed me.
+P-33	-0.6272 -1.3516 -0.1972 -2.3997 -1.7751 -0.5607 -2.8439 -0.8556 -1.5995 -0.0858
+S-114	Ідэі — гэта мажлівасці і новыя распрацоўкі.
+T-114	Ideas are opportunities and innovation.
+H-114	-0.9465749263763428	See , that &apos;s a new machine .
+D-114	-0.9465749263763428	See, that 's a new machine.
+P-114	-3.6833 -0.6362 -2.0094 -0.3519 -0.0560 -0.0574 -0.0904 -0.9676 -0.0939 -2.1123 -1.2221 -0.0784
+S-209	Паглядзім на праграмную сімуляцыю.
+T-209	Here is a computer simulation.
+H-209	-0.8260923624038696	Let &apos;s look at a tool .
+D-209	-0.8260923624038696	Let 's look at a tool.
+P-209	-1.0977 -0.0509 -0.0579 -0.0558 -0.0601 -0.4085 -0.0337 -1.2242 -4.6735 -1.3538 -0.0708
+S-76	Сёння гэтыя людзі — мае лепшыя трэнеры.
+T-76	Today, they are the best trainers.
+H-76	-1.3320013284683228	Today , these people have a way to do .
+D-76	-1.3320013284683228	Today, these people have a way to do.
+P-76	-1.2206 -0.6048 -0.8549 -0.0405 -2.5356 -2.8867 -2.6757 -0.4923 -2.2274 -1.0404 -0.0733
+S-82	Ведаеце, што здарылася з маёй краінай?
+T-82	But you know what happened to my country.
+H-82	-0.45686379075050354	Do you know what happened from my neighborhood ?
+D-82	-0.45686379075050354	Do you know what happened from my neighborhood?
+P-82	-1.0946 -0.0243 -0.0310 -0.0818 -0.1001 -0.5119 -0.1802 -2.4578 -0.0172 -0.0698
+S-169	Другі тып — гэтыя рэчы вельмі гарачыя.
+T-169	The second things is very hot.
+H-169	-1.5485838651657104	The second type is these things are very rare .
+D-169	-1.5485838651657104	The second type is these things are very rare.
+P-169	-0.4776 -3.1895 -2.9812 -1.7939 -1.2358 -1.2496 -0.5091 -0.7131 -4.7411 -0.0725 -0.0711
+S-95	Я хутка сэрвірую ваш заказ.
+T-95	Your food will be served shortly.
+H-95	-1.4143462181091309	I &apos;m quickly going to be a service service .
+D-95	-1.4143462181091309	I 'm quickly going to be a service service.
+P-95	-0.2914 -1.8830 -0.0598 -0.0592 -0.5146 -2.6188 -4.7532 -0.0725 -1.8506 -1.1456 -1.2692 -2.6991 -2.5022 -0.0815
+S-146	Дзякуй, усім міра і шчасця.
+T-146	Thank you, and peace and blessings.
+H-146	-1.2150894403457642	Thank you so much and happy .
+D-146	-1.2150894403457642	Thank you so much and happy.
+P-146	-0.2633 -0.0798 -3.6107 -0.6475 -0.6189 -4.2245 -0.2003 -0.0758
+S-53	Вы павінны мужацца і праяўляць моц.
+T-53	You have to hold it together and show strength.
+H-53	-1.467171549797058	You &apos;re going to need to be aware of the power .
+D-53	-1.467171549797058	You 're going to need to be aware of the power.
+P-53	-0.1429 -4.5851 -0.0603 -0.0632 -1.3269 -1.8103 -0.0670 -2.4448 -0.3052 -3.1916 -3.4016 -0.2100 -1.5479 -1.9813 -2.2581 -0.0787
+S-167	можна будзе адказаць вывучаючы гэтыя сістэмы.
+T-167	might be answered by studying these systems.
+H-167	-1.2383073568344116	You can learn to study these kinds of systems .
+D-167	-1.2383073568344116	You can learn to study these kinds of systems.
+P-167	-1.1729 -0.4591 -2.4985 -1.8157 -1.3217 -0.2388 -2.2044 -0.0652 -3.2951 -0.4797 -0.0705
+S-28	Гэта была вельмі абуральная сітуацыя.
+T-28	So it was a very devastating situation.
+H-28	-1.584152102470398	And it was pretty bad .
+D-28	-1.584152102470398	And it was pretty bad.
+P-28	-2.9908 -1.6058 -0.2359 -2.1610 -3.8674 -0.1516 -0.0765
+S-195	Так, гэта вельмі весела.
+T-195	So, it 's very funny.
+H-195	-0.9734886288642883	So it &apos;s very well .
+D-195	-0.9734886288642883	So it 's very well.
+P-195	-1.3778 -1.8809 -0.8346 -0.0624 -0.0594 -0.0898 -1.2992 -3.4488 -0.6004 -0.0816
+S-62	Працягвалі адчыняць клінікі.
+T-62	We continuously opened clinics.
+H-62	-1.3608379364013672	We &apos;ve got to open the exchange .
+D-62	-1.3608379364013672	We 've got to open the exchange.
+P-62	-3.4570 -2.9793 -0.0583 -0.0591 -0.2631 -1.6241 -0.3885 -1.3607 -1.5873 -3.7129 -0.7574 -0.0823
+S-150	Вось некалькі выяў аб 'яднанняў галактык.
+T-150	Here are some images of clusters of galaxies.
+H-150	-1.0762742757797241	Here &apos;s a couple of speculation that you &apos;re looking at .
+D-150	-1.0762742757797241	Here 's a couple of speculation that you 're looking at.
+P-150	-0.9453 -1.0823 -0.0587 -0.0589 -0.0589 -0.5374 -1.6301 -0.1869 -4.6524 -1.4319 -1.3330 -2.2501 -2.0265 -0.0621 -0.0588 -0.2154 -3.5812 -0.1417 -1.1383 -0.0756
+S-84	Але мы хочам вярнуцца да нашага старога Афганістана.
+T-84	But we want the same Afghanistan we had before.
+H-84	-0.933700442314148	But we want to go back to our grandference .
+D-84	-0.933700442314148	But we want to go back to our grandference.
+P-84	-0.0533 -0.2895 -0.4864 -0.0805 -1.7988 -0.0475 -0.1880 -1.0121 -2.3818 -1.2164 -3.4487 -1.0650 -0.0702
+S-186	І цёмная матэрыя не з 'яўляецца выключэннем.
+T-186	And dark matter is no exception.
+H-186	-1.1529327630996704	And dark material doesn &apos;t make things better .
+D-186	-1.1529327630996704	And dark material doesn 't make things better.
+P-186	-1.4222 -0.8632 -1.5484 -1.2182 -0.0655 -0.0683 -0.0574 -0.0457 -1.8767 -2.9697 -3.6432 -1.1441 -0.0655
+S-237	Дом, які быў пабудаваны другім - дом нумар два.
+T-237	The second house ever built is house number two.
+H-237	-1.2834221124649048	That &apos;s the only person who &apos;s gone .
+D-237	-1.2834221124649048	That 's the only person who 's gone.
+P-237	-3.5746 -1.9588 -0.0612 -0.0575 -0.0796 -1.3391 -1.4451 -1.7744 -3.0074 -1.2270 -0.0593 -0.0589 -0.1323 -2.9288 -2.7485 -0.0821
+S-39	Вось чаму я павінна была ўсталяваць давер у гэтай супольнасці.
+T-39	So I really needed to build the trust in this community.
+H-39	-1.0472445487976074	That &apos;s why I needed to build this social connection .
+D-39	-1.0472445487976074	That 's why I needed to build this social connection.
+P-39	-1.6485 -0.4774 -0.0545 -0.0585 -0.0773 -0.0103 -0.0726 -1.5922 -0.2704 -2.8325 -0.9631 -4.1764 -2.7551 -0.6418 -0.0780
+S-88	Кліент: Гмм, давайце паглядзім.
+T-88	Customer: Uh, let 's see.
+H-88	-1.1123294830322266	Kids : Let &apos;s let &apos;s start again .
+D-88	-1.1123294830322266	Kids: Let 's let 's start again.
+P-88	-2.3009 -2.0254 -0.4611 -1.6947 -0.0493 -0.0517 -0.0573 -0.0747 -3.6694 -0.1167 -0.0555 -0.0566 -0.0835 -3.5836 -4.1125 -0.3671 -0.1497
+S-87	Сэрвер-афіцыянт: Чаго пажадаеце?
+T-87	Server: May I help you, sir?
+H-87	-1.728425145149231	And what is the key thing : What are you going to want ?
+D-87	-1.728425145149231	And what is the key thing: What are you going to want?
+P-87	-3.8717 -1.8261 -1.2633 -0.8832 -4.9135 -3.0937 -1.0658 -1.5423 -2.2458 -1.1687 -1.5492 -0.1458 -1.6271 -0.6681 -0.0620
+S-7	Я хацела стаць доктаркай, каб дапамагчы жанчынам ды дзецям.
+T-7	I wanted to be a doctor to help women and children.
+H-7	-1.1194970607757568	I wanted to be a surrogate to help the men and children .
+D-7	-1.1194970607757568	I wanted to be a surrogate to help the men and children.
+P-7	-0.3385 -0.0276 -0.0343 -0.6284 -1.2842 -4.2755 -1.5870 -0.5408 -0.3388 -0.0277 -3.2867 -2.8805 -1.5480 -0.7636 -0.2754 -0.0749
+S-92	У нас адметныя высочваючыя радкі дадзеных.
+T-92	Our special is tracking cookie.
+H-92	-1.351838231086731	We have very high-speed data .
+D-92	-1.351838231086731	We have very high-speed data.
+P-92	-0.7054 -0.2010 -3.0185 -0.6182 -2.5653 -2.2187 -0.6133 -2.2757 -1.2272 -0.0751
+S-56	Я запрасіла іх сесці і прапанавала гарбаты.
+T-56	And I invited them to have a seat and have tea.
+H-56	-1.3138666152954102	And what I &apos;ve done is that I &apos;ve shown them that I &apos;ve been able to do something like this .
+D-56	-1.3138666152954102	And what I 've done is that I 've shown them that I 've been able to do something like this.
+P-56	-2.3974 -3.4899 -0.0974 -3.3630 -0.0591 -0.0580 -0.4851 -1.6269 -0.2225 -1.1828 -1.1031 -1.4486 -0.0627 -0.0576 -0.4716 -4.1705 -0.0557 -4.1525 -1.2065 -1.3415 -0.0643 -0.0600 -0.5653 -2.1276 -2.6304 -0.1214 -2.5016 -3.9494 -1.1414 -1.5165 -0.2192 -0.0943
+S-85	Яны атрымліваюць дыпломы і навучаюцца на адвакатаў.
+T-85	They are earning degrees. They are training to be lawyers.
+H-85	-1.6883727312088013	They &apos;re caring and learning from all of the circumstances .
+D-85	-1.6883727312088013	They 're caring and learning from all of the circumstances.
+P-85	-0.1486 -1.6203 -0.0513 -0.0565 -0.1533 -5.3288 -2.1479 -0.3106 -3.2862 -1.7649 -2.6285 -2.9125 -3.0067 -2.6789 -0.8439 -0.0751
+S-133	Шмат хто мяне пытае, чаму мае вырабы экалагічныя?
+T-133	Now a lot of people ask me, why is your business eco-friendly?
+H-133	-1.6037143468856812	And most of the people who ask me why do I grow animals ?
+D-133	-1.6037143468856812	And most of the people who ask me why do I grow animals?
+P-133	-3.8123 -1.6575 -0.3008 -2.9761 -2.5511 -1.1985 -1.6158 -0.0151 -0.1779 -1.1367 -0.8910 -2.7349 -4.3885 -0.5313 -0.0682
+S-22	І вось я паехала да лагеру бежанцаў.
+T-22	So I went to the refugee camp.
+H-22	-1.4528344869613647	And here I &apos;m going to get an hour of paper .
+D-22	-1.4528344869613647	And here I 'm going to get an hour of paper.
+P-22	-0.5346 -0.9979 -0.9854 -3.7678 -0.0637 -0.0620 -0.9153 -1.2658 -0.0350 -2.9019 -2.5368 -2.2851 -2.2533 -3.2517 -1.3083 -0.0806
+S-14	Праходзілі месяцы, гады, але я нічога не ведала.
+T-14	There were months, years, I didn 't know about it.
+H-14	-0.5208507776260376	After months , I didn &apos;t know anything .
+D-14	-0.5208507776260376	After months, I didn 't know anything.
+P-14	-2.2623 -0.0754 -0.7489 -0.2394 -1.4616 -0.0892 -0.0580 -0.0556 -0.0633 -0.4416 -0.6207 -0.5873 -0.0678
+S-50	Вы напалоханы. Ведаеце, што гэта небяспечна.
+T-50	You 're scared. You know it 's dangerous.
+H-50	-0.8976736664772034	You know , you know , you know , it &apos;s dangerous .
+D-50	-0.8976736664772034	You know, you know, you know, it 's dangerous.
+P-50	-0.1503 -4.1639 -0.3241 -0.5216 -3.7996 -0.1505 -1.3309 -2.0466 -0.1381 -0.8011 -0.2365 -0.0584 -0.0534 -0.0811 -1.1642 -0.1532 -0.0868
+S-97	Тады ж я даведалася, хто такія аніматары.
+T-97	At that age, I also learned about what an animator was.
+H-97	-1.2371000051498413	And I &apos;d like to find out who &apos;s going to be in front of the couples .
+D-97	-1.2371000051498413	And I 'd like to find out who 's going to be in front of the couples.
+P-97	-0.2530 -0.2608 -3.9653 -0.0566 -0.0541 -0.5300 -2.4448 -0.0454 -2.3788 -1.0808 -0.8096 -2.0618 -0.0627 -0.0533 -0.1349 -3.6028 -0.1355 -1.3757 -3.7515 -3.0541 -0.1205 -0.7812 -4.4564 -0.4656 -0.1439 -0.0856
+S-91	Сэрвер: Што-небудзь на салодкае?
+T-91	Server: Would you like any desserts, sir?
+H-91	-1.5791317224502563	Amy : What was it on a little bit ?
+D-91	-1.5791317224502563	Amy: What was it on a little bit?
+P-91	-2.9878 -2.7458 -0.0262 -0.1739 -2.6224 -2.6499 -1.2273 -1.1723 -1.7863 -1.6169 -1.8717 -0.0691
+S-32	У той момант я зразумела, што адукацыя змяніла маё жыццё.
+T-32	But at that moment, I knew that education changed my life.
+H-32	-0.5307475328445435	At that moment , I realized that education changed my life .
+D-32	-0.5307475328445435	At that moment, I realized that education changed my life.
+P-32	-1.2074 -0.8031 -0.7785 -0.3266 -0.2201 -0.3574 -0.3587 -1.5761 -0.6804 -0.2169 -0.1804 -0.1183 -0.0759
+S-52	Але як лідэр, вы павінны быць мужнымі.
+T-52	But as a leader, you have to hold it together.
+H-52	-0.6718059182167053	But like this , you have to be a husband .
+D-52	-0.6718059182167053	But like this, you have to be a husband.
+P-52	-0.0824 -2.1778 -2.5336 -0.1725 -0.0213 -1.2423 -0.0898 -0.0456 -0.8861 -0.4540 -0.2849 -0.0712
+S-59	Але ж я была моцная, трымалася мужна.
+T-59	But also I was strong, holding myself up.
+H-59	-1.5600413084030151	But I was very hard to get there .
+D-59	-1.5600413084030151	But I was very hard to get there.
+P-59	-0.1917 -0.2937 -0.6223 -2.9510 -4.3807 -1.5259 -1.4367 -3.4404 -0.6725 -0.0856
+S-94	Сэрвер: Прынясу найхутчэй.
+T-94	Server: Coming right up, sir.
+H-94	-1.5718493461608887	SW : I &apos;m going to be in the winter .
+D-94	-1.5718493461608887	SW: I 'm going to be in the winter.
+P-94	-2.9447 -2.0687 -0.0137 -3.0361 -1.0029 -0.0609 -0.0580 -1.6969 -2.9915 -0.0466 -1.6721 -3.0689 -1.0371 -5.2591 -0.1128 -0.0796
+S-151	Назва дасканальна супадае з рэчаіснасцю.
+T-151	They 're exactly what they sound like.
+H-151	-1.44691801071167	There &apos;s an expert in your mind that &apos;s really exciting .
+D-151	-1.44691801071167	There 's an expert in your mind that 's really exciting.
+P-151	-2.9289 -0.6655 -0.0580 -0.0583 -0.0664 -2.2671 -3.1915 -1.2721 -2.7073 -2.5228 -1.8630 -1.5499 -0.0748 -0.0590 -0.0821 -2.9188 -2.9974 -2.1301 -0.0784
+S-64	Праводзілі трэнінгі аб жаночым здароўі.
+T-64	We had reproductive health training.
+H-64	-1.958233118057251	Working for psychopaths .
+D-64	-1.958233118057251	Working for psychopaths.
+P-64	-4.5080 -1.5107 -1.4150 -5.4396 -1.8334 -0.7271 -0.1578 -0.0742
+S-1	Я нарадзілася ў сям 'і сярэдняга класа.
+T-1	(English) I was born in a middle class family.
+H-1	-1.0927784442901611	I was born in a family .
+D-1	-1.0927784442901611	I was born in a family.
+P-1	-0.1497 -0.4326 -1.0119 -0.2858 -0.4411 -2.3365 -4.0119 -0.0727
+S-197	Чацвертая рэч: фізіка вельмі дзіўнага.
+T-197	Fourth thing: the physics of the very strange.
+H-197	-1.5862064361572266	The third thing is , the theory is very strange .
+D-197	-1.5862064361572266	The third thing is, the theory is very strange.
+P-197	-2.7060 -4.1900 -0.7090 -0.8268 -1.4621 -3.1023 -1.4419 -0.5480 -1.2748 -2.4990 -0.1999 -0.0747
+S-115	Дзякуючы ідэям насамрэч свет варочаецца наўкола.
+T-115	Ideas truly are what make the world go round.
+H-115	-1.3732154369354248	It &apos;s actually the ideal world &apos;s field .
+D-115	-1.3732154369354248	It 's actually the ideal world 's field.
+P-115	-2.7006 -0.6118 -0.0532 -0.0560 -0.0670 -2.8351 -3.0962 -3.5905 -0.9704 -1.1315 -0.0680 -0.0572 -0.0935 -3.5203 -3.0325 -0.0875
+S-164	Але больш таго, яны маюць дадатковую асаблівасць.
+T-164	But more than their mass, they have this additional feature.
+H-164	-1.1025038957595825	But more than they do , they &apos;re not special .
+D-164	-1.1025038957595825	But more than they do, they 're not special.
+P-164	-0.1431 -0.1729 -0.9027 -0.2469 -2.9315 -1.3350 -0.0982 -2.2915 -0.0588 -0.0639 -0.5202 -2.7993 -4.2767 -0.6166 -0.0801
+S-205	Ізноў жа ж нам хочацца зразумець больш пра гэта.
+T-205	And, again, we want to learn more about it.
+H-205	-0.9663049578666687	The truth for us is to understand more about this .
+D-205	-0.9663049578666687	The truth for us is to understand more about this.
+P-205	-1.3284 -3.4316 -0.8747 -0.7081 -0.2290 -1.5799 -0.4517 -0.4180 -0.8063 -1.5616 -0.1205 -0.0858
+S-41	Я праводзіла апытанні і шукала, шукала.
+T-41	I went and surveyed and looked and looked.
+H-41	-1.5363435745239258	I spent researching and learning , and I started looking for the next .
+D-41	-1.5363435745239258	I spent researching and learning, and I started looking for the next.
+P-41	-0.4480 -0.7988 -1.8115 -1.0801 -0.6999 -3.9367 -1.7577 -1.9047 -0.3821 -3.1559 -1.3650 -1.0555 -2.8614 -0.7750 -2.4646 -0.0847
+S-221	Яны патрабуюць неверагодную колькасць навуковых вынаходніцтваў.
+T-221	They will require an enormous amount of scientific ingenuity.
+H-221	-1.34164559841156	They &apos;re curious to invent the numbers .
+D-221	-1.34164559841156	They 're curious to invent the numbers.
+P-221	-0.1892 -1.3428 -0.0526 -0.0585 -0.1276 -4.3569 -2.3699 -0.9854 -1.1178 -4.5880 -0.8358 -0.0752
+S-72	Пры мне быў толькі ахоўнік. Я страціла голас.
+T-72	My bodyguard was the only one there, and my voice was completely gone.
+H-72	-0.6660199761390686	I was only born . I lost the voice .
+D-72	-0.6660199761390686	I was only born. I lost the voice.
+P-72	-0.9517 -0.6893 -0.4932 -2.5261 -0.6209 -0.1519 -0.5037 -1.1384 -0.0257 -0.1489 -0.0764
+S-211	Мне падабаецца думаць пра гэта, выкарыстоўваючы аналогію.
+T-211	Well, I like to think about this using an analogy.
+H-211	-0.7926651239395142	I &apos;m like to think that &apos;s an example of an example .
+D-211	-0.7926651239395142	I 'm like to think that 's an example of an example.
+P-211	-0.5063 -2.0292 -0.0506 -0.0567 -0.1509 -0.9160 -0.7649 -0.1724 -1.9128 -1.9953 -0.0576 -0.0547 -0.0884 -0.9148 -0.7244 -0.5370 -1.1532 -1.5018 -2.1937 -0.0726
+S-12	Пакуль я навучалася, у маю краіну ўвайшлі расейскія войскі.
+T-12	While I was completing my education, my country was invaded by Russia.
+H-12	-1.475833535194397	As I was learning , I was going to move around the halls .
+D-12	-1.475833535194397	As I was learning, I was going to move around the halls.
+P-12	-1.4113 -0.6200 -1.2197 -0.6488 -0.2947 -0.7632 -2.7127 -3.5742 -0.1462 -1.6457 -1.4448 -2.1684 -4.2287 -1.3845 -1.2751 -0.0753
+S-69	У гэты раз нас усіх заб 'юць ''.
+T-69	This time, we all are going to be killed.
+H-69	-1.021108627319336	We &apos;re going to get all the time .
+D-69	-1.021108627319336	We 're going to get all the time.
+P-69	-0.8498 -1.4247 -0.0534 -0.0604 -0.5154 -2.5387 -0.0920 -3.2796 -1.0203 -1.3988 -1.6281 -0.3349 -0.0783
+S-132	(Смех) Яны хацелі напісаць пра мяне і маю фірму ў сваім<unk>куле.
+T-132	(Laughter) They wanted to feature me and my company in their article.
+H-132	-0.697134792804718	( Laughter ) They wanted to write about me and my appointment .
+D-132	-0.697134792804718	(Laughter) They wanted to write about me and my appointment.
+P-132	-0.0943 -0.0236 -0.0751 -0.2191 -0.1698 -0.1182 -0.9028 -0.2178 -0.5481 -0.8309 -2.6134 -2.8951 -1.1840 -0.3850 -0.7846 -0.0923
+S-102	Можа там ёсць які шынок, дзе яны сустракаюцца каб разам павірусаваць?
+T-102	Maybe a restaurant where they meet up and do virusy things?
+H-102	-1.1887391805648804	Maybe there &apos;s an E.C. where they &apos;re building together to beaches ?
+D-102	-1.1887391805648804	Maybe there 's an E.C. where they 're building together to beaches?
+P-102	-1.5530 -0.1005 -1.1107 -0.0650 -0.0620 -0.1218 -2.7214 -2.3533 -1.8690 -3.1471 -0.1698 -0.1264 -0.3091 -1.1858 -0.0660 -0.0647 -0.6852 -1.4974 -2.4718 -1.0018 -2.6606 -4.5698 -0.5329 -0.0845
+S-100	Выраб анімацыяў і мастацтва заўсёды былі маімі ўлюбёнымі справамі.
+T-100	Animation and art has always been my first love.
+H-100	-1.4887665510177612	The Arab attributes of art and art always became always the right to the right .
+D-100	-1.4887665510177612	The Arab attributes of art and art always became always the right to the right.
+P-100	-0.2670 -1.7163 -3.5074 -1.1287 -1.3604 -1.3594 -0.1038 -3.1308 -0.9900 -2.3246 -1.3216 -1.7296 -0.9513 -2.6134 -1.8073 -0.0690 -2.3398 -0.0772
+S-68	З вінтоўкамі на плячах, яны перакрылі нам дарогу.
+T-68	Rifles on their shoulders, they blocked the road.
+H-68	-1.4168082475662231	There &apos;s a chunks on the beach , and they &apos;re going to break up a week .
+D-68	-1.4168082475662231	There 's a chunks on the beach, and they 're going to break up a week.
+P-68	-3.5688 -1.0199 -0.0637 -0.0606 -0.0667 -1.5389 -5.1157 -2.7815 -1.7164 -0.9389 -0.8973 -0.0873 -1.3073 -1.2711 -0.0434 -0.9582 -0.0678 -0.0606 -0.6450 -4.3887 -0.1382 -2.6651 -2.8767 -1.6369 -2.8964 -1.3516 -0.0913
+S-36	Не, таму што на той момант адукацыя цалкам забаранялася дзяўчынкам.
+T-36	No, because at that time, education was banned for girls, completely.
+H-36	-1.5364744663238525	It wasn &apos;t because at that moment , it was in the Islamic Revolution .
+D-36	-1.5364744663238525	It wasn 't because at that moment, it was in the Islamic Revolution.
+P-36	-2.8785 -1.1500 -0.0600 -0.0611 -0.0598 -0.0792 -0.1159 -3.0941 -1.3073 -1.6664 -1.5006 -2.6165 -0.3637 -5.2838 -1.4731 -4.3353 -2.5116 -0.5636 -0.0725
+S-83	Сёння людзі не могуць выйсці з хаты, не клапоцячыся аб бяспецы.
+T-83	Today, people cannot walk out of their door without security issues.
+H-83	-1.1916941404342651	Today people don &apos;t want to take home , they don &apos;t have a lot of social safety .
+D-83	-1.1916941404342651	Today people don 't want to take home, they don 't have a lot of social safety.
+P-83	-0.9144 -0.4039 -2.8295 -0.0570 -0.0603 -0.0579 -0.0559 -2.5458 -0.0395 -4.4294 -0.9843 -1.4890 -2.7224 -1.0789 -0.1003 -0.0643 -0.0604 -0.0637 -1.2638 -2.3436 -2.4915 -0.6844 -2.9924 -2.5397 -0.6211 -0.0906
+S-175	І прычыну такой гарачыні можна знайсці на папярэднім слайдзе.
+T-175	And the reason why it 's so hot goes back to the previous slide.
+H-175	-1.3908600807189941	And what it &apos;s like to find out of the mountain of the Himalaya .
+D-175	-1.3908600807189941	And what it 's like to find out of the mountain of the Himalaya.
+P-175	-0.4285 -1.9013 -1.6349 -2.1234 -0.0556 -0.0535 -0.0993 -1.1633 -1.6193 -0.8612 -2.5327 -2.2311 -1.2541 -1.6079 -1.9500 -1.2746 -1.7990 -3.2010 -0.1285 -3.4480 -1.1437 -0.0879
+S-223	І па мне, дык лепшы шлях рабіць гэта — вывучаць сусвет вакол нас. Дзякую.
+T-223	And I can 't think of a better way to do this than by studying the universe around us. Thanks.
+H-223	-0.7815968990325928	And I &apos;m sure I &apos;m going to do this — I &apos;m learning around us . Thank you .
+D-223	-0.7815968990325928	And I 'm sure I 'm going to do this — I 'm learning around us. Thank you.
+P-223	-0.5018 -0.2769 -1.9262 -0.0555 -0.0560 -0.1497 -3.3528 -2.4111 -1.0074 -0.0540 -0.0571 -0.2650 -2.0381 -0.0484 -1.7084 -0.7887 -1.3192 -0.9888 -1.5112 -0.0653 -0.0594 -0.1987 -2.6782 -1.1655 -0.2009 -0.2595 -0.0144 -0.0807 -0.1123 -0.0967
+S-199	Калі і ёсць што-небудзь больш дзіўнае, дык гэта павінна быць цёмная энергія.
+T-199	Okay, if there 's anything stranger I think it has to be dark energy.
+H-199	-0.6673793196678162	If there &apos;s something more successful , it &apos;s going to be dark energy .
+D-199	-0.6673793196678162	If there 's something more successful, it 's going to be dark energy.
+P-199	-0.5819 -0.7762 -1.3198 -0.0590 -0.0559 -0.0918 -0.3584 -1.4211 -4.2152 -0.5159 -0.4238 -0.8829 -0.0636 -0.0566 -0.1583 -2.2358 -0.0626 -0.0511 -0.6455 -0.1246 -0.5010 -0.0811
+S-172	Тое, што мы тут бачым — гэта насамрэч рэнтгенаўскае святло.
+T-172	It 's actually X-ray light that we 're seeing.
+H-172	-1.2446237802505493	What we see here is actually the bottom of the baseline .
+D-172	-1.2446237802505493	What we see here is actually the bottom of the baseline.
+P-172	-0.3640 -0.2385 -0.1845 -0.7365 -0.1301 -1.2143 -0.9823 -4.7784 -1.5096 -0.2992 -5.6446 -0.9874 -0.2812 -0.0740
+S-118	(Смех) Я вырабляю экалагічную вопратку і аксэсуары.
+T-118	(Laughter) And I make eco-friendly clothing and accessories.
+H-118	-1.2233017683029175	( Laughter ) I &apos;m creating an average , and it &apos;s an average .
+D-118	-1.2233017683029175	(Laughter) I 'm creating an average, and it 's an average.
+P-118	-0.0511 -0.0243 -0.0369 -0.5697 -0.9979 -0.0526 -0.0539 -0.6863 -3.0804 -1.7617 -2.6344 -3.2615 -0.7660 -3.4467 -0.1841 -0.0682 -0.0562 -0.1045 -2.1432 -4.0455 -2.8098 -0.0777
+S-143	Пранесці тое, што здараецца ў свеце толькі праз галаву і думкі — недастаткова.
+T-143	But it 's never enough to just to get it through your heads about the things that are happening in our world.
+H-143	-0.9487525224685669	It &apos;s like this in the world that &apos;s not enough .
+D-143	-0.9487525224685669	It 's like this in the world that 's not enough.
+P-143	-2.0721 -1.1379 -0.0541 -0.0583 -0.0801 -4.0700 -1.5693 -1.2466 -0.5828 -0.1179 -1.0126 -0.7842 -0.0686 -0.0593 -0.0911 -1.2429 -1.0392 -2.6632 -0.0759
+S-148	Калі ласка, спадар і спадарыня Пэн, можа вы... Вах.
+T-148	Please, Mr. and Mrs. Penn. Would you just — Ah!
+H-148	-1.321699857711792	If you &apos;re ready and gentlemen , you can — you can ...
+D-148	-1.321699857711792	If you 're ready and gentlemen, you can — you can...
+P-148	-2.0242 -1.3723 -2.6486 -0.0533 -0.0552 -0.4556 -3.7451 -1.3352 -1.8125 -0.4816 -0.1001 -0.5386 -2.7039 -1.2658 -0.9753 -2.5590 -0.3426
+S-57	Яны адмовіліся, сказалі, што гарбату піць не будуць.
+T-57	They said no. They are not going to drink tea.
+H-57	-1.4064722061157227	They said that they didn &apos;t have a catalyst .
+D-57	-1.4064722061157227	They said that they didn 't have a catalyst.
+P-57	-0.2254 -3.5115 -1.2380 -1.8836 -2.7215 -0.0606 -0.0538 -0.0578 -0.0450 -2.8259 -1.6249 -4.3565 -1.4576 -0.9939 -1.3602 -0.0875
+S-177	Вось гэта і ёсць галоўны сэнс, але гэта толькі навуковы эскіз.
+T-177	So this is the main idea, but science is a rough draft.
+H-177	-1.0102953910827637	It &apos;s a powerful purpose , but it &apos;s only the science of the science .
+D-177	-1.0102953910827637	It 's a powerful purpose, but it 's only the science of the science.
+P-177	-2.4363 -0.5383 -0.0534 -0.0586 -0.0699 -1.8250 -3.1611 -3.6291 -0.3988 -0.2694 -0.5423 -0.2524 -0.0600 -0.0570 -0.0905 -1.1222 -1.2917 -0.8778 -1.4477 -2.2148 -1.7932 -0.9599 -0.0871
+S-15	Мая сям 'я была ў лагеры для бежанцаў.
+T-15	My family was in a refugee camp.
+H-15	-1.1699607372283936	My family was in Naza .
+D-15	-1.1699607372283936	My family was in Naza.
+P-15	-0.0153 -0.0705 -0.7623 -1.2243 -2.9485 -1.3427 -1.4610 -2.6231 -0.0819
+S-105	Гэтак у мяне з 'явілася цяга да кампутарных<unk>яў.
+T-105	That started my love for technology.
+H-105	-1.5284864902496338	So I went down to a computer named a computer .
+D-105	-1.5284864902496338	So I went down to a computer named a computer.
+P-105	-0.3991 -0.6168 -2.3473 -2.8509 -0.5190 -0.9650 -0.6353 -2.0201 -3.8722 -1.6020 -2.4360 -0.0781
+S-123	Я сабе і падумала, што з гэтага можна зрабіць справу і адкрыць фірму.
+T-123	And I thought, I can start my own business.
+H-123	-1.1152864694595337	And I thought that I could do something like this and discoveries .
+D-123	-1.1152864694595337	And I thought that I could do something like this and discoveries.
+P-123	-1.1564 -0.3810 -0.1900 -1.9581 -1.5419 -0.1746 -0.2503 -2.3659 -1.1533 -0.6608 -0.5625 -4.5864 -1.1828 -0.4907 -0.0747
+S-213	Найбольш важная рэч — сачыць за<unk>мя найбольшымі часткамі.
+T-213	The most important thing to do is to track the two biggest parts.
+H-213	-1.6981121301651	The biggest important thing is to study the private private private private private .
+D-213	-1.6981121301651	The biggest important thing is to study the private private private private private.
+P-213	-0.3469 -2.0483 -2.2735 -1.8334 -0.0971 -0.4290 -4.1500 -0.6584 -3.5231 -1.4972 -1.1461 -1.3597 -1.8595 -4.1637 -0.0858
+S-145	Менавіта тады мажлівасці і вынаходкі бачаць свет, гэтак ідэі робяцца рэальнасцю.
+T-145	That is when opportunities and innovation are created, and that is why ideas come to life.
+H-145	-1.447113275527954	And it &apos;s also the combination of light and the world &apos;s ideas that they &apos;re reading .
+D-145	-1.447113275527954	And it 's also the combination of light and the world 's ideas that they 're reading.
+P-145	-0.7806 -2.5153 -0.8699 -0.0537 -0.0530 -0.0924 -4.4944 -1.0712 -5.6852 -0.1473 -3.0143 -1.5756 -0.5823 -2.4083 -1.5760 -0.0587 -0.0537 -0.0986 -2.4768 -0.9320 -3.2682 -2.1650 -0.0594 -0.0575 -0.6663 -3.7469 -1.9365 -0.0800
+S-180	Каб распавесці вам пра гэта, мне трэба расказаць пра турбуючы факт.
+T-180	Now, to explain this, I need to tell you a very disturbing fact.
+H-180	-0.9266006946563721	To tell you about this , I need to tell you about the fact that I need to tell you .
+D-180	-0.9266006946563721	To tell you about this, I need to tell you about the fact that I need to tell you.
+P-180	-0.7286 -2.2051 -0.0547 -1.3011 -1.7028 -0.4174 -0.2653 -0.3433 -0.0775 -0.3675 -0.1558 -0.9725 -1.2085 -3.3749 -2.2110 -0.4642 -1.5214 -0.2229 -0.6500 -0.1129 -1.9558 -0.0721
+S-48	аднойчы я была ў офісе ў Пешаварэ, Пакістан.
+T-48	one day I was in the office in Peshawar, Pakistan.
+H-48	-1.2517248392105103	One night , I was sitting in Seattle in Beijing .
+D-48	-1.2517248392105103	One night, I was sitting in Seattle in Beijing.
+P-48	-0.5732 -1.1202 -1.6369 -0.2317 -0.7478 -2.8280 -0.4614 -2.8692 -0.3069 -2.8319 -1.4148 -1.1813 -0.0692
+S-155	Карысныя як крыніца наймагутнейшых лабараторый сусвету.
+T-155	Useful as the universe 's most massive laboratories.
+H-155	-1.8280473947525024	And the main actors like the Missississor of the Universe .
+D-155	-1.8280473947525024	And the main actors like the Missississor of the Universe.
+P-155	-2.0209 -1.1812 -3.6597 -2.7941 -0.9363 -0.8610 -5.3926 -2.9660 -0.6585 -1.2299 -3.6296 -1.8580 -0.5535 -1.1855 -0.2511 -0.0708
+S-202	Такім жа чынам, касмолагі тлумачаць чаму сусвет пашыраецца.
+T-202	Similarly, cosmologists understand why the universe is expanding.
+H-202	-1.2360268831253052	That &apos;s the cosmology of the world &apos;s universe .
+D-202	-1.2360268831253052	That 's the cosmology of the world 's universe.
+P-202	-4.3870 -0.3119 -0.0553 -0.0566 -0.0931 -3.4056 -3.2480 -0.5299 -0.7194 -2.6604 -1.6264 -1.0791 -0.0604 -0.0596 -0.1338 -3.2596 -0.4796 -0.0826
+S-66	Я была шчаслівая. Я захаплялася вынікамі сваёй працы.
+T-66	I was very happy. I was delighted with the outcome of my work.
+H-66	-0.8944961428642273	I &apos;ve been happy . I &apos;ve been fascinated with my work .
+D-66	-0.8944961428642273	I 've been happy. I 've been fascinated with my work.
+P-66	-0.2354 -2.8948 -0.0494 -0.0539 -0.6951 -0.1114 -1.1339 -1.0288 -0.2822 -1.5583 -0.0528 -0.0557 -0.5760 -0.2462 -3.7400 -1.3407 -1.7925 -1.7216 -0.2405 -0.0808
+S-79	Я жыву ў краіне, якая была прыгожай і добрай.
+T-79	I live in a country that was a beautiful country.
+H-79	-0.740429699420929	I live in a place that was beautiful and beautiful .
+D-79	-0.740429699420929	I live in a place that was beautiful and beautiful.
+P-79	-0.1994 -0.0460 -0.1077 -0.7724 -3.4906 -1.4101 -0.1785 -0.5152 -0.3832 -1.6166 -0.0909 -0.0746
+S-86	які сказаў, што спачуваннем і любоўю можна заваяваць сусвет.
+T-86	He said that by having compassion and having love, you can conquer the world.
+H-86	-1.2852668762207031	And he said that compassion and love can start with the Universe .
+D-86	-1.2852668762207031	And he said that compassion and love can start with the Universe.
+P-86	-3.4465 -1.4703 -0.2783 -0.2898 -0.1783 -1.0706 -1.4139 -1.4643 -3.8268 -2.6587 -0.7390 -0.9922 -0.0895 -0.0755
+S-163	Гэта ашаламляльна, наколькі масіўнымі могуць быць гэтыя сістэмы.
+T-163	It 's just mind-boggling how massive these systems can get.
+H-163	-1.328220248222351	It &apos;s kind of clear that the ability to be used to be the system .
+D-163	-1.328220248222351	It 's kind of clear that the ability to be used to be the system.
+P-163	-1.8100 -0.1603 -0.0481 -0.0574 -0.0550 -3.7603 -0.1694 -3.9079 -1.9477 -1.2058 -3.8705 -0.2615 -0.1977 -2.4520 -0.9576 -0.1461 -4.0492 -0.9873 -0.4441 -0.0763
+S-203	Яны не разумеюць, чаму ён пашыраецца з усе большай хуткасцю.
+T-203	They don 't understand why it 's expanding at an ever-increasing rate.
+H-203	-1.0433175563812256	They don &apos;t understand why he &apos;s gone from all the way around .
+D-203	-1.0433175563812256	They don 't understand why he 's gone from all the way around.
+P-203	-0.2198 -0.3797 -0.0685 -0.0556 -0.0648 -0.0638 -1.7259 -0.0571 -0.5474 -3.5885 -0.0627 -0.0590 -0.2047 -4.1485 -2.4061 -0.4213 -0.7811 -3.6378 -1.6493 -1.6874 -0.0805
+S-65	Мы праводзілі ўсе трэнінгі, якія вы толькі можаце ўявіць.
+T-65	We had all kinds of training that you can imagine.
+H-65	-1.325844407081604	And we spent all of the training that you can imagine .
+D-65	-1.325844407081604	And we spent all of the training that you can imagine.
+P-65	-2.9265 -0.2685 -1.4988 -0.5723 -1.4697 -2.2210 -2.9507 -0.6830 -0.4134 -1.0191 -2.9665 -0.1730 -0.0735
+S-185	Калі вы цікавіцеся фізікай часцінак, вам цікава, што адбываецца, калі мы стукаем нешта адно аб адно.
+T-185	If you 're a particle physicist, you want to know what happens when we smash things together.
+H-185	-1.1165262460708618	If you &apos;re curious , you &apos;re really curious about what happens when we &apos;re going to get something else .
+D-185	-1.1165262460708618	If you 're curious, you 're really curious about what happens when we 're going to get something else.
+P-185	-0.9547 -0.1791 -1.1555 -0.0545 -0.0601 -0.1405 -3.1198 -1.5706 -1.6283 -0.8138 -0.0597 -0.0592 -0.5272 -2.7310 -1.4129 -2.2475 -0.9820 -0.4277 -0.1616 -0.5141 -2.8234 -0.0682 -0.0609 -0.2345 -3.0267 -0.2109 -3.1981 -1.6028 -3.1337 -1.3724 -0.0809
+S-26	Я ўбачыла ўдаву з 5-8 дзецьмі, якая сядзела і плакала. Яна не ведала, што рабіць.
+T-26	I saw a widow with five to eight children sitting there and weeping and not knowing what to do.
+H-26	-0.9393019676208496	I saw the great-year-old children who sat on the table and she didn &apos;t know what to do .
+D-26	-0.9393019676208496	I saw the great-year-old children who sat on the table and she didn 't know what to do.
+P-26	-0.6359 -0.5026 -2.7129 -1.8036 -3.5556 -1.3115 -0.0574 -0.4355 -2.6259 -0.7332 -3.0134 -1.6043 -1.6525 -2.1521 -0.5978 -0.3090 -0.6873 -0.0936 -0.0535 -0.0543 -0.0487 -0.0978 -0.1069 -0.2000 -0.0229 -0.2119 -0.0809
+S-201	Але я не чакаю, што ён будзе ляцець угору з усё большай і большай хуткасцю.
+T-201	What I don 't expect is that it go up at an ever-increasing rate.
+H-201	-1.1948808431625366	But I didn &apos;t expect that he &apos;d be going to run away with more pain and more productive .
+D-201	-1.1948808431625366	But I didn 't expect that he 'd be going to run away with more pain and more productive.
+P-201	-0.1191 -0.2047 -2.6985 -0.0728 -0.0653 -0.0606 -0.0687 -1.6697 -0.8382 -0.5719 -1.9454 -0.0685 -0.0582 -1.2543 -2.6081 -2.6092 -0.0434 -4.7121 -1.6927 -1.6579 -2.0906 -1.4510 -0.4625 -0.8493 -3.5444 -0.7538 -0.0910
+S-174	І адказам будзе гарачы газ, газ у мільён градусаў — гэта фактычна ўжо плазма.
+T-174	The answer is hot gas, million-degree gas — in fact, it 's plasma.
+H-174	-1.2935459613800049	And the answer will be the newspaper newspaper , and in fact , it &apos;s a gallon of minister .
+D-174	-1.2935459613800049	And the answer will be the newspaper newspaper, and in fact, it 's a gallon of minister.
+P-174	-0.2616 -2.2899 -1.5968 -0.2416 -0.4942 -1.8973 -0.4997 -1.9821 -0.4570 -1.6924 -1.9725 -0.6863 -0.0803 -2.8316 -0.3346 -0.0616 -0.0564 -0.0920 -1.1906 -5.9584 -0.4271 -1.3313 -5.5767 -0.8102 -0.7287 -0.0814
+S-127	Я пачала ствараць больш вырабаў, такіх як шапачкі, шалікі і торбачкі.
+T-127	I started making more items like hats, scarves and bags.
+H-127	-2.044548749923706	And I started to create more efficient , like a ballot , a ballot , and it turned out to be a lot of fun .
+D-127	-2.044548749923706	And I started to create more efficient, like a ballot, a ballot, and it turned out to be a lot of fun.
+P-127	-2.7814 -0.1724 -0.4162 -1.0191 -2.3707 -0.0381 -3.9408 -3.9746 -0.4149 -2.7829 -3.2927 -2.3131 -1.7394 -2.6110 -3.2910 -2.0509 -2.7101 -0.3869 -2.2190 -4.2549 -0.8118 -1.5571 -1.5881 -2.1653 -5.1722 -0.2182 -4.2094 -0.7058 -0.0840
+S-200	Калі я падкідваю шар у паветра, я чакаю, што ён паляціць угору.
+T-200	If I throw a ball into the air, I expect it to go up.
+H-200	-1.2559187412261963	When I walk into the air , I &apos;m going to discover that he &apos;s under mycorrhiza .
+D-200	-1.2559187412261963	When I walk into the air, I 'm going to discover that he 's under mycorrhiza.
+P-200	-0.8225 -0.0444 -4.1825 -2.9386 -0.7274 -0.5441 -0.4244 -0.0917 -4.3061 -0.0678 -0.0564 -1.5443 -2.3454 -0.1096 -2.6509 -0.3689 -1.4902 -1.4265 -0.0752 -0.0583 -0.1393 -3.9991 -2.5498 -3.4112 -0.0669 -0.3833 -0.2500 -0.0910
+S-152	Яны менавіты гэткія вялізныя калекцыі галактык, звязаныя паміж сабой узаемнай гравітацыяй.
+T-152	They are these huge collections of galaxies, bound together by their mutual gravity.
+H-152	-1.5959783792495728	They &apos;re also a variety of things that are confusing , and they &apos;re connected to the gravity of gravity .
+D-152	-1.5959783792495728	They 're also a variety of things that are confusing, and they 're connected to the gravity of gravity.
+P-152	-0.8410 -1.5933 -0.0534 -0.0583 -0.0955 -2.8528 -3.7697 -2.2436 -0.0320 -4.6647 -0.7374 -1.1745 -4.9605 -1.3802 -2.6798 -3.2581 -1.4138 -0.6698 -0.0626 -0.0574 -0.0915 -5.0130 -0.8589 -2.3489 -3.3998 -0.7556 -0.1057 -3.0331 -0.9336 -0.2523 -0.0843
+S-236	Дом, які быў пабудаваны ў блоку першым, з 'яўляецца домам нумар адзін.
+T-236	The first house ever built on a block is house number one.
+H-236	-1.7711918354034424	This was built in the first place for the first one of the home .
+D-236	-1.7711918354034424	This was built in the first place for the first one of the home.
+P-236	-3.1093 -1.6383 -1.7861 -2.5306 -1.3134 -1.2110 -1.0460 -3.2758 -2.4824 -0.7823 -1.2505 -2.8863 -0.3339 -4.2962 -0.3152 -0.0819
+S-192	Чы<unk>ны — гэта гарачы газ, і, канешне, вы можаце бачыць шмат галактык.
+T-192	The red represents the hot gas, and, of course, you can see many galaxies.
+H-192	-1.2341471910476685	It &apos;s a mountain , and it &apos;s an open newspaper , and then you can see lots of stars .
+D-192	-1.2341471910476685	It 's a mountain, and it 's an open newspaper, and then you can see lots of stars.
+P-192	-5.5546 -0.0916 -0.0531 -0.0561 -0.0730 -2.4018 -1.9516 -2.0261 -2.0712 -1.4817 -0.1043 -0.0589 -0.0556 -0.1128 -3.1257 -3.5617 -0.4140 -0.2709 -0.1828 -2.3808 -0.6010 -0.6713 -0.0347 -2.3880 -0.0954 -3.1684 -1.4888 -0.0802
+S-112	(Музыка) Дзякуй. (Воплескі) Усе мае анімацыі распачаліся з ідэй, але што такое ідэі?
+T-112	(Music) Thank you. (Applause) All of my animations start with ideas, but what are ideas?
+H-112	-0.4713745713233948	( Music ) Thank you . ( Applause )
+D-112	-0.4713745713233948	(Music) Thank you. (Applause)
+P-112	-0.0316 -0.0095 -0.0278 -0.0562 -0.0370 -0.1155 -0.0185 -0.0068 -0.0258 -4.3850
+S-217	Што ж, для адказу, мне хочацца працытаваць Генры Форда, калі яго спыталі пра аўтамабілі.
+T-217	Well, to answer this, I want to give you a quote by Henry Ford when he was asked about cars.
+H-217	-1.281183123588562	Well , for the answer , I &apos;m going to leave you with Friedrenren &apos;s job when he asked him about cars .
+D-217	-1.281183123588562	Well, for the answer, I 'm going to leave you with Friedrenren 's job when he asked him about cars.
+P-217	-2.9546 -0.2134 -0.0748 -1.3491 -1.2172 -1.0535 -0.2743 -1.1349 -0.0659 -0.0603 -1.5059 -3.1598 -0.0478 -3.4376 -1.7209 -0.8531 -0.5627 -3.8880 -2.7521 -1.9182 -2.7096 -0.0672 -0.0613 -0.1319 -3.4315 -0.3227 -1.4912 -0.5910 -1.2028 -2.8172 -0.8995 -0.2222 -0.0867
+S-93	Кліент: Дайце падборку радкоў-зомбі, калі-ласка.
+T-93	Customer: I 'd like a batch of some zombie tracking cookies, thank you.
+H-93	-1.6711609363555908	The Victoria : Getting off the floor , if you &apos;re a barbecue .
+D-93	-1.6711609363555908	The Victoria: Getting off the floor, if you 're a barbecue.
+P-93	-1.9081 -4.2922 -2.8442 -0.2767 -2.2417 -0.2733 -3.5108 -1.1786 -2.6223 -0.9531 -4.3962 -1.3942 -1.7974 -0.8139 -2.2268 -0.0670 -0.0591 -0.4498 -1.3193 -5.1314 -1.3028 -0.5674 -0.4075 -0.0738
+S-193	Тое, што тут адбываецца, — гэта паскаральнік часцінкаў у вельмі, вельмі вялікім маштабе.
+T-193	What 's happened is a particle accelerator at a huge, huge scale.
+H-193	-1.1674665212631226	And what &apos;s happening here is that it &apos;s a very high-up moment .
+D-193	-1.1674665212631226	And what 's happening here is that it 's a very high-up moment.
+P-193	-2.8550 -0.0788 -1.3886 -0.0593 -0.0550 -0.0666 -0.3836 -0.5853 -0.3074 -1.2342 -1.9032 -0.8414 -0.0631 -0.0552 -0.0991 -1.1989 -2.3444 -4.6868 -0.8622 -2.5533 -3.9332 -1.2169 -0.0804
+S-247	Do<unk> arigato gozaimashita.
+T-247	Domo arigato gozaimashita.
+H-247	-1.4278792142868042	It &apos;s called Digitalia .
+D-247	-1.4278792142868042	It 's called Digitalia.
+P-247	-2.9320 -0.1692 -0.0666 -0.0597 -0.0770 -2.4930 -2.2320 -4.0981 -0.8545 -2.7904 -1.2798 -0.0822
+S-25	калі я штодзённа праводзіла апытанні, я зведала рэчы, якія вы і ўявіць сабе не зможаце.
+T-25	when I went day-to-day to do a survey, I found things you never could imagine.
+H-25	-1.1434640884399414	When I spent the day talking about things that I didn &apos;t think you can &apos;t imagine .
+D-25	-1.1434640884399414	When I spent the day talking about things that I didn 't think you can 't imagine.
+P-25	-0.9693 -0.1404 -2.0887 -3.4989 -1.0532 -3.7165 -0.8172 -3.1162 -1.2740 -0.3174 -2.8014 -0.0750 -0.0566 -0.0556 -0.0477 -2.2723 -1.2756 -1.9998 -0.2418 -0.0584 -0.0580 -0.0395 -2.0386 -0.5040 -0.0704
+S-207	У залежнасці ад яе моцы, структура можа набываць свае рысы хутчэй або марудней.
+T-207	Depending on how strong it is, maybe structure forms faster or slower.
+H-207	-1.7841410636901855	It &apos;s trying to design her abroad , and the walls can be able to eat their fish or be better .
+D-207	-1.7841410636901855	It 's trying to design her abroad, and the walls can be able to eat their fish or be better.
+P-207	-2.4985 -1.1163 -0.0572 -0.0554 -0.0743 -4.3611 -0.0347 -3.5116 -1.9754 -2.9628 -1.7258 -1.0530 -0.6190 -3.5352 -2.7742 -1.7435 -0.7245 -2.4143 -2.3888 -0.0698 -3.7452 -2.3239 -2.6522 -0.5716 -4.4087 -1.9194 -0.5586 -0.0811
+S-161	І калі насамрэч паглядзець вельмі ўважліва, вы адолееце ўбачыць кругі вакол аб 'яднання.
+T-161	And, in fact, if you look very carefully you 'll be able to see rings around this cluster.
+H-161	-1.0864936113357544	And when you look really , you &apos;ll see a little bit about it , you &apos;ll see the whole line .
+D-161	-1.0864936113357544	And when you look really, you 'll see a little bit about it, you 'll see the whole line.
+P-161	-0.5614 -1.0958 -0.2720 -0.8968 -0.8800 -2.6795 -0.3774 -2.5626 -0.0561 -0.0589 -1.0707 -0.0953 -2.1357 -2.9481 -0.0238 -2.6618 -2.1599 -2.4440 -0.8522 -1.9620 -0.0612 -0.0606 -0.7268 -0.0936 -0.8494 -1.0723 -1.8983 -0.8698 -0.0824
+S-138	Гэтае забруджвае паветра, робячы яго таксічным для ўсіх і ўсяго, хто ім дыхае.
+T-138	These actions can pollute the air, making it toxic to anyone or anything that inhales it.
+H-138	-1.5789536237716675	It &apos;s trying to eat the air , so it &apos;s really hard for all of them , and those of them are lost .
+D-138	-1.5789536237716675	It 's trying to eat the air, so it 's really hard for all of them, and those of them are lost.
+P-138	-2.1072 -1.2126 -0.0529 -0.0560 -0.0774 -4.5626 -0.0811 -4.6455 -2.7658 -2.1511 -2.4285 -1.2571 -3.1041 -0.3046 -0.0579 -0.0560 -0.0892 -2.8007 -2.9432 -1.8208 -1.1814 -0.6414 -2.5062 -2.7885 -0.9745 -1.8419 -1.6884 -0.5657 -1.3583 -4.1128 -0.2018 -0.0913
+S-16	Як толькі я скончыла навучанне, то перавезла сваю сям 'ю ў Амерыку.
+T-16	So as soon as I completed my education, I brought my family to America.
+H-16	-1.4457451105117798	As I entered college , I used to leave my family in America .
+D-16	-1.4457451105117798	As I entered college, I used to leave my family in America.
+P-16	-1.5737 -0.1516 -4.0681 -1.2848 -0.3807 -1.3775 -4.5365 -0.1893 -3.8756 -0.2273 -0.1446 -2.2788 -1.2576 -0.2622 -0.0778
+S-215	Нарэшце, я скончваю сваю прамову, але вы можаце адчуваць сябе трохі падманутымі.
+T-215	So, as I come to a close, you might feel slightly cheated.
+H-215	-1.2670727968215942	In fact , I &apos;m going to tell you the story , but you can take a little bit of the story .
+D-215	-1.2670727968215942	In fact, I 'm going to tell you the story, but you can take a little bit of the story.
+P-215	-3.5838 -0.1353 -0.0881 -0.1874 -1.8472 -0.0596 -0.0595 -0.5133 -3.0092 -0.1348 -2.7159 -0.1297 -2.3930 -1.3785 -0.9628 -0.0743 -0.3387 -0.1277 -4.1194 -1.6140 -1.3876 -0.2491 -2.3806 -1.8956 -3.9447 -0.8063 -0.0751
+S-183	Большасць складзена з чагосьці вельмі-вельмі таямнічага, што мы называем цёмнай матэрыяй.
+T-183	Most of it is made up of something very, very mysterious, which we call dark matter.
+H-183	-1.5677130222320557	Most of the things that &apos;s been focused on a very profound mystery , what we call dark energy .
+D-183	-1.5677130222320557	Most of the things that 's been focused on a very profound mystery, what we call dark energy.
+P-183	-0.0626 -0.4374 -1.6001 -3.5437 -1.2535 -2.2857 -0.0520 -0.0543 -0.1193 -3.4810 -5.6551 -0.4421 -2.8263 -0.2037 -3.7022 -4.0124 -0.5643 -2.8833 -0.0284 -0.0371 -1.1305 -2.7049 -0.4648 -0.0804
+S-144	Усё трэба пранесці праз сэрца, таму што менавіта тады ствараецца ідэя арганізоўваць рухі.
+T-144	It takes to get it through your hearts, because when you get it through your heart, that is when movements are sparked.
+H-144	-1.0214673280715942	And it &apos;s very important to take the heart of the heart , because that &apos;s what &apos;s important .
+D-144	-1.0214673280715942	And it 's very important to take the heart of the heart, because that 's what 's important.
+P-144	-0.9519 -3.3978 -1.4802 -0.0553 -0.0532 -0.0933 -3.3214 -0.0623 -0.4287 -2.5685 -2.4641 -0.0466 -0.7863 -1.8775 -0.0959 -1.8798 -0.0602 -2.0672 -0.4445 -0.0579 -0.0526 -0.1090 -1.4446 -1.6686 -0.0622 -0.0536 -0.0925 -1.2827 -3.5889 -0.0966
+S-60	"Яны спыталі:" "Што ты робіш?"
+T-60	"They asked me," "What are you doing?"
+H-60	-0.3634657561779022	&quot; They asked them , &quot; What do you do ? &quot; &quot;
+D-60	-0.3634657561779022	"They asked them," What do you do? ""
+P-60	-0.2739 -0.0557 -0.0585 -0.5973 -0.2363 -2.3424 -0.2890 -0.0737 -0.0494 -0.0658 -0.9191 -1.2377 -0.0727 -0.4228 -0.5269 -0.1813 -0.0563 -0.0624 -0.1335 -0.0574 -0.0634 -0.2209
+S-137	З рэшткамі працэсу расцірання фарбаў ці з рэшткамі самое сухое фарбы.
+T-137	For example, the grinding of materials, or the dumping of dried powder materials.
+H-137	-1.5942695140838623	And in the end , it &apos;s pretty efficient , or it &apos;s all in the middle of a tiny rock .
+D-137	-1.5942695140838623	And in the end, it 's pretty efficient, or it 's all in the middle of a tiny rock.
+P-137	-1.5281 -2.7588 -1.7350 -1.2796 -0.9182 -1.6730 -1.9354 -0.0557 -0.0587 -0.0879 -3.4681 -1.9635 -3.7501 -0.7893 -2.9277 -0.3580 -0.0595 -0.0597 -0.0981 -3.0269 -3.8216 -1.2975 -2.5624 -0.1471 -2.1562 -2.6255 -4.1301 -0.8730 -0.0892
+S-124	Таму што мне было толькі 8 год, асаблівых планаў развіцця фірмы ў мяне не было.
+T-124	Now I didn 't have any business plans at only eight years old.
+H-124	-1.1278047561645508	Because I was only 8 years old , the discovery of discovery had not been involved in me .
+D-124	-1.1278047561645508	Because I was only 8 years old, the discovery of discovery had not been involved in me.
+P-124	-0.7553 -0.6599 -1.3225 -0.1728 -0.1664 -0.8349 -0.5285 -0.2172 -1.4728 -3.1324 -0.0949 -3.0432 -3.0596 -0.9206 -0.4884 -4.4157 -0.1270 -0.8206 -0.2569 -0.0665
+S-204	Яны даюць гэтай прычыне паскоранага пашырэння імя і называюць яго цёмная энергія.
+T-204	They give the cause of this accelerated expansion a name, and they call it dark energy.
+H-204	-1.2970854043960571	They &apos;re talking to the root of the dark , and it &apos;s a dark energy source .
+D-204	-1.2970854043960571	They 're talking to the root of the dark, and it 's a dark energy source.
+P-204	-0.5106 -2.6765 -0.0556 -0.0584 -0.1055 -4.2370 -1.3420 -2.1219 -4.0030 -0.4328 -0.4317 -3.9890 -2.8788 -0.1241 -1.1576 -0.2415 -0.0640 -0.0571 -0.1175 -2.8487 -0.9219 -1.1476 -1.2403 -1.5773 -0.0867
+S-159	Добра, гэта — выява аднаго канкрэтнага аб 'яднання галактык.
+T-159	Well, here is an image of a particular galaxy cluster.
+H-159	-1.1837961673736572	Okay , so that &apos;s a collection of writing .
+D-159	-1.1837961673736572	Okay, so that 's a collection of writing.
+P-159	-1.5886 -0.1232 -0.8336 -1.3766 -0.8491 -0.0530 -0.0520 -0.0841 -1.2620 -3.1291 -0.0541 -4.8450 -2.2275 -0.0952
+S-134	З маленькага ўзросту я моцна цікавілася асяроддзем і стварэннямі, што ў ім жывуць.
+T-134	I 've had a passion for protecting the environment and its creatures since I was little.
+H-134	-1.0451836585998535	I &apos;ve been really excited about what I &apos;ve been doing , and that &apos;s what they &apos;re doing in them .
+D-134	-1.0451836585998535	I 've been really excited about what I 've been doing, and that 's what they 're doing in them.
+P-134	-4.0060 -1.4490 -0.0478 -0.0581 -0.6959 -0.5965 -2.0513 -2.4704 -0.6592 -2.8748 -1.2709 -1.1378 -0.0560 -0.0563 -1.2652 -0.5752 -0.5334 -3.3401 -0.7101 -3.1343 -0.7558 -0.0590 -0.0596 -0.0874 -2.0449 -1.3683 -0.4248 -0.0593 -0.0602 -0.1510 -0.3325 -1.2525 -2.6699 -0.1809 -0.0870
+S-109	Таму я вырашыла выкарыстаць гэтыя файныя стварэнні і зрабіць з іх каманду супер-герояў.
+T-109	So I decided to take these cool creatures and make a superhero team.
+H-109	-1.3432319164276123	And so I decided to use these kinds of steps to do the superheroes .
+D-109	-1.3432319164276123	And so I decided to use these kinds of steps to do the superheroes.
+P-109	-2.5226 -0.4921 -0.2942 -0.1791 -0.4342 -0.7911 -0.5272 -5.6706 -0.0189 -4.6696 -1.8275 -1.4053 -2.0283 -0.4846 -1.1872 -0.7553 -0.8114 -0.0791
+S-173	Тады паўстае пытанне: калі гэта не галактыкі, што выпраменьвае гэтае святло?
+T-173	And the question is, if it 's not galaxies, what is emitting this light?
+H-173	-1.238391637802124	Now , the final question is , if this isn &apos;t stars going into this light ?
+D-173	-1.238391637802124	Now, the final question is, if this isn 't stars going into this light?
+P-173	-2.7199 -0.5121 -0.6073 -2.7488 -0.2285 -0.5315 -1.6152 -1.4024 -0.7287 -3.2446 -0.0748 -0.0586 -0.0576 -0.0581 -2.7719 -3.1135 -2.6784 -0.9535 -1.5455 -0.2892 -0.0661
+S-208	І праблема сусвету ў вялікім маштабе ў тым, што той жудасна складаны.
+T-208	Well, the problem with the large-scale structure of the universe is that it 's horribly complicated.
+H-208	-1.4114909172058105	And the problem in the real universe is that there &apos;s a terrible amount of times .
+D-208	-1.4114909172058105	And the problem in the real universe is that there 's a terrible amount of times.
+P-208	-1.2874 -0.2851 -1.2203 -1.4258 -2.1538 -3.5461 -2.7300 -0.3943 -2.4958 -2.7841 -1.4696 -0.0530 -0.0613 -0.0788 -1.5798 -1.8906 -1.7273 -0.2044 -2.8469 -1.3261 -0.0810
+S-98	Па тэлебачанні паказвалі праграму пра прафесіі, якія большасць дзяцей не ведае.
+T-98	There was a program on TV about jobs most kids don 't know about.
+H-98	-1.4128429889678955	Our surrogate program programmers about sociologists who don &apos;t know most of the kids .
+D-98	-1.4128429889678955	Our surrogate program programmers about sociologists who don 't know most of the kids.
+P-98	-2.7055 -4.8212 -1.1335 -0.6517 -3.8677 -1.9291 -1.8691 -1.6534 -4.5007 -1.3599 -0.1493 -0.4990 -0.1048 -0.0585 -0.0590 -0.0549 -0.1043 -2.8378 -1.1156 -1.9361 -0.3023 -0.7101 -0.0719
+S-0	(арабская) Я шукаю ў Алаха сховішча ад Сатаны. У імя Алаха, міласцівага і міласэрнага.
+T-0	(Arabic) I seek<<unk>> in Allah from cursed Satan. In the Name of Allah, the most Gracious, the most Merciful.
+H-0	-1.671406626701355	( Arabic ) And I &apos;d like to find August in August , and the name of August is the Angngue Avenue .
+D-0	-1.671406626701355	(Arabic) And I 'd like to find August in August, and the name of August is the Angngue Avenue.
+P-0	-0.1231 -1.0792 -0.2835 -3.2636 -0.2134 -3.0297 -0.0581 -0.0591 -1.2410 -1.1390 -0.5699 -2.7187 -1.6115 -1.7630 -1.5971 -1.9056 -1.1912 -2.1146 -1.0740 -2.6910 -1.5305 -2.6984 -0.3132 -0.5293 -1.3475 -3.2297 -0.8212 -1.8828 -1.7429 -3.6008 -3.3201 -2.2858 -1.8593 -2.9834 -3.2174 -2.6680 -0.0854
+S-245	(Смех) Кажуць, што ў кожнай праўдзе, якую кажуць пра Індыю, ёсць супрацьлегласць, якая таксама з 'яўляецца праўдай.
+T-245	(Laughter) There 's a saying that whatever true thing you can say about India, the opposite is also true.
+H-245	-1.0191329717636108	( Laughter ) What I &apos;m saying is that in every election we &apos;ve learned about is that there &apos;s also a role that &apos;s true .
+D-245	-1.0191329717636108	(Laughter) What I 'm saying is that in every election we 've learned about is that there 's also a role that 's true.
+P-245	-0.0610 -0.0205 -0.0339 -1.7057 -1.0766 -3.5298 -0.0542 -0.0585 -0.3721 -0.8906 -0.4133 -0.6043 -0.4443 -0.1818 -3.5329 -3.1079 -2.2517 -0.0681 -0.0610 -0.8230 -2.8757 -0.7862 -2.0701 -3.0976 -1.7009 -1.0590 -0.0658 -0.0630 -0.1021 -0.7284 -0.6167 -3.4458 -0.9047 -1.9226 -0.0690 -0.0613 -0.0874 -0.8177 -0.9169 -0.0828
+S-191	Яны пераважна скаладаюцца з цёмнай матэрыі, і гэта тое, што вы бачыце ў гэтым блакітнаватым пурпуры.
+T-191	They are mostly made up of dark matter, and that 's what you see in this bluish purple.
+H-191	-0.9646307229995728	They &apos;re moving out of dark energy , and that &apos;s what you &apos;re seeing in this dark , and that &apos;s what you &apos;re seeing in this dark sky .
+D-191	-0.9646307229995728	They 're moving out of dark energy, and that 's what you 're seeing in this dark, and that 's what you 're seeing in this dark sky.
+P-191	-0.3929 -2.6409 -0.0592 -0.0586 -0.5347 -2.2674 -4.0318 -0.6533 -1.2338 -1.0931 -0.7794 -0.9828 -1.3695 -0.5804 -0.0655 -0.0557 -0.1134 -0.0540 -0.0368 -2.9404 -0.0668 -0.0598 -0.5836 -0.0533 -0.3161 -0.3737 -3.0790 -3.4445 -1.8519 -1.5685 -0.4251 -0.0697 -0.0586 -0.0854 -0.5688 -0.1197 -3.0128 -0.0712 -0.0598 -0.5191 -0.0589 -0.2869 -0.6225 -3.4641 -3.9730 -0.5204 -0.0809
+S-108	Калі б кветкі не апыляліся гэтымі апыляльнікамі, то ўсе стварэнні, што залежаць ад раслін, мы ўключна, памерлі б з<unk>ду.
+T-108	If plants aren 't pollinated by the pollinators, then all creatures, including ourselves, that depend on these plants, would starve.
+H-108	-1.3569949865341187	If bees don &apos;t pollinate these tomato flowers , all of the way that we &apos;re going to be able to communicate with flowers , we &apos;re going to be able to be able to be able to be able to be able to communicate .
+D-108	-1.3569949865341187	If bees don 't pollinate these tomato flowers, all of the way that we 're going to be able to communicate with flowers, we 're going to be able to be able to be able to be able to be able to communicate.
+P-108	-0.1867 -0.3432 -0.5125 -0.0619 -0.0632 -0.0599 -0.0674 -3.6352 -0.0572 -2.0942 -2.9918 -1.9095 -0.3329 -0.5134 -0.7404 -0.8172 -3.0882 -1.7739 -1.4310 -2.4725 -0.0720 -0.0581 -0.1898 -3.1315 -0.1421 -2.8383 -0.8722 -0.1035 -2.5207 -1.5303 -3.5192 -0.5683 -1.0167 -0.7844 -0.0752 -0.0560 -0.3454 -1.5872 -0.1536 -3.1412 -0.9727 -0.1099 -4.0731 -1.1229 -0.1234 -4.2769 -1.2693 -0.1345 -4.2958 -1.5845 -0.1415 -4.2295 -2.1027 -0.1639 -4.5655 -2.2371 -0.0877
+S-140	(Воплескі) Я лічу сябе часткай новай хвалі прадпрымальнікаў, якія не толькі хочуць зарабіць грошы, але і спрыяць ўстойліваму развіццю свету.
+T-140	(Applause) I feel I 'm part of the new wave of entrepreneurs that not only seeks to have a successful business, but also a sustainable future.
+H-140	-1.1198619604110718	( Applause ) I think this is a part of a new generation that can &apos;t only want to be able to be able to pay for money , but for the sustainable world .
+D-140	-1.1198619604110718	(Applause) I think this is a part of a new generation that can 't only want to be able to be able to pay for money, but for the sustainable world.
+P-140	-0.0533 -0.0157 -0.0300 -0.6338 -0.0520 -3.2984 -1.4942 -1.1022 -0.4876 -0.0510 -1.6060 -0.3330 -3.8626 -1.8641 -1.7866 -0.6915 -0.0609 -0.0577 -0.0603 -0.7710 -1.7628 -0.2014 -0.7436 -1.0109 -0.0789 -3.1526 -1.0313 -0.1225 -3.9180 -0.9913 -1.9447 -0.7684 -0.1929 -3.4475 -2.3409 -2.7587 -0.6089 -0.1985 -0.0888
+S-119	Мне зараз 13, і нягледзячы на тое, што я распачала з фірмай у 2008-ым, маё мастацкае развіццё распачалося нашмат раней.
+T-119	I 'm 13 now, and although I started my business in 2008, my artistic journey started way before then.
+H-119	-1.3252549171447754	I &apos;m 13 years old , and although I started talking to the protest in 2008 , my grandfather was so much fun .
+D-119	-1.3252549171447754	I 'm 13 years old, and although I started talking to the protest in 2008, my grandfather was so much fun.
+P-119	-0.7309 -0.5966 -0.0537 -0.0573 -0.1443 -0.0683 -3.6152 -0.1912 -0.5479 -0.1235 -1.5840 -0.4384 -2.3231 -4.2090 -0.6997 -1.2085 -4.7978 -2.3713 -1.2232 -0.3001 -0.6335 -3.0851 -1.2129 -3.4001 -0.7469 -1.7409 -0.9126 -0.0912
+S-23	Калі я даехала да такога лагеру ў Пакістане, то ўбачыла 7,5 мільёнаў бежанцаў. 7,5 мільёнаў бежанцаў.
+T-23	And when I went to the refugee camp in Pakistan, there were 7.5 million refugees. 7.5 million refugees.
+H-23	-1.6355571746826172	When I come to an hour of the St.S. , what &apos;s happening in Paris , 7.5 million tweets .
+D-23	-1.6355571746826172	When I come to an hour of the St.S., what 's happening in Paris, 7.5 million tweets.
+P-23	-1.0296 -0.0526 -4.4982 -0.4957 -1.5965 -5.0890 -1.8072 -2.5155 -3.5268 -0.8754 -1.8766 -0.1178 -1.2392 -3.0215 -2.5092 -0.0541 -0.0560 -0.0692 -1.4581 -1.4190 -1.0707 -1.4118 -0.5524 -2.8043 -1.6255 -0.0476 -5.7826 -0.1566 -2.2244 -0.0834
+S-156	І ў сваёй ролі лабараторый, апісанне аб 'яднанняў значыць апісанне эксперыментаў, якія вы можаце выконваць над імі.
+T-156	And as laboratories, to describe galaxy clusters is to describe the experiments that you can do with them.
+H-156	-1.5907155275344849	And in my lab , you can look at the motors , showing the sound of the experiment that you can draw on .
+D-156	-1.5907155275344849	And in my lab, you can look at the motors, showing the sound of the experiment that you can draw on.
+P-156	-0.1822 -2.0473 -0.9868 -0.7386 -0.3362 -3.4517 -1.3051 -2.1058 -0.1099 -0.8949 -5.4437 -0.6760 -0.7397 -5.1810 -1.1818 -4.6959 -0.2016 -0.8233 -0.4642 -2.6092 -0.4376 -0.2430 -4.2439 -0.1378 -2.0347 -0.0867
+S-135	Мае бацькі рана навучылі мяне дзяліцца з тымі, каму менш пашэнціла, і з розумам і пашанай ставіцца да асяроддзя.
+T-135	My parents taught me at an early age about giving back and being a good steward to the environment.
+H-135	-1.653845191001892	My parents are taught to come from this region of what &apos;s most likely to talk about , but for example , the ability to maximize the future .
+D-135	-1.653845191001892	My parents are taught to come from this region of what 's most likely to talk about, but for example, the ability to maximize the future.
+P-135	-0.2910 -0.0516 -3.4681 -2.3183 -0.7742 -2.1170 -0.9931 -3.1296 -3.1913 -0.9521 -3.1371 -2.2350 -0.0686 -0.0555 -0.0614 -1.1826 -2.8826 -0.0804 -5.0886 -0.8004 -1.8088 -0.9275 -3.3205 -2.5661 -0.1408 -4.0211 -1.8329 -0.3021 -4.4241 -0.0257 -1.0611 -2.4605 -0.3806 -0.0803
+S-165	Яны па сутнасці ізаляваныя сістэмы, і, калі вам даспадобы, мы можам думаць пра іх як пра паменшаныя версіі цэлага сусвету.
+T-165	They are essentially isolated systems, so if we like, we can think of them as a scaled-down version of the entire universe.
+H-165	-1.0654475688934326	They &apos;re staggering system , and when you think about it , we can think about them as little parts of the universe .
+D-165	-1.0654475688934326	They 're staggering system, and when you think about it, we can think about them as little parts of the universe.
+P-165	-0.1142 -3.0333 -0.0529 -0.0608 -0.1782 -5.2806 -2.2434 -0.3229 -0.9954 -1.3446 -0.0247 -1.0416 -0.1810 -3.8242 -0.5250 -2.1561 -0.1176 -0.1977 -0.5054 -0.7917 -0.3481 -1.7132 -0.1809 -3.1788 -1.5909 -0.0356 -0.2492 -1.2768 -0.3162 -0.0823
+S-75	"Яна запытала:" "Сакена?" "Я адказала ёй."
+T-75	"And she asked me," "Sakena?" "And I answered her."
+H-75	-0.4509229063987732	&quot; She asked her , &quot; &quot; What ? &quot; &quot; I said , &quot; &quot; I &apos;m the answer . &quot;
+D-75	-0.4509229063987732	"She asked her," "What?" "I said," "I 'm the answer."
+P-75	-0.0481 -0.0580 -0.0529 -0.1253 -0.7698 -0.2918 -0.3741 -0.1233 -0.0642 -0.0590 -0.1116 -0.0689 -0.0581 -1.3009 -1.4542 -0.5389 -0.0752 -0.0585 -0.1510 -0.0745 -0.0598 -0.8436 -1.5747 -0.4780 -0.0781 -0.0736 -0.0593 -0.0991 -0.0702 -0.0590 -1.8945 -1.1538 -0.0356 -0.0588 -1.5078 -3.1989 -0.6529 -0.3841 -0.2530 -0.0574 -0.0582 -0.4303
+S-141	Я веру, што магу задаволіць маіх пакупнікоў, ашчадна ставячыся да мажлівасці будучых пакаленняў жыць больш экалагічна чыстае жыццё.
+T-141	I feel that I can meet the needs of my customers without compromising the ability of future generations to live in a greener tomorrow.
+H-141	-1.7820602655410767	I believe that I can do this , to help people , to come back to the future , to live more profound lives .
+D-141	-1.7820602655410767	I believe that I can do this, to help people, to come back to the future, to live more profound lives.
+P-141	-0.4872 -0.0276 -1.6359 -1.2065 -0.3330 -2.7081 -3.0651 -3.3215 -2.0728 -1.0189 -2.2678 -2.1050 -0.7847 -4.4229 -2.8776 -1.0976 -1.8648 -3.4154 -1.3648 -0.3943 -3.9264 -0.5963 -3.2298 -1.8597 -0.1766 -0.0732
+S-27	Я ўбачыла маладую жанчыну, якая не магла нікуды пайсці, не мела адукацыі, забаў, якая не мела нават месца для жыцця.
+T-27	I saw a young woman have no way to go anywhere, no education, no entertainment, no place to even live.
+H-27	-0.942228376865387	I saw a young woman who couldn &apos;t go to the clinic who couldn &apos;t go to the master of education , who had no place for life .
+D-27	-0.942228376865387	I saw a young woman who couldn 't go to the clinic who couldn 't go to the master of education, who had no place for life.
+P-27	-0.5099 -0.5521 -0.5504 -0.7906 -0.2812 -0.0470 -0.6678 -0.0420 -0.0539 -0.0582 -0.0500 -0.7848 -1.2122 -0.8085 -3.7672 -1.8915 -1.5017 -0.0882 -0.0569 -0.0606 -0.0498 -1.0333 -2.2505 -0.8932 -3.1540 -2.3111 -0.5185 -0.3956 -1.8272 -1.4913 -2.7352 -0.8833 -0.7439 -1.4831 -0.2858 -0.0894
+S-243	Вы можаце гэта пачуць не толькі ў сказах, але і ў тым, як яны лічаць такты музыкі. два, тры, чатыры, раз.
+T-243	So, you can hear it not just in the phrasing, but the way they count off their music: two, three, four, one.
+H-243	-1.1310205459594727	You can &apos;t hear it only about it , but you can hear it , because they think it &apos;s so powerful , two .
+D-243	-1.1310205459594727	You can 't hear it only about it, but you can hear it, because they think it 's so powerful, two.
+P-243	-0.4034 -0.0927 -0.9533 -0.0620 -0.0633 -0.0534 -0.0574 -0.4359 -2.1790 -2.4924 -3.1261 -1.1194 -0.0557 -3.1398 -2.0358 -0.3686 -0.3316 -2.0659 -2.3426 -0.2171 -1.8281 -3.0303 -1.0786 -0.0687 -0.0624 -0.0865 -1.6293 -1.8666 -1.8660 -0.2417 -2.7531 -0.0858
+S-157	Я думаю, што існуюць чатыры асноўныя тыпы, і першы тып, пра які хочацца паведаміць, — у накірунку нечага вельмі вялікага.
+T-157	And I think there are four major types, and the first type that I want to describe is probing the very big.
+H-157	-1.3262715339660645	I think there &apos;s four major modations that you &apos;re at first , and the first concept that we &apos;re facing is not a kind of great kind of challenge .
+D-157	-1.3262715339660645	I think there 's four major modations that you 're at first, and the first concept that we 're facing is not a kind of great kind of challenge.
+P-157	-0.6940 -0.0578 -0.0911 -2.8982 -0.0584 -0.0598 -0.0925 -0.9187 -2.1599 -4.8550 -2.1308 -1.6766 -1.1697 -0.8549 -0.0677 -0.0608 -0.1908 -3.1791 -2.4199 -1.2331 -0.0724 -0.1832 -0.6133 -4.4042 -1.6722 -0.6784 -1.4182 -0.0739 -0.0641 -0.2661 -3.2041 -1.0367 -2.0832 -2.0482 -2.0991 -0.0576 -3.0630 -2.5598 -0.1070 -4.8842 -0.1604 -0.0852
+S-206	Тады, адно адмысловае пытанне, якое паўстае, — якім чынам цёмная энергія ўплывае на сусвет у наймагутнейшым маштабе?
+T-206	So, one particular question that we have is, how does dark energy affect the universe at the largest scales?
+H-206	-1.51588773727417	And the question is that the main question is , the dark energy in the dark energy of the universe are going to be able to be able to be able to be able to be able to be able to be able to be able to scale the scale of scale ?
+D-206	-1.51588773727417	And the question is that the main question is, the dark energy in the dark energy of the universe are going to be able to be able to be able to be able to be able to be able to be able to be able to scale the scale of scale?
+P-206	-1.2935 -1.2097 -2.9695 -1.0041 -1.5160 -0.3482 -3.4443 -1.0880 -1.4103 -3.3841 -1.1326 -0.5788 -0.3100 -3.2030 -1.0740 -0.2050 -1.6686 -1.0756 -2.2023 -0.6514 -1.6170 -2.2251 -0.1817 -0.6874 -1.0989 -0.0621 -1.8019 -1.1497 -0.0813 -2.5888 -1.0522 -0.0814 -3.0804 -1.2804 -0.1007 -3.3877 -1.5311 -0.0936 -3.7415 -1.8468 -0.0991 -4.1329 -2.1000 -0.1104 -4.4764 -2.3586 -0.1217 -2.6132 -3.6237 -2.6409 -0.0432 -1.7717 -0.2299 -0.0776
+S-13	Ведаеце, калі я сканчвала ўніверсітэт, я нават не ведала, што адбывалася з маёй сям 'ёй і з маёй краінай.
+T-13	And do you know that at the time I was completing my education, I didn 't know what was going on with my family or with my country.
+H-13	-0.832588791847229	You know , when I got a college class , I didn &apos;t know what was going to be my family .
+D-13	-0.832588791847229	You know, when I got a college class, I didn 't know what was going to be my family.
+P-13	-0.3233 -0.0370 -0.3093 -1.0815 -0.0997 -3.3676 -0.9994 -1.6508 -2.4152 -0.1870 -0.1131 -1.4803 -0.1024 -0.0616 -0.0532 -0.0646 -0.2501 -0.2711 -0.6612 -1.4747 -0.5234 -1.2897 -1.4766 -0.1318 -3.1455 -0.0770
+S-162	Каб не быць<unk>лоўным менавіта гэтае аб 'яднанне галактык мае вагу больш за адзін мільен мільярдаў сонцаў.
+T-162	Now, to give you a number, this particular galaxy cluster has a mass of over one million billion suns.
+H-162	-1.5053383111953735	It &apos;s not to be something that &apos;s confusioned by some more than one billion dollars .
+D-162	-1.5053383111953735	It 's not to be something that 's confusioned by some more than one billion dollars.
+P-162	-3.4415 -1.6211 -0.0573 -0.0569 -0.0965 -0.1806 -1.7312 -0.1076 -4.2682 -2.0499 -1.7453 -0.0638 -0.0579 -0.1248 -4.3198 -2.2067 -2.3940 -1.2824 -4.2206 -1.4953 -1.5302 -0.7694 -0.1283 -2.9220 -2.1828 -0.0848
+S-153	Большасць кропак, якія Вы бачыце на экране — гэта не адзіночныя зоркі, але калекцыі зорак, ці галактыкі.
+T-153	So most of the points that you see on the screen are not individual stars, but collections of stars, or galaxies.
+H-153	-1.3938137292861938	Most people who see the screen on the screen are not the lives of stars , but the stars of stars , or galaxies .
+D-153	-1.3938137292861938	Most people who see the screen on the screen are not the lives of stars, but the stars of stars, or galaxies.
+P-153	-0.0294 -2.8604 -0.6834 -1.8420 -2.3137 -0.4792 -2.3065 -0.5496 -0.0356 -0.1994 -0.8571 -2.6912 -5.0231 -0.1735 -0.4360 -1.0219 -0.0115 -3.8302 -0.9776 -1.7905 -0.8191 -0.8310 -3.4082 -2.7107 -0.2874 -0.0708
+S-103	"Такім чынам нарадзіліся" "Златворныя стравы" "."
+T-103	"And thus," "Malicious Dishes" "was born."
+H-103	-0.619828462600708	&quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; &quot; . &quot;
+D-103	-0.619828462600708	"" "" "" "" "" "" "" "" "" "". "
+P-103	-5.3281 -0.0650 -0.0529 -1.5946 -0.0594 -0.0546 -3.3562 -0.0617 -0.0570 -3.6527 -0.0631 -0.0582 -3.1250 -0.0632 -0.0593 -2.4316 -0.0659 -0.0601 -1.7668 -0.0675 -0.0607 -1.2555 -0.0690 -0.0616 -1.0107 -0.0702 -0.0610 -0.8721 -0.0693 -0.0618 -0.7577 -0.0706 -0.0611 -0.6973 -0.0724 -0.0619 -0.6301 -0.0745 -0.0626 -0.5528 -0.0749 -0.0623 -0.5545 -0.0761 -0.0638 -0.5239 -0.0764 -0.0632 -0.5778 -0.0816 -0.0623 -0.5567 -0.0815 -0.0617 -0.6435 -0.0818 -0.0622 -0.6627 -0.0819 -0.0618 -6.8853 -0.0278 -0.0668 -0.0619 -0.0604
+S-232	Вось паглядзіце ў Google Maps. Тут блок 14, 15, 16, 17, 18, 19.
+T-232	Just look at Google Maps here. There 's Block 14, 15, 16, 17, 18, 19.
+H-232	-1.0967038869857788	Let &apos;s take a V.D. here . Here &apos;s 14 , 15 , 176 , 18 , 18 , 18 , 18 .
+D-232	-1.0967038869857788	Let 's take a V.D. here. Here 's 14, 15, 176, 18, 18, 18, 18.
+P-232	-4.0862 -0.2234 -0.0587 -0.0553 -0.0651 -0.8513 -2.2731 -2.9089 -2.9665 -1.6335 -0.1810 -2.2769 -0.9867 -2.6929 -0.3452 -0.0672 -0.0594 -0.1233 -0.7649 -1.2413 -0.8938 -0.8185 -1.1987 -2.0611 -0.4674 -0.7593 -1.1013 -0.6602 -1.4064 -0.6511 -1.4293 -0.6393 -1.2512 -0.0897
+S-120	Вялікі ўплыў на мяне заўсёды аказвала мастацтва, і я хацела дапасаваць яго да ўсяго, што я раблю, ўключаючы сваю фірму.
+T-120	I was greatly influenced by art, and I wanted to incorporate it in everything I did, even my business.
+H-120	-1.3595335483551025	It &apos;s a very long time for me , and I always wanted to be able to transform it into what I &apos;ve been doing , and I wanted to do this .
+D-120	-1.3595335483551025	It 's a very long time for me, and I always wanted to be able to transform it into what I 've been doing, and I wanted to do this.
+P-120	-3.2104 -0.9256 -0.0592 -0.0585 -0.0692 -1.6223 -0.7229 -4.1894 -1.5748 -1.3089 -0.2900 -1.5550 -0.8909 -1.3355 -1.5903 -1.0215 -0.0528 -3.2391 -2.3381 -0.1116 -3.7374 -2.3213 -1.1686 -2.7400 -0.2212 -3.5716 -0.0675 -0.0547 -0.8632 -1.8614 -0.5591 -1.2649 -0.5943 -0.9627 -0.6991 -0.1954 -2.1108 -1.2556 -3.8867 -0.0798
+S-30	У той момант я запытала сябе: '' Што я магу зрабіць для гэтых людзей? ''
+T-30	At that moment, I felt, what can I do for these people?
+H-30	-0.655673623085022	And at that moment , I asked myself , what can I do for these people ?
+D-30	-0.655673623085022	And at that moment, I asked myself, what can I do for these people?
+P-30	-2.8875 -1.3555 -1.4384 -0.9657 -0.4071 -0.0520 -0.8007 -0.1087 -0.5271 -0.5949 -0.3786 -0.0289 -0.0470 -1.1355 -0.7478 -0.1946 -0.0607 -0.0716
+S-6	Штодня я бачыла жанчын, якіх неслі на пахаванне, ці дзяцей, якія ішлі наведаць могілкі.
+T-6	Day to day, I watched women being carried to a graveyard, or watched children going to a graveyard.
+H-6	-1.233690619468689	What I &apos;ve been raped is that I don &apos;t know who kids go to the West , or who went to the bathroom .
+D-6	-1.233690619468689	What I 've been raped is that I don 't know who kids go to the West, or who went to the bathroom.
+P-6	-0.2865 -0.4413 -2.7184 -0.0584 -0.0609 -0.1787 -0.9646 -3.1825 -1.6336 -0.7786 -1.8930 -1.2915 -0.1612 -0.0632 -0.0587 -0.0630 -2.2481 -0.7717 -1.0456 -2.7838 -1.2854 -2.0882 -2.5358 -1.6653 -0.4314 -2.5319 -2.2203 -0.6939 -1.3748 -2.9026 -0.9771 -0.0881
+S-46	Ўжо праз адзін год мы мелі 25 школ, і 15 000 дзяцей, якія ў гэтыя школы хадзілі. Гэта бало неверагодна.
+T-46	In a matter of one year, we had 25 schools set up, 15,000 children going to school, and it was amazing.
+H-46	-0.9551301598548889	On one year , we had 25-year-old children , 15,000 children who were in high school , and that &apos;s incredibly big .
+D-46	-0.9551301598548889	On one year, we had 25-year-old children, 15,000 children who were in high school, and that 's incredibly big.
+P-46	-3.5387 -0.4297 -0.1130 -0.3539 -0.0729 -0.9093 -0.3004 -2.9466 -0.4108 -0.1774 -0.7960 -0.4171 -1.1361 -0.4352 -1.4594 -0.4933 -0.3196 -1.2653 -2.6761 -2.6193 -0.0154 -1.2897 -0.7687 -1.9120 -0.7591 -0.0463 -0.0566 -0.0867 -1.2763 -3.2616 -0.1362 -0.0856
+S-190	Мы памятаем, што галактычныя аб 'яднанні нібы лустачкі сусвету, толькі паменшанай версіі.
+T-190	Since galaxy clusters are representative slices of the universe, scaled-down versions.
+H-190	-1.4942901134490967	What we remember is that there &apos;s the criteria of the moon , only one of the parts of the darkness .
+D-190	-1.4942901134490967	What we remember is that there 's the criteria of the moon, only one of the parts of the darkness.
+P-190	-1.4731 -0.1411 -0.9389 -0.4586 -0.5036 -3.0850 -3.7412 -0.0528 -0.0576 -0.0884 -2.6013 -5.5473 -1.7661 -0.8945 -0.6049 -0.7307 -5.1961 -0.4919 -2.1906 -2.7286 -0.6387 -0.1317 -3.7805 -1.0786 -0.1262 -2.4623 -0.8941 -0.8454 -0.0846
+S-58	Натуральна, іх тон, голас, якім яны размаўлялі са мной, вельмі мяне палохаў. Я сапраўды трэслался.
+T-58	And of course, with the tone of voice they were using, it was very scary, but I was really shaking up.
+H-58	-1.2946768999099731	Of course , their thin voice , they talk about me very , very , very quickly .
+D-58	-1.2946768999099731	Of course, their thin voice, they talk about me very, very, very quickly.
+P-58	-1.8971 -0.0096 -0.2164 -1.1476 -3.6316 -0.1288 -2.2580 -0.0681 -1.8348 -1.4994 -0.2474 -0.6296 -2.1305 -0.1942 -3.2869 -0.5504 -2.6432 -1.2684 -0.9566
+S-104	Калі мне было 4-ы гады, тата паказаў мне, як разабраць кампутар на часткі і скласці яго нанова.
+T-104	At four years old, my dad showed me how to take apart a computer and put it back together again.
+H-104	-1.1152669191360474	When I was 4 years old , I was going to find out how to write the computer and bring it back to it .
+D-104	-1.1152669191360474	When I was 4 years old, I was going to find out how to write the computer and bring it back to it.
+P-104	-0.9579 -0.0758 -0.2266 -0.5170 -0.4129 -0.0818 -0.0603 -0.4721 -1.5903 -3.0004 -0.0636 -2.3147 -2.0328 -2.2243 -1.2534 -2.7493 -1.8495 -0.7598 -0.8180 -2.1715 -0.3165 -1.4794 -1.6262 -1.0157 -0.8533 -0.0740
+S-142	Мы жывем у вялікім, разнастайным і прыгожым свеце, і ад гэтага мне яшчэ больш карціць абараніць яго.
+T-142	We live in a big, diverse and beautiful world, and that makes me even more passionate to save it.
+H-142	-1.3273661136627197	We live in a middle and a beautiful diversity of the world , and it &apos;s also my brother &apos;s chance to protect it .
+D-142	-1.3273661136627197	We live in a middle and a beautiful diversity of the world, and it 's also my brother 's chance to protect it.
+P-142	-0.2667 -0.0178 -0.3826 -0.9190 -4.1954 -1.4949 -1.6469 -2.6332 -2.3285 -0.9124 -2.2536 -0.1062 -0.6652 -0.0226 -1.7979 -1.6467 -0.0577 -0.0584 -0.0808 -2.4814 -2.0338 -2.7795 -1.4005 -0.0567 -0.0582 -0.1027 -4.7144 -0.8161 -3.8777 -0.8580 -1.7214 -0.0890
+S-233	Ва ўсіх гэтых блокаў ёсць назвы. Вуліцы - гэта проста безыменны прастор паміж блокамі.
+T-233	All of these blocks have names, and the streets are just the unnamed spaces in between the blocks.
+H-233	-1.5990759134292603	And all of these things , there &apos;s a name , and this is just a coach that &apos;s just played in the air .
+D-233	-1.5990759134292603	And all of these things, there 's a name, and this is just a coach that 's just played in the air.
+P-233	-2.2336 -0.3344 -1.8325 -0.3271 -3.0001 -3.9061 -0.5334 -2.3981 -0.0532 -0.0620 -0.1150 -1.7827 -0.3325 -3.0451 -2.4566 -2.6003 -0.1072 -1.1591 -1.3094 -5.0945 -2.0187 -4.2200 -0.7240 -0.0642 -0.0634 -0.1015 -0.5501 -4.1078 -3.3128 -1.1439 -3.3032 -0.3965 -0.0805
+S-34	У той момант я зразумела, што павінна даць майму народу адукацыю і здароўе, і над гэтым я пачала працаваць.
+T-34	And I knew that at that moment that what I should give to my people is education and health, and that 's what I went after.
+H-34	-0.9285294413566589	And at that moment , I realized that there should be a community of education and education , and I started working on this stage .
+D-34	-0.9285294413566589	And at that moment, I realized that there should be a community of education and education, and I started working on this stage.
+P-34	-1.9318 -1.6302 -0.9700 -1.0040 -0.5040 -0.1498 -0.3492 -0.3334 -1.9681 -1.5123 -0.3355 -0.6486 -4.2010 -1.4155 -0.5216 -0.4015 -1.0641 -0.9282 -0.0766 -0.9309 -0.8898 -1.1708 -0.1325 -0.9107 -0.8255 -0.1842 -0.0806
+S-239	Вось напрыклад, ў Кітаі ёсць дактары, якія вераць ў тое, што іх праца - захоўваць Ваша здароўе.
+T-239	So, for example, there are doctors in China who believe that it 's their job to keep you healthy.
+H-239	-1.1856989860534668	Here &apos;s China , there &apos;s the health that predicts their health .
+D-239	-1.1856989860534668	Here 's China, there 's the health that predicts their health.
+P-239	-3.6498 -1.2973 -0.0556 -0.0623 -0.0556 -2.5826 -1.2772 -0.2190 -1.7357 -0.0615 -0.0618 -0.0777 -2.3161 -1.7386 -0.7193 -2.4968 -0.6463 -2.3338 -1.9647 -1.4756 -0.0724
+S-129	Зразумела ж, мне трэ было шмат што вывучыць пра кіраванне справамі, як, напрыклад, фірмовую назву і распродаж, як падтрымліваць адносіны з кліентамі і назіраць за тым, што прадаецца лепш ці горш.
+T-129	Now, I had a lot to learn about my business, like branding and marketing, staying engaged with my customers, and seeing what sold the most and the least.
+H-129	-1.4220783710479736	Well , I &apos;ve been thinking a lot about the right thing about the right-hand side , like this , and for example , there &apos;s businesses , and it &apos;s kind of getting better , and that &apos;s what &apos;s happening .
+D-129	-1.4220783710479736	Well, I 've been thinking a lot about the right thing about the right-hand side, like this, and for example, there 's businesses, and it 's kind of getting better, and that 's what 's happening.
+P-129	-1.7459 -0.2523 -0.2407 -3.6177 -0.0596 -0.0559 -0.2586 -2.2939 -2.6936 -2.4411 -0.0207 -0.6920 -2.3850 -0.1413 -2.7400 -0.4835 -2.0056 -0.1247 -1.4179 -2.5590 -3.1822 -1.1293 -0.7717 -2.2776 -0.6101 -3.7873 -3.0976 -0.3099 -0.1000 -4.1917 -1.0973 -0.0642 -0.0596 -0.0957 -4.9954 -2.7331 -1.1165 -4.1419 -0.6008 -0.0634 -0.0602 -0.0945 -3.7094 -0.1219 -3.9654 -0.7495 -2.2852 -1.9006 -2.3271 -0.4637 -0.0596 -0.0601 -0.0856 -3.3846 -1.2833 -0.0649 -0.0605 -0.0729 -2.4438 -2.8147 -0.0847
+S-246	Такім чынам, давайце не забываць, што ці ў TED, ці недзе яшчэ, што незалежна ад таго, якая бліскучая ідэя ў Вас ёсць ці якую Вы чуеце, яе супрацьлегласць таксама можа быць праўдай.
+T-246	So, let 's never forget, whether at TED, or anywhere else, that whatever brilliant ideas you have or hear, that the opposite may also be true.
+H-246	-0.934863269329071	So let &apos;s forget if TED &apos;s forget that TED or even though it &apos;s not about it , whether it &apos;s a good idea of what you &apos;re doing , whether it &apos;s true , it &apos;s true .
+D-246	-0.934863269329071	So let 's forget if TED 's forget that TED or even though it 's not about it, whether it 's a good idea of what you 're doing, whether it 's true, it 's true.
+P-246	-0.3311 -0.2973 -0.0874 -0.0614 -0.0563 -0.0710 -1.2094 -2.5214 -0.2859 -2.6044 -0.0679 -0.0582 -0.1127 -0.6173 -2.0509 -1.1911 -0.3839 -2.2187 -1.2411 -0.8683 -0.2557 -0.0613 -0.0627 -0.1139 -3.0427 -2.2257 -2.3587 -0.7232 -1.1394 -0.9350 -0.1737 -0.0616 -0.0636 -0.1081 -3.6013 -3.0685 -0.1573 -2.3742 -1.5827 -2.4824 -0.6892 -0.0632 -0.0650 -0.3067 -0.7437 -2.2230 -2.1449 -0.7909 -0.3304 -0.0615 -0.0640 -0.1704 -2.3771 -1.4011 -1.1249 -0.7742 -0.0578 -0.0643 -0.1007 -2.1892 -1.1992 -0.0928
+S-176	Экстрэмальная гравітацыя гэтых сістэм аб 'ядноўвае часціцы газу і надае ім велізарную хуткасць, а велізарная хуткасць, у сваю чаргу, — гэта велізарная тэмпература.
+T-176	The extreme gravity of these systems is accelerating particles of gas to great speeds, and great speeds means great temperatures.
+H-176	-1.4799127578735352	EVD , the gravity of the gravity of these things is that they &apos;re embedded in a big big pack , and it &apos;s a big package , and it &apos;s a pack pack package , and it &apos;s a very , and it &apos;s a very clear thing .
+D-176	-1.4799127578735352	EVD, the gravity of the gravity of these things is that they 're embedded in a big big pack, and it 's a big package, and it 's a pack pack package, and it 's a very, and it 's a very clear thing.
+P-176	-1.3190 -2.3304 -1.2238 -4.3980 -1.6774 -1.4434 -0.4655 -0.0947 -2.5862 -4.2505 -0.5925 -0.9755 -1.4166 -4.4559 -0.7905 -3.9198 -2.2299 -2.0953 -0.0617 -0.0636 -0.2996 -4.8289 -0.3187 -1.2497 -1.1971 -1.7900 -3.4877 -1.0371 -0.5641 -2.6996 -1.4556 -0.0704 -0.0611 -0.1059 -1.7517 -2.1215 -3.3226 -0.8455 -0.8766 -0.6877 -1.6293 -0.4568 -0.0632 -0.0624 -0.0978 -2.0888 -4.2157 -1.3039 -1.8531 -1.1101 -1.2104 -0.8134 -1.1891 -0.1781 -0.0608 -0.0627 -0.0918 -2.1940 -1.8922 -4.3568 -2.5504 -1.3115 -0.1455 -0.0614 -0.0644 -0.0989 -1.9324 -2.2346 -4.1522 -2.9833 -0.8450 -0.0823
+S-166	"І на шмат пытанняў, якія могуць з 'явіцца у нас, пра суцэльны сусвет, напрыклад," "як працуе гравітацыя?" ""
+T-166	And many of the questions that we might have about the universe at large scales, such as, how does gravity work?
+H-166	-0.9691553115844727	&quot; And most of the things that we can do , &quot; &quot; Well , the world &apos;s right now , the world &apos;s world , &quot; &quot; which works ? &quot;
+D-166	-0.9691553115844727	"And most of the things that we can do," "Well, the world 's right now, the world 's world," "which works?"
+P-166	-0.6329 -0.0546 -0.0521 -0.1733 -3.3658 -1.0034 -0.5965 -3.5967 -0.6628 -1.3903 -1.5620 -1.9102 -2.0236 -1.8953 -0.0611 -0.0523 -0.1669 -0.0625 -0.0548 -3.4100 -0.0953 -1.5629 -1.2015 -2.4019 -0.1161 -0.0583 -0.0955 -3.7538 -0.7080 -0.1098 -0.7566 -1.4661 -1.7039 -0.1881 -0.0593 -0.0733 -3.4536 -1.5059 -1.3886 -0.0773 -0.0577 -0.2777 -0.0443 -0.0586 -3.2593 -0.8161 -1.1634 -0.0610 -0.0528 -0.0567 -0.0764
+S-194	І гэта вельмі важна, таму што гэта значыць, што вельмі, вельмі малыя эфекты, якія цяжка вылучыць у лабараторыі, могуць спалучацца і спалучацца у нешта, што мы можам бачыць у прыродзе.
+T-194	And this is very important, because what it means is that very, very small effects that might be difficult to detect in the lab, might be compounded and compounded into something that we could possibly observe in nature.
+H-194	-1.2529311180114746	And it &apos;s very important , because this means that it &apos;s very , very , very , very , very , very , very hard to use the lab , so you can see if we can see something like this .
+D-194	-1.2529311180114746	And it 's very important, because this means that it 's very, very, very, very, very, very, very hard to use the lab, so you can see if we can see something like this.
+P-194	-0.2695 -1.4649 -0.2579 -0.0559 -0.0574 -0.0719 -1.3432 -0.1287 -1.5105 -0.0708 -1.2743 -1.2729 -0.3182 -1.5151 -0.6678 -0.0585 -0.0575 -0.0861 -1.2659 -2.0838 -0.1485 -2.6073 -0.1725 -2.9427 -0.2441 -3.3445 -0.3363 -3.6385 -0.4143 -3.8459 -0.5405 -2.3480 -1.6388 -3.4923 -1.8656 -0.6910 -2.9999 -3.5043 -1.2481 -0.1876 -0.7986 -3.5029 -1.2632 -0.8081 -0.1909 -1.1109 -3.6708 -0.8310 -0.3444 -0.0846
+S-228	"Вуліцы маюць назвы; блокі - гэта проста безыменны прастор паміж<unk>цамі." "Ён сыходзіць, трохі збянтэжаны і расчараваны."
+T-228	"Streets have names; blocks are just the unnamed spaces in between streets." "He leaves, a little confused and disappointed."
+H-228	-1.2498433589935303	&quot; The name of the name is , &quot; &quot; It &apos;s just just a white barbecue , and it &apos;s just just a little bit of the National Geographic . &quot; &quot; It &apos;s a little bit of all-pound . &quot;
+D-228	-1.2498433589935303	"The name of the name is," "It 's just just a white barbecue, and it 's just just a little bit of the National Geographic." "It 's a little bit of all-pound."
+P-228	-0.3304 -0.0521 -0.0500 -2.2276 -3.2782 -0.5686 -2.9584 -1.7420 -0.9110 -3.3235 -0.3007 -0.0600 -0.0558 -0.2114 -0.0598 -0.0587 -2.9824 -0.2569 -0.0487 -0.0603 -0.0952 -0.2143 -1.9428 -0.7723 -1.8376 -5.4008 -1.4661 -0.7296 -3.5841 -0.6322 -1.5927 -1.3904 -0.0502 -0.0618 -0.0982 -0.2882 -3.6367 -1.4053 -2.6349 -0.2003 -1.4127 -2.8134 -5.8063 -0.5763 -0.1960 -3.0403 -0.1301 -0.0613 -0.0604 -0.9538 -0.0648 -0.0588 -2.4505 -1.1918 -0.0631 -0.0610 -0.0789 -3.4526 -0.5836 -0.0437 -1.7956 -4.2209 -3.1019 -1.9490 -2.8967 -2.5829 -0.0794 -0.0535 -0.0592 -0.0804
+S-139	Таму калі я пачала з фірмай, я ведала дзьве рэчы: ўсе мае вырабы павінны быць экалагічнымі, і што 10-20 адсоткаў майго заробку павінна ахвяравацца мясцовым і сусветным дабрачынным арганізацыям.
+T-139	So when I started my business, I knew two things: All of my items had to be eco-friendly, and 10 to 20 percent of the profits I made went to local and global charities and environmental organizations.
+H-139	-1.5987052917480469	So when I started to find out , I knew two things : everything must be important , and 10 to 10 percent of my international organizations need to be able to ensure that the World Bank is a global World War .
+D-139	-1.5987052917480469	So when I started to find out, I knew two things: everything must be important, and 10 to 10 percent of my international organizations need to be able to ensure that the World Bank is a global World War.
+P-139	-0.6151 -0.2365 -0.0567 -0.4236 -1.3320 -2.4603 -2.1893 -3.9018 -0.1981 -0.2081 -3.6405 -0.0709 -0.6332 -1.7755 -1.6003 -0.2329 -4.1387 -0.6940 -0.2508 -1.6850 -2.5686 -0.0462 -0.4454 -1.2406 -0.0539 -3.6783 -4.2137 -2.2551 -0.0784 -2.4540 -2.9932 -0.1527 -4.6774 -0.9696 -1.4940 -2.9549 -1.0367 -1.2572 -3.9199 -1.2548 -3.7092 -1.5303 -0.9353 -0.0800
+S-122	"Я заўважыла, што калі я апранала свае вырабы, мяне спынялі на вуліцы з пытаннем:" Як прыгожа. Дзе такое можна купіць? ""
+T-122	"I noticed when I wore my creations, people would stop me and say," Wow, that 's really cute. Where can I get one? ""
+H-122	-0.9772921800613403	&quot; I noticed , &quot; &quot; What happened when I walked away from the street , I &apos;m going to get on the street from the street ? &quot; &quot; How are you going to be able to eat ? &quot;
+D-122	-0.9772921800613403	"I noticed," "What happened when I walked away from the street, I 'm going to get on the street from the street?" "How are you going to be able to eat?"
+P-122	-0.2231 -0.0641 -0.0530 -0.5303 -1.2422 -3.1440 -0.2943 -0.0625 -0.0553 -0.1256 -0.0678 -0.0562 -0.7765 -3.1846 -0.2037 -0.1074 -3.0630 -2.8125 -1.5237 -1.8787 -0.1424 -0.8191 -0.6731 -3.0749 -0.0514 -0.0619 -2.1251 -1.0871 -0.1465 -2.3757 -2.3128 -0.2917 -2.1185 -2.1490 -0.8267 -2.2699 -1.8541 -0.1185 -0.0738 -0.0576 -0.1385 -0.0739 -0.0573 -1.7940 -2.9261 -0.6813 -0.2478 -0.1241 -1.9622 -1.0608 -0.0782 -3.5932 -0.6109 -0.0619 -0.0731 -0.0570 -0.0668
+S-178	Існуе таксама шмат іншых асаблівасцей гэтай плазмы, якія пакуль яшчэ галаваломка для нас, дагэтуль блытаюць нас, і дагэтуль штурхаюць нашае разуменне фізікі звыш-гарачых целаў.
+T-178	There are many basic properties about this plasma that still confuse us, still puzzle us, and still push our understanding of the physics of the very hot.
+H-178	-1.548325777053833	There &apos;s also a lot of other things in this way that are still alive for us , that we still still still still see , and that &apos;s where we &apos;re doing , and we &apos;re still looking at the point of the universe .
+D-178	-1.548325777053833	There 's also a lot of other things in this way that are still alive for us, that we still still still still see, and that 's where we 're doing, and we 're still looking at the point of the universe.
+P-178	-0.5073 -1.9488 -0.0603 -0.0596 -0.0789 -0.7126 -0.8907 -0.0911 -0.3067 -0.1592 -2.3491 -3.4657 -0.6785 -2.9464 -0.2059 -2.4266 -0.7528 -4.0606 -1.4266 -0.1838 -2.0629 -2.1186 -3.3371 -0.3598 -0.7916 -1.5859 -2.5103 -3.6674 -2.5163 -0.9810 -3.7275 -1.7669 -0.0648 -0.0567 -0.1087 -3.3789 -0.8526 -2.6463 -0.0629 -0.0585 -0.8474 -3.8345 -3.2181 -1.4934 -2.9962 -1.3019 -0.0740 -0.0593 -0.8817 -1.6611 -5.1198 -0.0805 -2.2612 -4.3397 -0.1372 -2.8453 -3.3317 -0.8237 -0.0786
+S-170	Так, калі ўзяць выяву аб 'яднання галактык, і адняць ўсё святло, якое вылучаецца зоркамі, то пасля застанецца гэтая вялікая, блакітная кропля.
+T-170	Okay, if I take an image of a galaxy cluster, and I subtract away all of the starlight, what I 'm left with is this big, blue blob.
+H-170	-1.3440337181091309	So if you put it down , and it &apos;s all the way out there , and it &apos;s still the light that you &apos;re going to see , and then it &apos;s still the great , and then it &apos;s still great .
+D-170	-1.3440337181091309	So if you put it down, and it 's all the way out there, and it 's still the light that you 're going to see, and then it 's still the great, and then it 's still great.
+P-170	-0.4765 -0.5454 -0.4761 -1.7037 -2.0000 -3.4705 -0.7813 -2.1904 -4.0529 -2.1507 -0.0657 -0.0558 -0.1128 -4.2036 -2.1428 -1.7752 -2.4622 -1.9170 -0.3779 -1.4140 -2.1452 -1.4406 -0.0704 -0.0609 -0.1316 -1.9441 -2.5382 -1.8359 -0.9223 -2.9276 -2.4945 -0.0693 -0.0609 -0.7870 -2.4208 -0.2074 -1.6598 -1.0304 -1.2583 -0.5504 -2.1007 -0.8640 -0.0717 -0.0602 -0.1306 -2.2281 -2.3353 -1.0159 -2.5521 -1.3719 -1.6978 -1.0399 -0.6247 -0.0693 -0.0600 -0.1196 -2.2166 -3.7080 -1.3585 -0.0870
+S-188	"Каб адказаць на гэта пытанне, я збіраюся адказаць на трошкі іншае:" Што будзе, калі аб 'яднанні галактык сутыкнуцца? ""
+T-188	To answer that question, I 'm going to have to ask another one, which is, what happens when galaxy clusters collide?
+H-188	-0.9600059986114502	&quot; To answer that question , I &apos;m going to say , &quot; &quot; What will happen if there &apos;s the message coming to the message ? &quot;
+D-188	-0.9600059986114502	"To answer that question, I 'm going to say," "What will happen if there 's the message coming to the message?"
+P-188	-0.5345 -0.0544 -0.0536 -0.5773 -1.2009 -1.3988 -0.1604 -0.4305 -2.3386 -0.7749 -0.0532 -0.0634 -0.3442 -0.1581 -0.1974 -0.8763 -0.9499 -0.0748 -0.0601 -0.0574 -0.3494 -0.0639 -0.0607 -0.0228 -2.6052 -2.6106 -0.7144 -3.2628 -2.1156 -0.0440 -0.0610 -0.0894 -2.3061 -2.7621 -2.0581 -3.2382 -1.1885 -3.8219 -3.1533 -0.0562 -0.0744 -0.0606 -0.2023
+S-214	Такім жа чынам, я магу вывучыць шмат што пра сусвет у найвялікшым маштабе, сочачы за яго найвялікшымі часткамі, а гэтыя часткі — аб 'яднанні галактык.
+T-214	Similarly, I can learn a lot about the universe at the largest scales by tracking its biggest pieces and those biggest pieces are clusters of galaxies.
+H-214	-1.3417270183563232	So I can learn a lot about the world &apos;s greatest scale , with the greatest part of it , and those claims are all the claims of the cliches .
+D-214	-1.3417270183563232	So I can learn a lot about the world 's greatest scale, with the greatest part of it, and those claims are all the claims of the cliches.
+P-214	-0.8844 -0.2847 -0.9398 -0.1721 -0.7743 -0.0850 -0.9063 -0.6190 -2.8445 -1.3802 -0.0652 -0.0598 -0.1407 -0.5987 -3.0278 -1.2267 -2.1857 -0.8471 -1.0977 -4.2923 -0.2013 -1.9922 -0.1976 -1.5193 -0.4031 -3.5414 -1.6790 -0.2229 -4.1427 -1.5755 -2.3844 -2.0883 -0.1913 -0.6042 -3.3971 -3.1715 -1.6106 -0.8906 -0.0821
+S-131	"А аднойчы, калі мне было 10 год, са мной звязаліся з часопіса" "Forbes" "."
+T-131	Then one day, Forbes magazine contacted me when I was 10 years old.
+H-131	-1.0111373662948608	&quot; And one day , when I was 10 years old , I was talking to a magazine called &quot; &quot; The Grant . &quot;
+D-131	-1.0111373662948608	"And one day, when I was 10 years old, I was talking to a magazine called" "The Grant."
+P-131	-1.7579 -0.0600 -0.0505 -1.5153 -0.5996 -2.6130 -0.6321 -0.5790 -0.3192 -0.5852 -0.0640 -0.3690 -0.2293 -0.2325 -1.3884 -2.3827 -3.4867 -0.2025 -2.0542 -4.0169 -0.5371 -0.2574 -0.0570 -0.0560 -0.1371 -0.0614 -0.0549 -2.2106 -3.8857 -2.1700 -2.4220 -0.0786 -0.0687 -0.0558 -0.1993
+S-125	Я толькі ведала, што хачу вырабляць прыгожыя рэчы. якія б не пагражалі асяроддзю, і што я хацела падзяліцца з тымі, каму менш за мяне пашэнціла ў жыцці.
+T-125	I only knew I wanted to make pretty creations that were safe for the environment and I wanted to give back.
+H-125	-1.2755546569824219	I just knew that the difference between the wonderful things that would not be enriched , and what I wanted to share with is that I wanted to share with my most powerful life in life .
+D-125	-1.2755546569824219	I just knew that the difference between the wonderful things that would not be enriched, and what I wanted to share with is that I wanted to share with my most powerful life in life.
+P-125	-0.6385 -1.5553 -0.3654 -0.5648 -0.3887 -3.5140 -1.7022 -1.0226 -2.6287 -0.1168 -0.1044 -3.2513 -1.5613 -0.7968 -4.4271 -2.3108 -0.0765 -3.8037 -0.2851 -2.5231 -0.0780 -0.0681 -0.1687 -0.0587 -0.3881 -3.3903 -1.9003 -0.4190 -0.2514 -0.1129 -0.0273 -1.6872 -2.3585 -1.7216 -1.9923 -2.2285 -1.5886 -0.7377 -0.1300 -0.0780
+S-147	(Воплескі) Дзякуй. (Воплескі) Пэт Мітчэл: Вы кагадзе пачулі, як Мая размаўляла пра сваіх бацькоў, якія за спінай гэтае чароўнае жанчыны. Дзе яны?
+T-147	(Applause) Thank you. (Applause) Pat Mitchell: So, you heard Maya talk about the amazing parents who are behind this incredible woman. Where are they?
+H-147	-1.0015424489974976	( Applause ) Thank you . ( Applause ) Patients : Do you hear hear the talk about my parents who are listening to this beautiful woman ?
+D-147	-1.0015424489974976	(Applause) Thank you. (Applause) Patients: Do you hear hear the talk about my parents who are listening to this beautiful woman?
+P-147	-0.0712 -0.0083 -0.0290 -0.3682 -0.0822 -0.0529 -1.1542 -0.1111 -0.0372 -1.8123 -2.0923 -0.2354 -2.3725 -0.0515 -0.9261 -1.7824 -2.8757 -2.1885 -0.6028 -2.4975 -0.0377 -1.3228 -1.7561 -3.1469 -0.2849 -1.3971 -1.2409 -0.6700 -0.7607 -0.0778
+S-242	"Аднак у паўночна-афрыканскай музыцы" "раз" "гэта канец фразы, паўза напрыканцы сказа."
+T-242	"But in West African music, the" "one" "is thought of as the end of the phrase, like the period at the end of a sentence."
+H-242	-0.9785258769989014	&quot; But in fact , &quot; &quot; Leymah &quot; &quot; is the end of the Industrial Revolution . &quot;
+D-242	-0.9785258769989014	"But in fact," "Leymah" "is the end of the Industrial Revolution."
+P-242	-3.5730 -0.0592 -0.0514 -1.5706 -2.1815 -2.4301 -0.1133 -3.9114 -0.0641 -0.0581 -0.0541 -0.0600 -0.0587 -3.6506 -0.4837 -0.7243 -1.2605 -0.0755 -0.0595 -0.3083 -0.0650 -0.0601 -0.9564 -1.4062 -1.8812 -0.0308 -1.1579 -5.3022 -0.1358 -0.8847 -1.3011 -0.0488 -0.0702 -0.0586 -0.1416
+S-226	"А Вы адказваеце:" "Выбачайце. Ну, гэта Оўк стрыт, а гэта Элм стрыт."
+T-226	"And you say," "I 'm sorry, well, this is Oak Street, that 's Elm Street."
+H-226	-0.960297167301178	&quot; And you &apos;re thinking , &quot; &quot; Wow . &quot; &quot; Well , that &apos;s an E.C. , and that &apos;s an E. Beach . &quot;
+D-226	-0.960297167301178	"And you 're thinking," "Wow." "Well, that 's an E.C., and that 's an E. Beach."
+P-226	-0.2075 -0.0567 -0.0516 -0.8741 -0.5295 -3.7401 -0.0480 -0.0584 -0.8263 -0.9653 -0.4045 -0.0509 -0.0603 -0.0525 -0.1126 -0.0664 -0.0560 -2.7412 -1.1059 -3.1903 -0.0645 -0.0576 -0.0858 -0.0703 -0.0588 -0.4862 -0.6009 -1.4337 -0.8764 -0.0676 -0.0632 -0.1561 -4.7521 -2.1777 -1.3363 -2.6634 -0.1318 -2.0823 -0.4810 -1.1388 -0.2885 -0.0602 -0.0627 -0.1105 -5.0400 -2.7538 -0.2239 -4.1453 -1.4658 -3.4037 -0.1214 -0.0582 -0.0552 -0.0842
+S-90	Кліент: Мне, калі ласка, бутэрброд з аператыўнай памяццю, а выпіць — кілішак вашага найлепшага штрых-коду.
+T-90	Customer: I 'd like a RAM sandwich and a glass of your finest Code 39.
+H-90	-1.606377124786377	Kids : I &apos;d say , if you &apos;ve got a fire in the midst of the Office , and you &apos;re going to eat your hands , and you &apos;re going to make your best best-linked game .
+D-90	-1.606377124786377	Kids: I 'd say, if you 've got a fire in the midst of the Office, and you 're going to eat your hands, and you 're going to make your best best-linked game.
+P-90	-2.6366 -2.0901 -0.5840 -0.8851 -2.8271 -0.0537 -0.0624 -1.3711 -1.2516 -1.0065 -1.2587 -2.0732 -3.3583 -0.0617 -0.0631 -1.6777 -0.5841 -2.4083 -4.2236 -1.6155 -1.5651 -3.6225 -1.8339 -1.4897 -2.5555 -5.4731 -2.3903 -0.4518 -0.7018 -1.0023 -0.2872 -0.8104 -0.0648 -0.0653 -1.1021 -0.6660 -0.1275 -3.7382 -0.9304 -4.3408 -1.6579 -2.1994 -0.7337 -0.6655 -0.0680 -0.0660 -1.1165 -0.9866 -0.1360 -4.1148 -1.0807 -1.7880 -1.8112 -3.0712 -3.8968 -3.1544 -1.2714 -4.7445 -0.4262 -0.0828
+S-116	Калі б не ідэі, мы б не былі там, дзе знаходзімся зараз, не было б тэхналагічных ці медыцынскіх вынаходак, не было б мастацтва, культуры, нашага стылю жыцця.
+T-116	If it wasn 't for ideas, we wouldn 't be where we are now with technology, medicine, art, culture, and how we even live our lives.
+H-116	-0.9833478331565857	If we don &apos;t work , we wouldn &apos;t be at some point where we wouldn &apos;t be a technology , whether it wasn &apos;t the technology of the culture , or the culture of the culture of our lives .
+D-116	-0.9833478331565857	If we don 't work, we wouldn 't be at some point where we wouldn 't be a technology, whether it wasn 't the technology of the culture, or the culture of the culture of our lives.
+P-116	-0.1094 -0.4727 -1.1431 -0.0772 -0.0599 -0.0600 -0.0587 -2.2809 -0.8203 -0.3222 -0.8538 -0.0796 -0.0630 -0.0569 -0.0574 -1.3758 -1.5765 -3.1079 -0.4219 -0.3797 -1.7506 -3.3824 -0.1076 -0.0632 -0.0600 -0.0591 -0.6420 -3.5388 -0.9561 -1.9420 -1.8869 -0.8867 -3.1550 -0.1383 -0.0589 -0.0601 -0.0692 -3.6792 -1.3634 -1.1304 -3.1441 -0.9991 -0.9529 -2.1479 -1.2564 -0.3051 -0.3886 -2.2872 -0.0626 -1.2331 -1.0894 -0.5581 -0.2794 -0.0903
+S-160	Яно настолькі масіўнае, што святло, якое праходзіць праз яго, выгінаецца, скажаецца з-за экстрэмальнай гравітацыі гэтага аб 'яднання.
+T-160	It is so massive that the light passing through it is being bent, it 's being distorted by the extreme gravity of this cluster.
+H-160	-1.5146515369415283	It &apos;s so bad that the light that you &apos;re looking at it , and you &apos;re going to see the wind , and you &apos;re going to come back with the T.K. for that moment .
+D-160	-1.5146515369415283	It 's so bad that the light that you 're looking at it, and you 're going to see the wind, and you 're going to come back with the T.K. for that moment.
+P-160	-0.6336 -1.6618 -0.0559 -0.0564 -0.0925 -0.3645 -3.0667 -0.1818 -0.9996 -0.9127 -1.8558 -3.8558 -2.8064 -0.0638 -0.0562 -0.4573 -4.2522 -0.9131 -2.1732 -1.9801 -2.2212 -0.9619 -1.1978 -0.0726 -0.0589 -0.5222 -2.3992 -0.1746 -4.0764 -2.0143 -4.1564 -2.4005 -2.7549 -3.0787 -0.7261 -0.0696 -0.0594 -0.5132 -1.6775 -0.1114 -4.5705 -1.6631 -0.4013 -1.2878 -4.2618 -1.4203 -3.0183 -0.0886 -3.8418 -1.7583 -1.9981 -0.1913 -0.0890
+S-110	(Воплескі) (Грумкаценне ног) (Музыка) (Рык) Апыляльнік: Абезлесвалус! Хто ж яшчэ!
+T-110	(Applause) (Foot stomp) (Music) (Roar) Pollinator: Deforestsaurus! I should have known!
+H-110	-1.3592244386672974	( Applause ) Guatemalmalmala ) ( Music ) ( Music ) AW : Agnus .
+D-110	-1.3592244386672974	(Applause) Guatemalmalmala) (Music) (Music) AW: Agnus.
+P-110	-0.0381 -0.0203 -0.0168 -3.5973 -1.4024 -1.3027 -1.2918 -1.8293 -0.4769 -0.6094 -0.0320 -0.0468 -0.0295 -2.0147 -0.1239 -0.0535 -3.3699 -4.0045 -0.1292 -1.2641 -5.4151 -0.9743 -1.5759 -3.0028
+S-74	Дык вось, я сядзела і нечакана... ў гэты момант, мы размаўляем аб імпульсе... ў гэты момант адна з маіх цудоўных донараў патэлефанавала аб справаздачы.
+T-74	So I was sitting there, all of a sudden, at this moment, talking about momentum, we are, at that moment, one of my wonderful donors called me about a report.
+H-74	-1.1838346719741821	So , I &apos;m standing on the stage and I &apos;m going to talk at this moment , and we &apos;re going to talk at this moment at this moment , and I &apos;m going to be at one moment in this moment , right ?
+D-74	-1.1838346719741821	So, I 'm standing on the stage and I 'm going to talk at this moment, and we 're going to talk at this moment at this moment, and I 'm going to be at one moment in this moment, right?
+P-74	-0.6240 -1.1488 -0.8423 -2.2071 -0.0592 -0.0515 -0.0866 -1.6009 -1.6949 -2.3879 -2.6473 -0.9340 -0.9422 -0.8617 -0.0661 -0.0535 -0.3230 -2.4637 -0.1349 -0.5205 -2.2292 -0.6415 -0.2270 -2.3321 -0.6560 -1.1020 -1.7539 -0.0748 -0.0555 -0.6847 -0.6731 -0.1369 -0.9999 -2.1046 -0.5412 -0.5453 -3.2326 -1.6929 -0.3131 -2.8797 -1.4784 -2.2404 -1.0336 -0.0716 -0.0571 -0.6191 -0.9782 -0.1212 -1.3373 -2.8757 -1.5598 -0.8484 -2.5148 -2.9132 -1.0692 -3.0651 -2.7407 -1.7329 -0.0634
+S-128	Хутка мае вырабы пачалі купляць па ўсім свеце. У мяне з 'явіліся кліенты у Даніі, Іта<unk>, Аўстраліі, Канадзе і іншых краінах.
+T-128	Soon, my items began selling all over the world, and I had customers in Denmark, Italy, Australia, Canada and more.
+H-128	-1.6582895517349243	The discovery of the world started to tap into the world , and I had a result from the U.K. , and I went to the D.C. , and many other countries in Canada .
+D-128	-1.6582895517349243	The discovery of the world started to tap into the world, and I had a result from the U.K., and I went to the D.C., and many other countries in Canada.
+P-128	-2.1977 -3.4351 -0.3125 -3.9986 -0.4898 -0.3588 -0.9655 -4.7772 -0.9768 -1.6883 -0.1462 -1.3398 -0.2396 -0.3430 -1.4315 -0.9299 -5.9956 -1.6403 -2.5446 -3.2475 -0.0577 -1.9491 -0.0373 -1.2786 -0.3932 -3.6224 -3.6006 -2.2976 -2.2626 -2.7349 -0.9218 -0.8176 -0.4727 -1.2003 -0.4054 -4.6557 -0.4971 -0.0621 -3.3462 -1.5528 -0.3368 -0.0874
+S-212	Для разумення, як патануў Тытанік, найбольш важная рэч — гэта не мадэль месцазнаходжання кожнага маленькага кавалачка карабля, які абламаўся.
+T-212	If I want to understand the sinking of the Titanic, the most important thing to do is not to model the little positions of every single little piece of the boat that broke off.
+H-212	-1.3104631900787354	To find out what the most important part of you &apos;ve taken is , the most important place is not the place for every single single place , the small part of the Netherlands .
+D-212	-1.3104631900787354	To find out what the most important part of you 've taken is, the most important place is not the place for every single single place, the small part of the Netherlands.
+P-212	-1.2900 -1.6992 -1.3663 -2.1002 -1.0609 -2.8791 -0.1251 -1.2299 -0.1545 -1.0148 -4.3757 -0.0549 -0.0591 -0.9553 -1.8438 -2.3380 -1.8307 -1.1176 -0.1267 -0.4641 -0.5669 -0.7316 -0.3876 -1.0713 -0.3033 -2.1520 -1.3538 -0.1977 -1.2457 -3.2957 -1.0452 -1.4908 -0.8762 -3.0667 -0.3127 -0.6861 -4.7058 -2.9489 -0.0692 -1.0477 -0.0883
+S-67	Аднойчы 4 трэнеры, адзін ахоўнік, і я паехалі на поўнач ад Кабула. Зноў, нечакана нас спынілі пасярод дарогі 19 юнакоў.
+T-67	And one day, with four trainers and one bodyguard, I was going up north of Kabul, and all of a sudden, again, I was stopped in the middle of the road by 19 young men.
+H-67	-1.4956504106521606	One day , one of the defense defense , and I went back to Cambridge , and I left mycorrhiza , and I left the middle of the South Pole .
+D-67	-1.4956504106521606	One day, one of the defense defense, and I went back to Cambridge, and I left mycorrhiza, and I left the middle of the South Pole.
+P-67	-1.7007 -1.3681 -0.5599 -2.4259 -1.7909 -0.8490 -3.6298 -1.4070 -1.0551 -0.0628 -0.0827 -2.3795 -3.5083 -0.1305 -1.6335 -0.4434 -0.5349 -1.2737 -0.8408 -0.2092 -3.4196 -2.1475 -1.1369 -0.1330 -0.2253 -2.7277 -1.7398 -2.4166 -3.2238 -1.3731 -5.4038 -0.4855 -1.8938 -1.8068 -1.0535 -0.1831 -0.0835
+S-216	Маю на ўвазе тое, што я распачаў з таго, наколькі карысныя аб 'яднанні галактык, і выказаў некалькі гэтаму прычын, але як іх насамрэч выкарыстоўваць?
+T-216	I mean, I began by talking about how galaxy clusters are useful, and I 've given some reasons, but what is their use really?
+H-216	-1.5606627464294434	What I &apos;ve done is that I &apos;ve started an example of how much good it feels like the couples , and some of them are really important to use , but what &apos;s really important ?
+D-216	-1.5606627464294434	What I 've done is that I 've started an example of how much good it feels like the couples, and some of them are really important to use, but what 's really important?
+P-216	-1.3708 -0.9706 -1.6464 -0.0569 -0.0636 -0.4438 -4.8037 -0.8173 -1.0336 -0.4568 -3.8770 -0.0583 -0.0612 -0.4843 -1.5579 -4.0260 -2.1023 -0.2122 -0.5077 -1.3058 -2.1816 -4.4755 -2.4844 -1.2815 -2.4556 -4.5477 -0.5193 -2.4627 -1.8272 -3.8450 -0.5088 -0.8803 -1.0712 -2.0233 -3.0330 -1.0629 -1.7191 -2.7095 -0.2744 -2.4840 -1.5176 -0.0674 -0.0598 -0.0535 -2.0744 -1.8153 -1.5338 -0.0866
+S-106	Першую маю інтэрнэт-старонку я пабудавала на мове HTML, а зараз я вучу мовы JavaScript і Pyt<unk>.
+T-106	I built my first website myself in HTML, and I 'm learning JavaScript and Python.
+H-106	-1.2866694927215576	My first web web web web , I &apos;m looking at the NLL , and now I &apos;m going to play the National Geographic and PDS .
+D-106	-1.2866694927215576	My first web web web web, I 'm looking at the NLL, and now I 'm going to play the National Geographic and PDS.
+P-106	-2.8216 -0.1076 -0.7017 -0.2804 -0.8900 -2.1952 -1.7114 -0.2148 -3.7060 -0.0645 -0.0549 -0.4817 -3.1999 -0.1424 -1.7788 -4.0628 -0.9110 -1.3991 -1.9090 -0.2967 -1.0944 -0.2274 -0.3927 -0.0719 -0.0591 -0.3580 -0.5022 -0.1405 -2.6794 -2.1877 -4.8488 -1.3966 -0.0680 -1.6402 -1.7311 -3.0903 -1.4254 -1.2444 -0.0925
+S-184	Цёмная матэрыя — гэта штосьці, што не вельмі добра ўзаемадзейнічае, акрамя за кошт гравітацыі, і, канешне ж, нам карціць даведацца больш пра гэта.
+T-184	Dark matter is something that doesn 't like to interact very much, except through gravity, and of course we would like to learn more about it.
+H-184	-1.2202430963516235	It &apos;s a material that &apos;s something that &apos;s really good , but it &apos;s not really good at the end of the gravity , and it &apos;s going to find out more about it .
+D-184	-1.2202430963516235	It 's a material that 's something that 's really good, but it 's not really good at the end of the gravity, and it 's going to find out more about it.
+P-184	-3.4711 -0.3821 -0.0593 -0.0602 -0.1001 -1.8876 -1.7617 -2.0183 -0.8788 -0.0690 -0.0593 -0.0949 -1.2562 -2.7872 -0.6616 -0.0709 -0.0617 -0.1006 -2.2457 -1.6354 -1.4088 -2.8473 -1.9457 -0.4841 -0.0655 -0.0638 -0.1201 -1.9999 -2.1128 -0.7578 -2.6514 -1.6938 -1.6191 -0.2339 -1.1751 -3.3453 -0.1950 -0.5920 -1.1006 -2.9452 -0.2341 -0.0681 -0.0652 -0.1050 -4.3380 -0.6161 -3.1389 -2.6049 -1.3344 -1.1456 -3.4806 -0.4307 -0.0926
+S-121	Знаходзячы кавалачкі рознае тканіны ў хаце, я думала сабе, з гэтага можна зрабіць шалік ці шапачку — у мяне было столькі ідэяў апрацоўкі матэрыялу!
+T-121	"I would find different fabrics around the house, and say," "This could be a scarf or a hat," "and I had all these ideas for designs."
+H-121	-1.5298571586608887	Now , when I think of a little bit of time in my house , I thought , could be able to do this rock , and I had so many of my cloths .
+D-121	-1.5298571586608887	Now, when I think of a little bit of time in my house, I thought, could be able to do this rock, and I had so many of my cloths.
+P-121	-3.4799 -0.4829 -1.0052 -2.1935 -2.9075 -1.1395 -2.4105 -1.7552 -0.6442 -0.1898 -1.9813 -2.4950 -1.2335 -1.8285 -0.2773 -0.1414 -0.0680 -1.7135 -2.3683 -2.9922 -0.6033 -0.0658 -1.5216 -0.7508 -5.1316 -0.9042 -3.0804 -0.4685 -0.8425 -0.4294 -0.7058 -2.8641 -1.6735 -2.3808 -1.6177 -0.4516 -3.2534 -0.0826
+S-8	Нажаль, у маёй краіне не было інтэрнатаў для дзяўчын. Такім чынам, я была прынятая ў медкаледж, але наведваць яго не магла.
+T-8	Unfortunately, in my country, there wasn 't a dormitory for girls, so I was accepted in medical school, but I could not go there.
+H-8	-1.7659482955932617	And my neighborhood wasn &apos;t the international business for his grandfather , and I was in a place where I was in my office , and it could never be able to fill it .
+D-8	-1.7659482955932617	And my neighborhood wasn 't the international business for his grandfather, and I was in a place where I was in my office, and it could never be able to fill it.
+P-8	-2.8355 -0.5822 -4.1557 -1.4774 -0.0776 -0.0650 -0.0576 -0.0611 -2.3142 -1.7527 -3.8487 -0.7344 -3.1907 -2.6330 -0.8889 -0.6302 -0.6212 -0.3444 -3.4129 -2.3799 -4.9904 -1.2824 -0.6821 -0.5235 -3.3609 -2.4483 -3.6759 -0.3566 -1.6254 -2.2949 -2.3095 -2.3157 -2.0286 -3.5885 -0.0749 -3.4757 -1.1775 -0.5162 -0.0819
+S-37	"Цяжка было прыйсці і сказаць:" "Я хачу зрабіць гэта" ". Хто я такая?"
+T-37	"It was very hard to come and say," "I want to do this." "Who am I?"
+H-37	-0.4802137017250061	&quot; I mean , &quot; &quot; Don &apos;t say , &quot; &quot; I want to do that ? &quot; &quot; I said , &quot; &quot; Who is that ? &quot;
+D-37	-0.4802137017250061	"I mean," "Don 't say," "I want to do that?" "I said," "Who is that?"
+P-37	-0.0347 -0.0594 -0.0549 -1.2973 -0.5280 -0.1384 -3.0664 -0.0666 -0.0562 -0.1156 -0.0612 -0.0571 -2.1393 -0.1267 -0.0516 -0.0584 -0.0497 -1.9915 -1.3193 -0.0688 -0.0615 -0.0587 -0.1568 -0.0669 -0.0590 -0.5586 -0.0826 -0.1149 -0.0983 -1.1222 -1.1664 -0.7498 -0.0702 -0.0576 -0.1395 -0.0719 -0.0579 -2.0987 -1.5138 -0.2436 -0.1229 -0.0777 -0.0585 -0.4494 -0.0730 -0.0589 -0.7704 -2.2320 -1.1560 -0.3178 -0.4602 -0.0685 -0.0568 -0.1394
+S-24	Каля 90% з іх былі жанчынамі ды дзецьмі. Большасць мужчынаў былі забітыя ці ваявалі. Ведаеце, калі я была ў лагеры бежанцаў,
+T-24	About 90 percent of them were women and children. Most of the men have been killed or they were in war. And you know, in the refugee camp,
+H-24	-1.1087620258331299	About 90 percent of them were women who were born , and most of the men were born , and you know , when I was a white white white white .
+D-24	-1.1087620258331299	About 90 percent of them were women who were born, and most of the men were born, and you know, when I was a white white white white.
+P-24	-1.8400 -0.1649 -0.0497 -0.0864 -0.7860 -0.6687 -1.9783 -1.2477 -0.2912 -0.4673 -1.6412 -0.4314 -2.1230 -0.3613 -1.0903 -1.3650 -0.7563 -0.5157 -2.5938 -2.2019 -2.4530 -0.3414 -0.2299 -0.6620 -0.1541 -0.3785 -3.5089 -0.5594 -0.5514 -1.0708 -1.9560 -3.9718 -0.0922
+S-45	"Ён паглядзеў на мяне і адказаў:" "Вар 'ятка, жанчына-вар 'ятка. Як я магу стаць настаўнікам?" "І я сказала яму:" "Я зраблю з вас настаўніка" ". Нарэшце, ён пагадзіўся. І калі я пачала ўрокі з яго ўдзелам, навіны аб гэтым пачалі распаўсюджвацца."
+T-45	"And he looked at me, and he said," "Crazy woman, crazy woman, how do you think I can be a teacher?" "And I told him," "I will make you a teacher." "Finally, he accepted my offer, and once I started a class in his compound, the word spread all over."
+H-45	-0.7757828831672668	&quot; He looked at me , and he said , &quot; &quot; In Work , a woman . &quot; &quot; How can I become a teacher ? &quot; &quot; And I said , &quot; &quot; I started with a teacher . &quot; &quot; And he started to say , &quot; &quot; So , when I started talking about it . &quot;
+D-45	-0.7757828831672668	"He looked at me, and he said," "In Work, a woman." "How can I become a teacher?" "And I said," "I started with a teacher." "And he started to say," "So, when I started talking about it."
+P-45	-0.1067 -0.0528 -0.0526 -0.1854 -3.3094 -0.2936 -0.0462 -1.5214 -0.8182 -0.2158 -1.8851 -0.0924 -0.1180 -0.0751 -0.0553 -0.0902 -0.0724 -0.0551 -0.8581 -2.3466 -3.6909 -0.5671 -0.5126 -0.1846 -2.4067 -0.6475 -0.0669 -0.0571 -0.0771 -0.0647 -0.0570 -0.1891 -0.5985 -0.0374 -2.5140 -0.9425 -0.0224 -0.7457 -0.1975 -0.0611 -0.0560 -0.0972 -0.0622 -0.0564 -0.3366 -1.3871 -0.3599 -0.2706 -0.1346 -0.0697 -0.0555 -0.0958 -0.0648 -0.0555 -0.8413 -1.4726 -3.2019 -1.8776 -0.1822 -2.5023 -0.8617 -0.0789 -0.0551 -0.0914 -0.0774 -0.0564 -1.0521 -1.7768 -0.7509 -3.0580 -3.5294 -0.9285 -0.4501 -0.0556 -0.0542 -0.0943 -0.0574 -0.0546 -3.1034 -2.1350 -0.8803 -0.5875 -0.9944 -4.6668 -0.7980 -1.8682 -2.6419 -0.1558 -0.0544 -0.0528 -0.5044
+S-101	"Але зацікаўленасць кампутарнымі тэхналогіямі нарадзіла ідэю стварэння анімацыі" "Златворныя стравы" ". (" "Malicious Dishes" ", гл. пачатак) На маім кампутары быў вірус, я спрабавала ад яго пазбавіцца, і раптам я падумала, а што, калі ў вірусаў існуе свой маленькі свет у сярэдзіне кампутара?"
+T-101	"It was my love for technology that sparked the idea for" "Malicious Dishes." "There was a virus on my computer, and I was trying to get rid of it, and all of a sudden, I just thought, what if viruses have their own little world inside the computer?"
+H-101	-1.4500688314437866	&quot; But the whole piece of computer-based innovation set up to the &quot; &quot; The Mowowow . &quot; &quot; ( Laughter ) So , I went to my computer , and I realized that if I was able to see my computer computer , my computer and I knew what was going to happen ? &quot;
+D-101	-1.4500688314437866	"But the whole piece of computer-based innovation set up to the" "The Mowowow." "(Laughter) So, I went to my computer, and I realized that if I was able to see my computer computer, my computer and I knew what was going to happen?"
+P-101	-0.2499 -0.0567 -0.0511 -0.1581 -1.7645 -4.3132 -2.0549 -0.0512 -1.1360 -1.5547 -4.7123 -2.8815 -3.7923 -0.4545 -1.8371 -2.0551 -2.1851 -0.0634 -0.0562 -0.2192 -0.0625 -0.0604 -2.3242 -2.4355 -3.5510 -1.6865 -2.5312 -3.4789 -0.0417 -0.0706 -0.0604 -0.0728 -0.0688 -0.0594 -0.4251 -0.6150 -0.0770 -2.8346 -1.3219 -3.2601 -2.6643 -1.6460 -1.0691 -1.4023 -1.9770 -1.9016 -1.3025 -2.8075 -1.4390 -1.3249 -1.1248 -1.8964 -1.8869 -0.0912 -2.2707 -0.5709 -1.0875 -1.6045 -2.0770 -1.8161 -1.6481 -3.8921 -1.5301 -3.4054 -2.0390 -0.3597 -2.6420 -0.2954 -2.6429 -1.8956 -0.1085 -0.0604 -0.0564 -0.0847
+S-89	Сэрвер: Прапаную падсмажаную памылку рэгістру, патрушаную найлепшымі карумпаванымі дадзенымі, хлябцы з двайковага коду, бутэрброды з аператыўнай, чыпсы-чарвякі Канфікер, да гэтага салаты са скрыпту з паліморфнай паліўкай, і падпечаны шашлык з кодаў.
+T-89	Server: We have pan seared registry error sprinkled with the finest corrupted data, binary brioche, RAM sandwiches, Conficker fitters, and a scripting salad with or without polymorphic dressing, and a grilled coding kabob.
+H-89	-2.6531167030334473	Prospera : The blood vessel , the limbs created the best counterintegration of the cyberbullying , the triggers of the flock , the Douderder , the mankk , the Delelphphphphy , who made this monitor , and the Delelphin would be thrown away from that balloter .
+D-89	-2.6531167030334473	Prospera: The blood vessel, the limbs created the best counterintegration of the cyberbullying, the triggers of the flock, the Douderder, the mankk, the Delelphphphphy, who made this monitor, and the Delelphin would be thrown away from that balloter.
+P-89	-4.1112 -2.1686 -1.5507 -0.0035 -2.6519 -4.2723 -2.8071 -2.7858 -0.2956 -4.6374 -0.1587 -3.6668 -0.5865 -1.8225 -5.2588 -1.1677 -3.3246 -1.3836 -1.9673 -1.3012 -5.2127 -0.9155 -0.9753 -0.5103 -1.8935 -1.8886 -5.4913 -1.3158 -2.6066 -2.0110 -1.1813 -5.1680 -2.0820 -1.1133 -1.1880 -4.4597 -3.5864 -1.8416 -2.5167 -2.1617 -1.4341 -5.7112 -1.7007 -2.7810 -2.8038 -1.2858 -5.2416 -3.1368 -3.3971 -2.8451 -2.5946 -3.0433 -3.3088 -3.5071 -2.6117 -3.0826 -3.8185 -1.8539 -4.9483 -1.3133 -3.5110 -3.5859 -1.8677 -5.0287 -3.1728 -3.3250 -2.9129 -3.0989 -4.6377 -3.9343 -3.7536 -1.7285 -0.9638 -2.5459 -3.3755 -2.0674 -3.5463 -1.9976 -0.0817
+S-230	"Яны адказваюць:" "О, ну вось гэта блок 17, а гэта блок 16." "А Вы ў адказ:" "Ну добра, але як жа называецца гэтая<unk>ца?" "А яны адказваюць:" "Як вам сказаць, у<unk>ц нямя назваў."
+T-230	"They say," "Oh, well that 's Block 17 and this is Block 16." "And you say," "OK, but what is the name of this street?" "And they say," "Well, streets don 't have names."
+H-230	-0.6907400488853455	&quot; They say , &quot; &quot; Oh , yeah , this is 17 , and that &apos;s 17 . &quot; &quot; And you said , &quot; &quot; What &apos;s the problem ? &quot; &quot; And they said , &quot; &quot; Well , that &apos;s what they said . &quot;
+D-230	-0.6907400488853455	"They say," "Oh, yeah, this is 17, and that 's 17." "And you said," "What 's the problem?" "And they said," "Well, that 's what they said."
+P-230	-0.0338 -0.0576 -0.0564 -0.3587 -2.0121 -0.1258 -0.0500 -0.0605 -0.0590 -0.0770 -0.0642 -0.0574 -0.5840 -0.4274 -2.4870 -0.0877 -1.4711 -0.3779 -0.8752 -1.0386 -0.5596 -1.7140 -0.9358 -0.0593 -0.0629 -0.1527 -2.2617 -2.5316 -0.7127 -0.1058 -0.0630 -0.0935 -0.0859 -0.0642 -1.4211 -1.9772 -1.1661 -0.0387 -0.0645 -0.0681 -0.0652 -0.1048 -0.0683 -0.0654 -2.6164 -1.8112 -0.0713 -0.0674 -0.1371 -1.9267 -2.6055 -1.3537 -0.8324 -0.0661 -0.0632 -0.5568 -0.0732 -0.0625 -1.8955 -3.1103 -0.5282 -0.1409 -0.1003 -0.0676 -0.0640 -0.1423 -0.0670 -0.0639 -1.7920 -0.1165 -3.0101 -0.4982 -0.0710 -0.0652 -0.1164 -1.9054 -2.2285 -1.0714 -1.8684 -0.5139 -0.0585 -0.0616 -0.7274
+S-99	"Калі я зразумела, што аніматары — гэта тыя, што робяць мульцікі, якія я пасля гляджу на экране, я неадкладна сказала:" "Я хочу стаць аніматаркай!" "Я не ведаю, ці я ўслых гэта сказала, ці сама сабе, але гэта быў вялікі вырашальны момант майго жыцця."
+T-99	"When I understood that an animator makes the cartoons I saw on TV, I immediately said," "That 's what I want to be." "I don 't know if I said it mentally or out loud, but that was a greatly defining moment in my life."
+H-99	-0.7804778218269348	&quot; When I realized that the chair is saying , &quot; &quot; Well , this is the multiverse that I &apos;m going to look at the screen , and I said , &quot; &quot; I don &apos;t know , I don &apos;t know if that &apos;s a big job . &quot; &quot; And I said , &quot; &quot; I don &apos;t know if that &apos;s a big job . &quot;
+D-99	-0.7804778218269348	"When I realized that the chair is saying," "Well, this is the multiverse that I 'm going to look at the screen, and I said," "I don 't know, I don 't know if that 's a big job." "And I said," "I don 't know if that 's a big job."
+P-99	-0.0985 -0.0634 -0.0519 -0.9446 -0.0411 -0.1190 -0.3879 -1.0786 -4.4684 -1.9723 -2.2217 -1.4800 -0.2502 -0.0779 -0.0541 -0.1823 -0.0764 -0.0574 -2.9873 -0.2321 -2.8324 -0.8346 -2.7985 -0.3998 -2.5092 -0.3387 -0.3493 -2.5686 -0.0501 -0.0614 -0.8699 -1.7114 -0.1720 -1.3503 -0.4014 -1.4492 -0.1873 -1.3763 -2.4650 -0.4180 -0.5499 -0.1732 -0.1126 -0.0744 -0.0603 -0.1279 -0.0646 -0.0590 -0.2230 -0.8454 -0.0643 -0.0465 -0.0622 -0.0631 -0.1086 -3.5286 -0.6081 -1.5853 -0.0773 -0.0444 -0.0618 -0.0611 -0.0996 -1.8789 -1.5679 -1.1948 -0.0400 -0.0625 -0.1139 -1.4194 -1.0215 -2.3732 -1.6034 -0.5607 -0.0594 -0.0571 -2.6047 -0.0601 -0.0575 -1.8707 -0.4311 -1.0367 -1.2259 -0.2953 -0.0697 -0.0580 -0.4234 -0.0713 -0.0569 -0.2431 -2.9782 -0.0550 -0.0562 -0.0617 -0.0493 -0.0723 -2.0130 -1.2138 -2.4142 -0.0477 -0.0613 -0.1187 -2.2406 -0.9080 -2.8976 -1.1175 -0.1169 -0.0595 -0.0569 -0.1673
+S-235	"Там знаходзіцца блок 17, дом нумар адзін. Вы кажаце:" "Файна. Але гуляючы па раёне я заўважыў, што ў дамы пранумераваныя не па парадку." "Ен кажа:" "Канешне па парадку. Нумар залежыць ад таго, калі дамы былі пабудаваны."
+T-235	"There 's Block 17, house number one." "You say," "OK, but walking around the neighborhood, I noticed that the house numbers don 't go in order." "He says," "Of course they do. They go in the order in which they were built."
+H-235	-1.1615262031555176	&quot; There &apos;s a 17-year-old home . &quot; &quot; And the war says , &quot; &quot; But I &apos;m going to notice that I &apos;m standing in the backyard , and I &apos;ve noticed that there &apos;s not a word called &quot; &quot; Stock . &quot; &quot; And when the one comes from the backyard says , &quot; &quot; Well , there &apos;s a signal that &apos;s what &apos;s going on . &quot;
+D-235	-1.1615262031555176	"There 's a 17-year-old home." "And the war says," "But I 'm going to notice that I 'm standing in the backyard, and I 've noticed that there 's not a word called" "Stock." "And when the one comes from the backyard says," "Well, there 's a signal that 's what 's going on."
+P-235	-0.0412 -0.0659 -0.0528 -1.2583 -1.1086 -0.0536 -0.0577 -0.0800 -2.3569 -0.7551 -1.4332 -1.7262 -2.1562 -0.6372 -0.8567 -1.4208 -0.4014 -0.0688 -0.0571 -0.0769 -0.0718 -0.0613 -0.9542 -1.2010 -3.3595 -0.5083 -0.1726 -0.0389 -0.0803 -0.0610 -0.0463 -0.0837 -0.0609 -2.0554 -3.8213 -1.9421 -0.0521 -0.0643 -1.0029 -2.3329 -0.0581 -4.0046 -0.4909 -2.5806 -1.3900 -0.0502 -0.0649 -0.9615 -4.3960 -0.3445 -1.0293 -4.2611 -1.1609 -1.5712 -1.1654 -1.1496 -1.4642 -0.0532 -0.0640 -2.4938 -0.8855 -1.1814 -2.8696 -1.0541 -0.0519 -0.0648 -0.0748 -2.2828 -1.7335 -4.4453 -2.1838 -1.5469 -0.2728 -0.0582 -0.5082 -0.0653 -0.0591 -4.4456 -2.9884 -2.1322 -0.0931 -0.0814 -0.0595 -0.0776 -0.0815 -0.0600 -2.0100 -1.7562 -0.6656 -5.4345 -1.3831 -2.0092 -0.5607 -4.8639 -1.9358 -2.2659 -0.6265 -0.8896 -0.0809 -0.0589 -0.6082 -0.0677 -0.0582 -3.7654 -0.1098 -2.4310 -2.0931 -0.0586 -0.0621 -0.0660 -2.5423 -4.7012 -2.1145 -2.3762 -0.0668 -0.0636 -0.0638 -4.2320 -3.1146 -0.0783 -0.0632 -0.0571 -3.0777 -0.9903 -1.3169 -0.0571 -0.0678 -0.0597 -0.1864
+S-154	Зараз, паказваючы вам некаторыя з гэтых выяў, я маю надзею, што вы хутка пабачыце, што аб 'яднанні галактык — гэта не толькі прыгожыя аб 'екты, але больш за гэта, я думаю, што аб 'яднанні галактык таямнічыя, яны здзіўляюць, і яны карысныя.
+T-154	Now, by showing you some of these images, I hope that you will quickly see that galaxy clusters are these beautiful objects, but more than that, I think galaxy clusters are mysterious, they are surprising, and they 're useful.
+H-154	-1.2640681266784668	Now , for some of you , I hope that you &apos;ll see that you &apos;re able to see that it &apos;s not only a beautiful part of what &apos;s happening , but I think it &apos;s a little bit more exciting , but I think it &apos;s a little bit more exciting .
+D-154	-1.2640681266784668	Now, for some of you, I hope that you 'll see that you 're able to see that it 's not only a beautiful part of what 's happening, but I think it 's a little bit more exciting, but I think it 's a little bit more exciting.
+P-154	-0.1523 -0.2439 -3.5895 -2.2028 -2.3646 -0.6482 -0.2613 -0.4468 -0.1105 -0.6075 -1.2751 -1.7098 -0.0553 -0.0583 -0.7667 -1.0343 -0.6814 -2.4721 -1.5002 -0.0614 -0.0600 -1.9132 -2.4740 -0.2094 -0.6129 -1.1010 -4.6562 -0.7450 -0.0668 -0.0587 -0.0889 -0.4913 -0.4593 -3.0417 -2.4109 -3.3454 -0.4024 -2.3561 -2.5387 -0.0697 -0.0613 -0.0697 -2.0603 -1.0186 -0.4449 -2.0518 -0.1247 -2.1488 -0.2553 -0.0583 -0.0616 -0.0721 -1.8680 -3.8419 -0.6973 -1.8999 -3.6014 -0.6884 -2.2941 -1.0641 -0.1642 -2.4616 -0.1456 -0.0589 -0.0623 -0.0952 -3.5471 -4.9343 -0.7496 -1.9980 -3.3786 -2.8247 -0.1306
+S-238	"Трэці дом - гэта дом нумар тры. Гэта проста. Гэта відавочна." "Вось, мне вельмі падабаецца, што часам нам неабходна патрапіць на другі бок зямлі, каб зразумець нешта, аб чым мы нават і не падазравалі, і каб зразумець, што абсалютна супрацьлеглыя рэчы магчымыя."
+T-238	"Third is house number three. It 's easy. It 's obvious." "So, I love that sometimes we need to go to the opposite side of the world to realize assumptions we didn 't even know we had, and realize that the opposite of them may also be true."
+H-238	-0.9602028727531433	&quot; And the third house is the number . That &apos;s just a good thing . &quot; &quot; This is that I &apos;m very excited to tell you that we are willing to understand something else , and even though we &apos;re willing to understand what &apos;s wrong . &quot;
+D-238	-0.9602028727531433	"And the third house is the number. That 's just a good thing." "This is that I 'm very excited to tell you that we are willing to understand something else, and even though we 're willing to understand what 's wrong."
+P-238	-0.2847 -0.0536 -0.0505 -2.1124 -0.9589 -0.4213 -0.7164 -0.0564 -0.7448 -1.0282 -2.0963 -0.9811 -0.1931 -0.0538 -0.0603 -0.1201 -1.9617 -1.6517 -1.1505 -0.4729 -0.2255 -0.1189 -0.0700 -0.0625 -0.0657 -0.0843 -0.0635 -1.7963 -0.1877 -1.9286 -1.5933 -1.7216 -0.0659 -0.0645 -0.0713 -1.4617 -1.6131 -1.1776 -3.5789 -1.3150 -0.1573 -2.8539 -1.3497 -1.9975 -0.1416 -2.5603 -2.5382 -2.5295 -1.3411 -0.6993 -1.4524 -0.7053 -0.5046 -2.8455 -0.0561 -0.0626 -0.4306 -3.0904 -0.0741 -0.8045 -1.4627 -2.4894 -0.3073 -0.0601 -0.1533 -2.9412 -1.8196 -0.0770 -0.0660 -0.0593 -0.1095
+S-227	"Гэта дваццаць шосты, а гэта дваццаць сёмы." "Ён кажа:" "Ну добра. А як жа называецца гэты блок?" "Вы адказваеце:" "Ведаеце, ў блокаў няма назваў."
+T-227	"This is 26th, that 's 27th." "He says," "OK, but what is the name of that block?" "You say," "Well, blocks don 't have names."
+H-227	-0.7295088768005371	&quot; It &apos;s like to be shocked . &quot; &quot; And it says , &quot; &quot; Well , what is that ? &quot; &quot; And the method is called &quot; &quot; He said , &quot; &quot; You don &apos;t know . &quot;
+D-227	-0.7295088768005371	"It 's like to be shocked." "And it says," "Well, what is that?" "And the method is called" "He said," "You don 't know."
+P-227	-0.0413 -0.0589 -0.0567 -1.3502 -0.9071 -0.0558 -0.0597 -0.0773 -1.0768 -3.7941 -2.9305 -0.6746 -0.3998 -2.2676 -0.2983 -0.0595 -0.0609 -0.1277 -0.0656 -0.0630 -2.0444 -1.5099 -0.3985 -0.1183 -0.0862 -0.0673 -0.0617 -0.1006 -0.0688 -0.0628 -1.0851 -0.4364 -0.8458 -0.6460 -2.2428 -2.3261 -0.3613 -0.0869 -0.0630 -0.1130 -0.0824 -0.0627 -1.5361 -1.5593 -4.4759 -1.3867 -1.8368 -2.0070 -0.0685 -0.0617 -0.1760 -0.0628 -0.0618 -5.4846 -0.5112 -0.0665 -0.1436 -0.0703 -0.0624 -0.1732 -0.0699 -0.0621 -0.7837 -2.5514 -0.1217 -0.0487 -0.0683 -0.0505 -0.8724 -1.0288 -0.8848 -0.0659 -0.0611 -0.2747
+S-117	"Калі мне было 8 гадоў, я ўзяла свае ідэі і адкрыла фірму" "Ідэі Маі," "а поруч з ім фонд" "Ідэі Маі для планеты." ""
+T-117	At eight years old, I took my ideas and started my own business called Maya 's Ideas, and my nonprofit, Maya 's Ideas for the Planet.
+H-117	-0.9456152319908142	&quot; When I was eight years old , I took my ideas , and I found my open voice , &quot; &quot; Mauritius , &quot; &quot; and with the foundation of the planet . &quot;
+D-117	-0.9456152319908142	"When I was eight years old, I took my ideas, and I found my open voice," "Mauritius," "and with the foundation of the planet."
+P-117	-1.0190 -0.0618 -0.0515 -0.8637 -0.0876 -0.1803 -0.5351 -0.0186 -0.0496 -0.0797 -0.0820 -3.5270 -0.1020 -0.7570 -3.5259 -0.2472 -0.2209 -1.7761 -0.6520 -2.1202 -5.5860 -1.3008 -0.6929 -0.0681 -0.0590 -0.4120 -0.0707 -0.0588 -0.7012 -3.2302 -0.5885 -1.3050 -0.9803 -0.4685 -0.0791 -0.0590 -0.4311 -0.0635 -0.0590 -2.1169 -4.3078 -1.2711 -3.9525 -0.2637 -1.4892 -2.0705 -0.3172 -0.0623 -0.0687 -0.0576 -0.0778
+S-240	Такім чынам, кожны месяц, калі Вы не хварэеце, Вы ім плоціце, а калі Вы не хварэеце, Вам не трэбна ім плаціць, таму што яны не здолелі справіцца са сваёй працай. Яны багацеюць, калі Вы здаровыя, а не калі Вы хварэеце.
+T-240	So, any month you are healthy you pay them, and when you 're sick you don 't have to pay them because they failed at their job. They get rich when you 're healthy, not sick.
+H-240	-1.022048830986023	So every month , if you &apos;re not enough , if you &apos;re going to pay attention , and if you &apos;re not going to pay it , you &apos;re not going to pay it up , because they &apos;re not going to pay your job , they &apos;re not going to be high enough if you &apos;re not going to be healthy .
+D-240	-1.022048830986023	So every month, if you 're not enough, if you 're going to pay attention, and if you 're not going to pay it, you 're not going to pay it up, because they 're not going to pay your job, they 're not going to be high enough if you 're not going to be healthy.
+P-240	-0.6061 -0.3920 -0.0120 -0.6070 -0.6408 -0.0849 -2.0921 -0.0507 -0.0587 -0.1707 -0.5179 -3.2872 -0.9402 -1.6139 -0.1910 -1.0308 -0.0610 -0.0619 -0.2330 -1.9008 -0.1092 -0.7096 -2.4218 -0.4694 -1.2216 -0.9322 -0.1680 -1.3301 -0.0677 -0.0641 -0.2232 -0.7529 -0.8858 -0.0865 -3.1894 -2.5625 -1.1409 -1.1475 -1.0086 -0.0650 -0.0650 -0.4317 -0.6638 -0.5115 -0.0814 -1.9593 -2.1344 -3.3897 -0.8856 -0.3835 -0.2294 -0.7247 -0.0645 -0.0655 -0.1391 -0.5149 -1.0127 -0.0550 -3.3357 -2.8995 -3.2539 -1.9277 -2.0126 -0.5385 -0.0633 -0.0667 -0.1202 -0.3889 -1.6718 -0.0651 -1.6232 -4.5550 -1.3131 -1.1135 -0.5739 -0.9037 -0.0620 -0.0628 -0.1009 -2.6055 -2.8723 -0.0956 -3.4178 -3.9263 -1.7599 -0.1463
+S-222	Так, нам патрэбна засяродзіцца, так, нам патрэбна сканцэнтравацца, але нам таксама трэба памятаць пра інавацыі, вынаходніцтвы, натхненне — гэтая рэчы прыходзяць падчас таго, як мы пашыраем нашае поле бачнасці, калі мы робім крок назад, калі мы прыглядаемся з адлегласці.
+T-222	So, yes, we need to focus, yes, we need to concentrate, but we also need to remember that innovation, ingenuity, inspiration — these things come when we broaden our field of vision when we step back when we zoom out.
+H-222	-1.4871432781219482	So we need to help , because we need to do what we need to do , but what we need to do is to remember remember , through the creation of innovation , which is that moment , when we &apos;re coming back to the street , we &apos;re going to go back to the window .
+D-222	-1.4871432781219482	So we need to help, because we need to do what we need to do, but what we need to do is to remember remember, through the creation of innovation, which is that moment, when we 're coming back to the street, we 're going to go back to the window.
+P-222	-0.4114 -0.3983 -0.6596 -0.1663 -4.4419 -2.1922 -1.8417 -0.0821 -0.2697 -0.1056 -2.4106 -3.6879 -0.5838 -0.2008 -0.7963 -0.4543 -0.8595 -0.3675 -3.7877 -0.6709 -1.1157 -0.4637 -0.9407 -0.9592 -3.3272 -1.7453 -1.9889 -1.5630 -4.3830 -1.3627 -3.2673 -0.0311 -2.2721 -0.6250 -3.1335 -0.5154 -2.9057 -3.3358 -1.3555 -1.5149 -0.2464 -3.0861 -0.0650 -0.0587 -0.1801 -4.6270 -0.7977 -1.3332 -0.9338 -4.5570 -0.8882 -1.1686 -1.6380 -0.0683 -0.0583 -0.2449 -3.1284 -0.2546 -2.4067 -1.3739 -1.6245 -1.1665 -3.0199 -2.4597 -0.0851
+S-196	Прычына, чаму галактычныя аб 'яднанні могуць навучыць нас пра тое, чым з 'яўляецца цёмная матэрыя, прычына, чаму галактычныя аб 'яднанні могуць навучыць нас пра фізіку вельмі малога, менавіта ў тым, што яны настолькі велізарныя.
+T-196	The reason why galaxy clusters can teach us about dark matter, the reason why galaxy clusters can teach us about the physics of the very small, is precisely because they are so very big.
+H-196	-1.6707866191864014	And the reason that we &apos;re looking at is why we can teach us about how dark dark energy is , the reason why we can teach the physical consequences of the physical language , and that &apos;s why they &apos;re so powerful .
+D-196	-1.6707866191864014	And the reason that we 're looking at is why we can teach us about how dark dark energy is, the reason why we can teach the physical consequences of the physical language, and that 's why they 're so powerful.
+P-196	-2.7939 -3.1217 -2.0476 -1.7047 -2.9707 -4.1293 -0.0540 -0.0583 -0.9090 -3.9975 -0.3319 -0.7824 -2.2591 -1.1508 -0.4505 -1.5409 -3.3735 -0.4842 -0.9360 -0.9709 -2.2993 -1.6052 -0.6976 -0.6981 -2.0573 -2.8558 -0.2616 -2.3475 -0.8498 -3.3576 -1.9932 -2.5841 -5.0321 -0.5119 -3.0419 -1.7484 -3.8002 -0.6297 -3.0685 -1.6743 -1.5482 -0.0637 -0.0551 -0.0560 -4.1185 -1.4377 -1.6098 -0.0582 -0.0571 -0.1685 -0.8337 -4.3044 -0.6463 -0.0843
+S-218	"Вось што ён адказаў:" "Калі б я пытаўся ў людзей, што ім трэба, яны адказалі б, што ім патрэбны хутчэйшыя коні" "Сення нашае грамадства сустракаецца з вельмі вялікай колькасцю праблем."
+T-218	"He had this to say:" "If I had asked people what they wanted, they would have said faster horses." "Today, we as a society are faced with many, many difficult problems."
+H-218	-0.909894585609436	&quot; This is what he said , &quot; &quot; If I tried to ask people to say , &quot; &quot; What would they want to do is they want to say , &quot; &quot; they need to be better than this country . &quot;
+D-218	-0.909894585609436	"This is what he said," "If I tried to ask people to say," "What would they want to do is they want to say," "they need to be better than this country."
+P-218	-0.0540 -0.0617 -0.0510 -1.5559 -0.2045 -0.2202 -0.4342 -0.6059 -0.7362 -0.0668 -0.0634 -0.0562 -0.0933 -0.0735 -0.0579 -0.3504 -0.1148 -3.0737 -0.1146 -1.6565 -0.1166 -1.9048 -1.0655 -1.7676 -0.6395 -0.0692 -0.0602 -0.2656 -0.0616 -0.0604 -3.1971 -1.8260 -0.0549 -1.3741 -0.2536 -2.1317 -0.9981 -2.3188 -1.8575 -0.2324 -1.2997 -1.6936 -1.6261 -0.0731 -0.0608 -0.1987 -0.0629 -0.0591 -3.4213 -2.5252 -0.8615 -1.0069 -1.9511 -2.8478 -3.2028 -2.8049 -1.6557 -0.0460 -0.0626 -0.0575 -0.0861
+S-49	"Раптам я ўбачыла, як мае супрацоўнікі бягуць да пакояў, зачыняюць дзверы і крычаць мне:" "Ўцякай, хавайся!" "Калі менавіта вы — лідэр, што вы робіце?"
+T-49	"All of a sudden, I saw my staff running to rooms and locking the doors and telling me," "Run away, hide!" "And you know, as a leader, what do you do?"
+H-49	-1.1469874382019043	&quot; And suddenly , I saw how do I go to the clinic waiting room , and the door is , &quot; &quot; Go ! &quot; &quot; When you &apos;re a great door ? &quot; &quot; When you &apos;ve done it , you &apos;re what &apos;ve done ? &quot;
+D-49	-1.1469874382019043	"And suddenly, I saw how do I go to the clinic waiting room, and the door is," "Go!" "When you 're a great door?" "When you 've done it, you 're what 've done?"
+P-49	-0.0828 -0.0533 -0.0529 -1.0455 -2.3521 -1.1160 -0.4753 -1.1404 -3.4724 -0.8788 -0.9239 -1.9282 -0.5263 -2.6402 -1.3120 -3.3934 -1.4128 -0.8764 -0.6940 -2.0806 -0.7313 -2.5757 -2.2331 -0.3150 -0.0585 -0.0579 -0.2435 -0.0590 -0.0592 -3.2576 -1.4904 -0.5684 -0.0538 -0.0587 -0.0681 -0.0557 -0.0599 -1.6633 -0.8253 -3.1256 -0.0434 -0.0619 -0.4531 -2.0602 -3.6645 -3.1405 -3.1987 -1.1220 -0.0552 -0.0581 -0.2486 -0.0587 -0.0581 -1.3113 -0.5948 -2.5746 -0.0589 -0.0617 -2.8114 -1.9215 -3.1607 -1.2360 -2.3409 -0.8710 -0.0444 -0.0626 -0.6052 -4.7563 -2.3665 -0.0608 -0.0606 -3.4615 -2.2749 -0.2468 -0.1357 -0.0596 -0.0568 -0.0900
+S-234	"А Вы ў адказ:" "Ну добра, але ж як Вы ведаеце свой хатні адрас?" "Ен кажа:" "Ну, гэта проста: Гэта восьмы раён."
+T-234	"And you say then," "OK, then how do you know your home address?" "He said," "Well, easy, this is District Eight."
+H-234	-0.7044483423233032	&quot; And you say , &quot; &quot; Well , well , but you know , you &apos;re ready to eat your mouth ? &quot; &quot; She said , &quot; &quot; Oh , that &apos;s just eight . &quot;
+D-234	-0.7044483423233032	"And you say," "Well, well, but you know, you 're ready to eat your mouth?" "She said," "Oh, that 's just eight."
+P-234	-0.0910 -0.0589 -0.0526 -0.6610 -0.4990 -2.4755 -0.1074 -0.0936 -0.0631 -0.0558 -0.1019 -0.0676 -0.0565 -0.1301 -0.3187 -1.5644 -0.3154 -1.8490 -1.2103 -1.3121 -0.5510 -1.5859 -2.2373 -0.0408 -0.0611 -0.8186 -3.5769 -0.2739 -3.5111 -0.0913 -4.0028 -1.0485 -0.0703 -0.0749 -0.0561 -0.0563 -0.0682 -0.0578 -1.8594 -0.7150 -0.0361 -0.0934 -0.0717 -0.0605 -0.6586 -0.0640 -0.0595 -1.8786 -0.2080 -1.0236 -0.0842 -0.0502 -0.0634 -0.0610 -1.3091 -3.7071 -1.3752 -0.1105 -0.0588 -0.0574 -0.0990
+S-107	"Я таксама распрацоўваю новую анімацыю, што завецца" "Апыляльнікі" ". Яна пра пчол і іншых апыляльнікаў, што існуюць у наваколлі, і чаму яны карысныя."
+T-107	"I 'm also working on an animated series called" "The Pollinators." "It 's about bees and other pollinators in our environment and why they 're so important."
+H-107	-0.7338497042655945	&quot; I &apos;m also a new tool that &apos;s called &quot; &quot; E.S. . &quot; &quot; She said , &quot; &quot; She &apos;s talking about bees and other bees , and they &apos;re very special . &quot;
+D-107	-0.7338497042655945	"I 'm also a new tool that 's called" "E.S.." "She said," "She 's talking about bees and other bees, and they 're very special."
+P-107	-0.4203 -0.0612 -0.0529 -0.4917 -2.7027 -0.0448 -0.0595 -0.1950 -0.0497 -1.4594 -0.0787 -3.5000 -1.5055 -1.0293 -0.0694 -0.0633 -0.1588 -0.0366 -0.0476 -0.0630 -0.0593 -0.0452 -0.0657 -0.0636 -1.3163 -2.3417 -3.1009 -0.0934 -1.7958 -0.0651 -0.0720 -0.0639 -0.0836 -0.0716 -0.0636 -0.6703 -2.8842 -0.3862 -0.1343 -0.0739 -0.0636 -0.0989 -0.0691 -0.0633 -0.4161 -2.3402 -0.0477 -0.0656 -0.1029 -2.7009 -0.0555 -0.3070 -0.7430 -0.9900 -1.9775 -1.1427 -1.7886 -0.6631 -1.9609 -0.0441 -0.0633 -0.2364 -3.3111 -2.9941 -2.5453 -0.0826 -0.0673 -0.0614 -0.0935
+S-136	Я даведалася, што фарбы для тканіны ці нават працэс вырабу рэчаў небяспечныя для людзей і планеты. Я пачала свае даследванні і даведалася, што нават пасля афарбоўкі існуе праблема для асяроддзя ў тым, што невядома, што рабіць з рэшткамі.
+T-136	I heard about how the dyes in some clothing or the process of even making the items was harmful to the people and the planet, so I started doing my own research, and I discovered that even after dyeing has being completed, there is a waste issue that gives a negative impact on the environment.
+H-136	-1.2732048034667969	And I &apos;ve learned that they &apos;re going to be able to be able to fit into the most dangerous process , and I started to understand the studies of the planet , and I &apos;ve been aware that even though there &apos;s no problem to do what &apos;s going on .
+D-136	-1.2732048034667969	And I 've learned that they 're going to be able to be able to fit into the most dangerous process, and I started to understand the studies of the planet, and I 've been aware that even though there 's no problem to do what 's going on.
+P-136	-1.5320 -0.1913 -3.5871 -0.0605 -0.0573 -0.9129 -2.2623 -0.2258 -4.0703 -2.0260 -0.0528 -0.0558 -1.4222 -1.9711 -0.1788 -1.2362 -0.5487 -0.2222 -3.6565 -0.9148 -0.1774 -3.9392 -0.3841 -3.1546 -3.0220 -1.1487 -1.8672 -1.7231 -0.9362 -0.9605 -0.9905 -1.2309 -2.2343 -1.7813 -2.5466 -0.5737 -1.5768 -0.1672 -1.0090 -0.0680 -1.4167 -4.0507 -0.0677 -0.0575 -0.5138 -1.7527 -2.0560 -0.3973 -1.2320 -2.3548 -0.8077 -1.4931 -0.0574 -0.0590 -0.0727 -3.4131 -0.2840 -1.9002 -1.5237 -2.0465 -2.2695 -0.0717 -0.0594 -0.0595 -0.6731 -1.3520 -1.7810 -0.0791
+S-229	"Вось, а зараз уявіце сабе, што Вы стаіце на вуліцы, недзе ў Японіі, паварочваецеся да чалавека побач з Вамі і кажаце:" Прабачце, як называецца гэтая<unk>ца? ""
+T-229	"So, now imagine you 're standing on a street, anywhere in Japan, you turn to a person next to you and say," Excuse me, what is the name of this street? ""
+H-229	-0.8699105978012085	&quot; Here &apos;s what you &apos;re seeing in the street , what are you going to do in the street , and say , &quot; &quot; What do you believe in the person and says , &quot; &quot; What does this mean ? &quot;
+D-229	-0.8699105978012085	"Here 's what you 're seeing in the street, what are you going to do in the street, and say," "What do you believe in the person and says," "What does this mean?"
+P-229	-0.0307 -0.0648 -0.0514 -0.9507 -1.2790 -0.0590 -0.0598 -0.0618 -1.6418 -2.8877 -0.7511 -0.0656 -0.0605 -0.2239 -1.4538 -1.9884 -0.3614 -0.9389 -0.9141 -2.3196 -2.3742 -0.3124 -0.6299 -0.2754 -2.2689 -0.6294 -0.3563 -2.0569 -0.8190 -0.8347 -2.4669 -0.0950 -0.0756 -0.0608 -0.0584 -0.8666 -0.0610 -0.0599 -1.3993 -0.9675 -0.3810 -2.9225 -1.6265 -1.0847 -0.8575 -1.8974 -0.6190 -1.7411 -0.1663 -0.0600 -0.0578 -1.7389 -0.0609 -0.0576 -1.1342 -2.8202 -0.5011 -3.7605 -0.1045 -0.1018 -0.0592 -0.0557 -0.1636
+S-96	(Воплескі) Мая Пэн: Я малюю з тае пары, як навучылася трымаць аловак у руцэ, і я малюю мульцікі-гарталаўкі ў нататніках з 3-х гадовага ўзросту.
+T-96	(Applause) Maya Penn: I 've been drawing ever since I could hold a crayon, and I 've been making animated flip books since I was three years old.
+H-96	-1.241989254951477	( Applause ) My Boy Boy : I &apos;m talking about the text , and I &apos;m going to have a hobby , and I &apos;m in New York , and I &apos;m in 3Ds .
+D-96	-1.241989254951477	(Applause) My Boy Boy: I 'm talking about the text, and I 'm going to have a hobby, and I 'm in New York, and I 'm in 3Ds.
+P-96	-0.0526 -0.0148 -0.0294 -0.7034 -2.3489 -2.5435 -0.1987 -0.6123 -1.3312 -0.0550 -0.0531 -0.1431 -3.2019 -0.6054 -2.7676 -3.6207 -1.8599 -1.1735 -0.1566 -2.2451 -0.0735 -0.0585 -0.4557 -3.5125 -0.0951 -3.3931 -1.2630 -4.9005 -1.7883 -0.4130 -1.6367 -0.4285 -0.3265 -1.0130 -0.0750 -0.0584 -0.1543 -3.2815 -2.8480 -0.5761 -1.9051 -1.8068 -0.4617 -0.9166 -0.0729 -0.0592 -0.1689 -3.4946 -2.9193 -0.4849 -2.9918 -0.4042 -0.0716
+S-225	"Так, ўявіце сабе, што Вы знаходзіцeся на вуліцы незде ў Амерыцы і тут падыходзіць да Вас японец і кажа:" Выбачайце, як называецца гэты блок? ""
+T-225	"So, imagine you 're standing on a street anywhere in America and a Japanese man comes up to you and says," Excuse me, what is the name of this block? ""
+H-225	-0.9484169483184814	&quot; So imagine what you &apos;re looking at in the street and say , &quot; &quot; Oh , you &apos;re walking around in America and says , &quot; &quot; Do you call this Greek box ? &quot;
+D-225	-0.9484169483184814	"So imagine what you 're looking at in the street and say," "Oh, you 're walking around in America and says," "Do you call this Greek box?"
+P-225	-0.7094 -0.0598 -0.0529 -0.2803 -0.1418 -0.8855 -0.4380 -1.7114 -0.0491 -0.0580 -0.1745 -2.4819 -0.5490 -0.6337 -0.6448 -1.7732 -0.9436 -3.7743 -0.8459 -0.0684 -0.0607 -0.0569 -0.2701 -0.0674 -0.0568 -4.0663 -0.8247 -2.6775 -1.4028 -0.0488 -0.0613 -0.6414 -2.5967 -2.9603 -0.8516 -2.1725 -0.2845 -2.7148 -0.6815 -0.1799 -0.0625 -0.0562 -1.6974 -0.0616 -0.0564 -1.9213 -0.0478 -2.4567 -0.3404 -4.8135 -0.3562 -2.2032 -0.6232 -0.1617 -0.0628 -0.0557 -0.1311
+S-47	Натуральна, мы працуем, мы рыхтуем настаўнікаў. Мы выкладаем правы жанчын, правы чалавека, прынцыпы дэмакратыі, правапарадак. Мы праводзім разнастайныя трэнінгі. Аднойчы, я скажу вам,
+T-47	But of course, we 're doing all our work, we were giving teacher training. We were training women 's rights, human rights, democracy, rule of law. We were giving all kinds of training. And one day, I tell you,
+H-47	-1.1541550159454346	Of course , we work , we &apos;re working on teachers , and we &apos;re giving the power of women &apos;s rights , the human rights , the power of intelligence , and we &apos;ll tell you a little bit of training .
+D-47	-1.1541550159454346	Of course, we work, we 're working on teachers, and we 're giving the power of women 's rights, the human rights, the power of intelligence, and we 'll tell you a little bit of training.
+P-47	-1.5357 -0.0091 -0.2567 -0.4521 -0.3780 -1.5402 -0.2876 -1.8539 -0.0518 -0.0600 -0.2176 -4.2533 -1.4215 -2.1113 -0.8583 -0.5726 -0.1224 -1.0561 -0.0576 -0.0611 -0.2978 -3.3869 -1.7004 -3.0475 -0.1430 -1.3659 -2.5338 -0.0731 -0.0595 -1.6514 -2.3978 -0.8456 -1.8992 -2.3037 -0.7403 -1.7534 -1.0094 -3.5760 -0.3273 -3.0572 -0.5056 -3.6367 -0.7067 -0.5615 -0.0635 -0.0612 -0.9815 -0.4103 -0.0547 -2.8788 -0.9302 -0.1418 -1.5043 -1.7476 -1.0041 -0.1185
+S-241	"(Апладысменты) Амаль у любой музыцы" "Раз" "з 'яўляецца даўнбітам, пачаткам музычнай фразы. Раз, два тры чатыры."
+T-241	"(Applause) In most music, we think of the" "one" "as the downbeat, the beginning of the musical phrase: one, two, three, four."
+H-241	-1.4606099128723145	( Applause ) In the audience , everyone in music is a new music machine , two .
+D-241	-1.4606099128723145	(Applause) In the audience, everyone in music is a new music machine, two.
+P-241	-0.1451 -0.0064 -0.0249 -2.2959 -3.1211 -2.3229 -0.2597 -1.6917 -1.8104 -1.0108 -1.1198 -3.0564 -2.7880 -2.3482 -2.3093 -1.0645 -1.2523 -1.0401 -0.0842
+S-126	Мама навучыла мяне шыць, і я садзілася на прыступку за хатай і рабіла павязкі на галаву з лентаў, а на бірцы я пісала назву і цану для кожнага свайго вырабу.
+T-126	My mom taught me how to sew, and on my back porch, I would sit and make little headbands out of ribbon, and I would write down the names and the price of each item.
+H-126	-1.7349367141723633	My science decided to me , and I sat down on a drunk , and I ran into my desk with my cloth , and I picked up my cloth on the forest , and I photographed the paper for each other .
+D-126	-1.7349367141723633	My science decided to me, and I sat down on a drunk, and I ran into my desk with my cloth, and I picked up my cloth on the forest, and I photographed the paper for each other.
+P-126	-1.6002 -1.2815 -3.3104 -0.2420 -2.9998 -1.1784 -0.0501 -0.3125 -2.8124 -1.2528 -1.4700 -1.2621 -3.9574 -1.6988 -2.4233 -0.8235 -0.4738 -4.0315 -0.9096 -1.5754 -4.4434 -2.2550 -0.9954 -2.6338 -1.4062 -1.8273 -0.9689 -1.0105 -3.7314 -0.5012 -1.5289 -4.1419 -1.1281 -1.6882 -1.4028 -2.0008 -2.1411 -0.4568 -0.4082 -3.6663 -2.3594 -1.7749 -1.1539 -1.9641 -1.4935 -0.7013 -0.0934
+2020-10-11 19:38:16 | INFO | fairseq_cli.generate | NOTE: hypothesis and token scores are output in base 2
+2020-10-11 19:38:16 | INFO | fairseq_cli.generate | Translated 248 sentences (6841 tokens) in 4.0s (62.47 sentences/s, 1723.25 tokens/s)
+Generate valid with beam=5: BLEU = 13.03 41.3/17.1/8.7/4.7 (BP = 1.000 ratio = 1.112 hyp_len = 5024 ref_len = 4517)
