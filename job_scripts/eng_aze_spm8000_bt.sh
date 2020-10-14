@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SUBSAMPLE_SIZE=10000
-UPSAMPLE=16
+SUBSAMPLE_SIZE=100000
+UPSAMPLE=8
 DATA_DIR=fairseq/data-bin/ted_aze_spm8000/eng_aze_plus_bt_"$SUBSAMPLE_SIZE"/
 MODEL_DIR=fairseq/checkpoints/ted_aze_spm8000/eng_aze_plus_bt_"$SUBSAMPLE_SIZE"_upsample_"$UPSAMPLE"/
 mkdir -p $MODEL_DIR

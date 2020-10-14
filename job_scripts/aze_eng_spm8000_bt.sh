@@ -3,7 +3,7 @@
 SUBSAMPLE_SIZE=100000
 UPSAMPLE=8
 DATA_DIR=fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_"$SUBSAMPLE_SIZE"/
-MODEL_DIR=fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_"$SUBSAMPLE_SIZE"_upsample_"$UPSAMPLE"_v2/
+MODEL_DIR=fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_"$SUBSAMPLE_SIZE"_upsample_"$UPSAMPLE"_v2x	/
 mkdir -p $MODEL_DIR
 
 # change the cuda_visible_device to the GPU device number you are using

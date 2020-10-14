@@ -1,0 +1,1150 @@
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | Namespace(activation_dropout=0.0, activation_fn='relu', adam_betas='(0.9, 0.98)', adam_eps=1e-08, adaptive_input=False, adaptive_softmax_cutoff=None, adaptive_softmax_dropout=0, all_gather_list_size=16384, arch='transformer_iwslt_de_en', attention_dropout=0.0, batch_size=None, batch_size_valid=None, best_checkpoint_metric='loss', bf16=False, bpe=None, broadcast_buffers=False, bucket_cap_mb=25, checkpoint_suffix='', clip_norm=25.0, cpu=False, criterion='label_smoothed_cross_entropy', cross_self_attention=False, curriculum=0, data='fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/', data_buffer_size=10, dataset_impl=None, ddp_backend='c10d', decoder_attention_heads=4, decoder_embed_dim=512, decoder_embed_path=None, decoder_ffn_embed_dim=1024, decoder_input_dim=512, decoder_layerdrop=0, decoder_layers=6, decoder_layers_to_keep=None, decoder_learned_pos=False, decoder_normalize_before=False, decoder_output_dim=512, device_id=0, disable_validation=False, distributed_backend='nccl', distributed_init_method=None, distributed_no_spawn=False, distributed_num_procs=1, distributed_port=-1, distributed_rank=0, distributed_world_size=1, distributed_wrapper='DDP', dropout=0.3, empty_cache_freq=0, encoder_attention_heads=4, encoder_embed_dim=512, encoder_embed_path=None, encoder_ffn_embed_dim=1024, encoder_layerdrop=0, encoder_layers=6, encoder_layers_to_keep=None, encoder_learned_pos=False, encoder_normalize_before=False, eval_bleu=False, eval_bleu_args=None, eval_bleu_detok='space', eval_bleu_detok_args=None, eval_bleu_print_samples=False, eval_bleu_remove_bpe=None, eval_tokenized_bleu=False, fast_stat_sync=False, find_unused_parameters=False, finetune_from_model=None, fix_batches_to_gpus=False, fixed_validation_seed=None, fp16=True, fp16_init_scale=128, fp16_no_flatten_grads=False, fp16_scale_tolerance=0.0, fp16_scale_window=None, gen_subset='test', keep_best_checkpoints=-1, keep_interval_updates=-1, keep_last_epochs=-1, label_smoothing=0.1, layernorm_embedding=False, left_pad_source='True', left_pad_target='False', load_alignments=False, local_rank=0, localsgd_frequency=3, log_format=None, log_interval=100, lr=[0.0002], lr_scheduler='inverse_sqrt', max_epoch=80, max_source_positions=1024, max_target_positions=1024, max_tokens=4500, max_tokens_valid=4500, max_update=0, maximize_best_checkpoint_metric=False, memory_efficient_bf16=False, memory_efficient_fp16=False, min_loss_scale=0.0001, min_lr=-1.0, model_parallel_size=1, no_cross_attention=False, no_epoch_checkpoints=True, no_last_checkpoints=False, no_progress_bar=False, no_save=False, no_save_optimizer_state=False, no_scale_embedding=False, no_seed_provided=False, no_token_positional_embeddings=False, nprocs_per_node=4, num_batch_buckets=0, num_shards=1, num_workers=1, optimizer='adam', optimizer_overrides='{}', patience=-1, pipeline_balance=None, pipeline_checkpoint='never', pipeline_chunks=0, pipeline_devices=None, pipeline_model_parallel=False, profile=False, quant_noise_pq=0, quant_noise_pq_block_size=8, quant_noise_scalar=0, quantization_config_path=None, required_batch_size_multiple=8, required_seq_len_multiple=1, reset_dataloader=False, reset_lr_scheduler=False, reset_meters=False, reset_optimizer=False, restore_file='checkpoint_last.pt', save_dir='fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/', save_interval=1, save_interval_updates=0, scoring='bleu', seed=2, sentence_avg=False, shard_id=0, share_all_embeddings=True, share_decoder_input_output_embed=False, skip_invalid_size_inputs_valid_test=False, slowmo_algorithm='LocalSGD', slowmo_momentum=None, source_lang=None, stop_time_hours=0, target_lang=None, task='translation', tensorboard_logdir=None, threshold_loss_scale=None, tie_adaptive_weights=False, tokenizer=None, tpu=False, train_subset='train', truncate_source=False, update_freq=[2], upsample_primary=1, use_bmuf=False, use_old_adam=False, user_dir=None, valid_subset='valid', validate_after_updates=0, validate_interval=1, validate_interval_updates=0, warmup_init_lr=1e-07, warmup_updates=4000, weight_decay=0.0, zero_sharding='none')
+2020-10-13 18:29:40 | INFO | fairseq.tasks.translation | [aze] dictionary: 7728 types
+2020-10-13 18:29:40 | INFO | fairseq.tasks.translation | [eng] dictionary: 7728 types
+2020-10-13 18:29:40 | INFO | fairseq.data.data_utils | loaded 671 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/valid.aze-eng.aze
+2020-10-13 18:29:40 | INFO | fairseq.data.data_utils | loaded 671 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/valid.aze-eng.eng
+2020-10-13 18:29:40 | INFO | fairseq.tasks.translation | fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/ valid aze-eng 671 examples
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | TransformerModel(
+  (encoder): TransformerEncoder(
+    (dropout_module): FairseqDropout()
+    (embed_tokens): Embedding(7728, 512, padding_idx=1)
+    (embed_positions): SinusoidalPositionalEmbedding()
+    (layers): ModuleList(
+      (0): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (2): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (3): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (4): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (5): TransformerEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+  )
+  (decoder): TransformerDecoder(
+    (dropout_module): FairseqDropout()
+    (embed_tokens): Embedding(7728, 512, padding_idx=1)
+    (embed_positions): SinusoidalPositionalEmbedding()
+    (layers): ModuleList(
+      (0): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (2): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (3): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (4): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+      (5): TransformerDecoderLayer(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=512, out_features=512, bias=True)
+          (v_proj): Linear(in_features=512, out_features=512, bias=True)
+          (q_proj): Linear(in_features=512, out_features=512, bias=True)
+          (out_proj): Linear(in_features=512, out_features=512, bias=True)
+        )
+        (encoder_attn_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=512, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=512, bias=True)
+        (final_layer_norm): LayerNorm((512,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (output_projection): Linear(in_features=512, out_features=7728, bias=False)
+  )
+)
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | task: translation (TranslationTask)
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | model: transformer_iwslt_de_en (TransformerModel)
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | criterion: label_smoothed_cross_entropy (LabelSmoothedCrossEntropyCriterion)
+2020-10-13 18:29:40 | INFO | fairseq_cli.train | num. model params: 35500032 (num. trained: 35500032)
+2020-10-13 18:29:46 | INFO | fairseq.trainer | detected shared parameter: encoder.embed_tokens.weight <- decoder.embed_tokens.weight
+2020-10-13 18:29:46 | INFO | fairseq.trainer | detected shared parameter: encoder.embed_tokens.weight <- decoder.output_projection.weight
+2020-10-13 18:29:46 | INFO | fairseq.utils | ***********************CUDA enviroments for all 1 workers***********************
+2020-10-13 18:29:46 | INFO | fairseq.utils | rank   0: capabilities =  7.0  ; total memory = 15.782 GB ; name = Tesla V100-SXM2-16GB                    
+2020-10-13 18:29:46 | INFO | fairseq.utils | ***********************CUDA enviroments for all 1 workers***********************
+2020-10-13 18:29:46 | INFO | fairseq_cli.train | training on 1 devices (GPUs/TPUs)
+2020-10-13 18:29:46 | INFO | fairseq_cli.train | max tokens per GPU = 4500 and max sentences per GPU = None
+2020-10-13 18:29:46 | INFO | fairseq.trainer | no existing checkpoint found fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt
+2020-10-13 18:29:46 | INFO | fairseq.trainer | loading train data for epoch 1
+2020-10-13 18:29:46 | INFO | fairseq.data.data_utils | loaded 5946 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/train.aze-eng.aze
+2020-10-13 18:29:46 | INFO | fairseq.data.data_utils | loaded 5946 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/train.aze-eng.eng
+2020-10-13 18:29:46 | INFO | fairseq.tasks.translation | fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/ train aze-eng 5946 examples
+2020-10-13 18:29:46 | INFO | fairseq.data.data_utils | loaded 72307 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/train1.aze-eng.aze
+2020-10-13 18:29:46 | INFO | fairseq.data.data_utils | loaded 72307 examples from: fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/train1.aze-eng.eng
+2020-10-13 18:29:46 | INFO | fairseq.tasks.translation | fairseq/data-bin/ted_aze_spm8000/aze_eng_plus_bt_100000/ train1 aze-eng 72307 examples
+2020-10-13 18:29:46 | INFO | fairseq.trainer | begin training epoch 1
+2020-10-13 18:29:47 | INFO | fairseq.trainer | NOTE: overflow detected, setting loss scale to: 64.0
+2020-10-13 18:29:57 | INFO | fairseq.trainer | NOTE: overflow detected, setting loss scale to: 32.0
+2020-10-13 18:29:59 | INFO | train_inner | epoch 001:    102 / 394 loss=12.857, nll_loss=12.769, ppl=6978.59, wps=59248.6, ups=7.82, wpb=7571.1, bsz=202.7, num_updates=100, lr=5.0975e-06, gnorm=3.092, clip=0, loss_scale=32, train_wall=13, wall=13
+2020-10-13 18:30:14 | INFO | train_inner | epoch 001:    202 / 394 loss=11.754, nll_loss=11.538, ppl=2973.02, wps=53203.4, ups=6.98, wpb=7618.5, bsz=195, num_updates=200, lr=1.0095e-05, gnorm=1.173, clip=0, loss_scale=32, train_wall=14, wall=28
+2020-10-13 18:30:34 | INFO | train_inner | epoch 001:    302 / 394 loss=11.126, nll_loss=10.834, ppl=1825.66, wps=38438.5, ups=4.99, wpb=7705.8, bsz=195.8, num_updates=300, lr=1.50925e-05, gnorm=0.936, clip=0, loss_scale=32, train_wall=20, wall=48
+2020-10-13 18:30:52 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:30:53 | INFO | valid | epoch 001 | valid on 'valid' subset | loss 9.511 | nll_loss 8.953 | ppl 495.5 | wps 60658.1 | wpb 1984.1 | bsz 74.6 | num_updates 392
+2020-10-13 18:30:53 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:30:54 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 1 @ 392 updates, score 9.511) (writing took 1.715304944998934 seconds)
+2020-10-13 18:30:54 | INFO | fairseq_cli.train | end of epoch 1 (average epoch stats below)
+2020-10-13 18:30:54 | INFO | train | epoch 001 | loss 11.59 | nll_loss 11.348 | ppl 2606.18 | wps 43990.2 | ups 5.79 | wpb 7601.8 | bsz 197.4 | num_updates 392 | lr 1.96902e-05 | gnorm 1.652 | clip 0 | loss_scale 32 | train_wall 65 | wall 68
+2020-10-13 18:30:54 | INFO | fairseq.trainer | begin training epoch 2
+2020-10-13 18:30:56 | INFO | train_inner | epoch 002:      8 / 394 loss=10.518, nll_loss=10.13, ppl=1120.87, wps=33867.2, ups=4.49, wpb=7546.5, bsz=194, num_updates=400, lr=2.009e-05, gnorm=1.36, clip=0, loss_scale=32, train_wall=20, wall=70
+2020-10-13 18:31:16 | INFO | train_inner | epoch 002:    108 / 394 loss=10.062, nll_loss=9.573, ppl=761.56, wps=38245.9, ups=5.06, wpb=7553.6, bsz=197, num_updates=500, lr=2.50875e-05, gnorm=0.94, clip=0, loss_scale=32, train_wall=20, wall=90
+2020-10-13 18:31:36 | INFO | train_inner | epoch 002:    208 / 394 loss=9.855, nll_loss=9.305, ppl=632.38, wps=38472.6, ups=5.09, wpb=7564.7, bsz=207.4, num_updates=600, lr=3.0085e-05, gnorm=1.051, clip=0, loss_scale=32, train_wall=20, wall=109
+2020-10-13 18:31:55 | INFO | train_inner | epoch 002:    308 / 394 loss=9.808, nll_loss=9.236, ppl=603.14, wps=39299.3, ups=5.11, wpb=7684.1, bsz=194.2, num_updates=700, lr=3.50825e-05, gnorm=1.01, clip=0, loss_scale=32, train_wall=19, wall=129
+2020-10-13 18:32:11 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:32:12 | INFO | valid | epoch 002 | valid on 'valid' subset | loss 8.561 | nll_loss 7.799 | ppl 222.73 | wps 58121.6 | wpb 1984.1 | bsz 74.6 | num_updates 786 | best_loss 8.561
+2020-10-13 18:32:12 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:32:15 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 2 @ 786 updates, score 8.561) (writing took 3.6636342460042215 seconds)
+2020-10-13 18:32:15 | INFO | fairseq_cli.train | end of epoch 2 (average epoch stats below)
+2020-10-13 18:32:15 | INFO | train | epoch 002 | loss 9.878 | nll_loss 9.332 | ppl 644.7 | wps 37089.1 | ups 4.88 | wpb 7603.9 | bsz 198.6 | num_updates 786 | lr 3.93804e-05 | gnorm 1.055 | clip 0 | loss_scale 32 | train_wall 76 | wall 149
+2020-10-13 18:32:15 | INFO | fairseq.trainer | begin training epoch 3
+2020-10-13 18:32:18 | INFO | train_inner | epoch 003:     14 / 394 loss=9.72, nll_loss=9.133, ppl=561.26, wps=33029.8, ups=4.35, wpb=7598, bsz=198.2, num_updates=800, lr=4.008e-05, gnorm=1.224, clip=0, loss_scale=32, train_wall=19, wall=152
+2020-10-13 18:32:38 | INFO | train_inner | epoch 003:    114 / 394 loss=9.596, nll_loss=8.992, ppl=509.31, wps=37586.6, ups=4.97, wpb=7561.5, bsz=185.9, num_updates=900, lr=4.50775e-05, gnorm=1.23, clip=0, loss_scale=32, train_wall=20, wall=172
+2020-10-13 18:32:58 | INFO | train_inner | epoch 003:    214 / 394 loss=9.406, nll_loss=8.776, ppl=438.27, wps=38051.6, ups=4.97, wpb=7657.7, bsz=190.2, num_updates=1000, lr=5.0075e-05, gnorm=1.312, clip=0, loss_scale=32, train_wall=20, wall=192
+2020-10-13 18:33:18 | INFO | train_inner | epoch 003:    314 / 394 loss=9.217, nll_loss=8.56, ppl=377.31, wps=37517.2, ups=4.98, wpb=7533.6, bsz=208.6, num_updates=1100, lr=5.50725e-05, gnorm=1.452, clip=0, loss_scale=32, train_wall=20, wall=212
+2020-10-13 18:33:35 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:33:35 | INFO | valid | epoch 003 | valid on 'valid' subset | loss 7.913 | nll_loss 7.06 | ppl 133.42 | wps 57254.1 | wpb 1984.1 | bsz 74.6 | num_updates 1180 | best_loss 7.913
+2020-10-13 18:33:35 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:33:39 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 3 @ 1180 updates, score 7.913) (writing took 3.708491186000174 seconds)
+2020-10-13 18:33:39 | INFO | fairseq_cli.train | end of epoch 3 (average epoch stats below)
+2020-10-13 18:33:39 | INFO | train | epoch 003 | loss 9.347 | nll_loss 8.708 | ppl 418.13 | wps 35922 | ups 4.72 | wpb 7603.9 | bsz 198.6 | num_updates 1180 | lr 5.90705e-05 | gnorm 1.368 | clip 0 | loss_scale 32 | train_wall 79 | wall 233
+2020-10-13 18:33:39 | INFO | fairseq.trainer | begin training epoch 4
+2020-10-13 18:33:41 | INFO | train_inner | epoch 004:     20 / 394 loss=9.061, nll_loss=8.379, ppl=332.91, wps=33385.9, ups=4.36, wpb=7658, bsz=206.2, num_updates=1200, lr=6.007e-05, gnorm=1.529, clip=0, loss_scale=32, train_wall=19, wall=235
+2020-10-13 18:34:00 | INFO | train_inner | epoch 004:    120 / 394 loss=8.908, nll_loss=8.204, ppl=294.89, wps=39588.8, ups=5.29, wpb=7481.4, bsz=194.2, num_updates=1300, lr=6.50675e-05, gnorm=1.37, clip=0, loss_scale=32, train_wall=19, wall=254
+2020-10-13 18:34:20 | INFO | train_inner | epoch 004:    220 / 394 loss=8.747, nll_loss=8.019, ppl=259.32, wps=37996.2, ups=5.03, wpb=7559.2, bsz=201.2, num_updates=1400, lr=7.0065e-05, gnorm=1.358, clip=0, loss_scale=32, train_wall=20, wall=274
+2020-10-13 18:34:40 | INFO | train_inner | epoch 004:    320 / 394 loss=8.628, nll_loss=7.881, ppl=235.73, wps=39255.8, ups=5.03, wpb=7798.3, bsz=209.7, num_updates=1500, lr=7.50625e-05, gnorm=1.508, clip=0, loss_scale=32, train_wall=20, wall=294
+2020-10-13 18:34:55 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:34:55 | INFO | valid | epoch 004 | valid on 'valid' subset | loss 7.494 | nll_loss 6.546 | ppl 93.47 | wps 56826.5 | wpb 1984.1 | bsz 74.6 | num_updates 1574 | best_loss 7.494
+2020-10-13 18:34:55 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:34:59 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 4 @ 1574 updates, score 7.494) (writing took 3.6878839139972115 seconds)
+2020-10-13 18:34:59 | INFO | fairseq_cli.train | end of epoch 4 (average epoch stats below)
+2020-10-13 18:34:59 | INFO | train | epoch 004 | loss 8.729 | nll_loss 7.997 | ppl 255.52 | wps 37417.5 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 1574 | lr 7.87607e-05 | gnorm 1.418 | clip 0 | loss_scale 32 | train_wall 75 | wall 313
+2020-10-13 18:34:59 | INFO | fairseq.trainer | begin training epoch 5
+2020-10-13 18:35:04 | INFO | train_inner | epoch 005:     26 / 394 loss=8.498, nll_loss=7.73, ppl=212.38, wps=31404.5, ups=4.19, wpb=7499.8, bsz=188.2, num_updates=1600, lr=8.006e-05, gnorm=1.401, clip=0, loss_scale=32, train_wall=20, wall=318
+2020-10-13 18:35:24 | INFO | train_inner | epoch 005:    126 / 394 loss=8.373, nll_loss=7.587, ppl=192.28, wps=38583.8, ups=5.07, wpb=7614.5, bsz=187.8, num_updates=1700, lr=8.50575e-05, gnorm=1.333, clip=0, loss_scale=32, train_wall=20, wall=338
+2020-10-13 18:35:41 | INFO | train_inner | epoch 005:    226 / 394 loss=8.267, nll_loss=7.463, ppl=176.49, wps=42973.8, ups=5.62, wpb=7646.4, bsz=213.6, num_updates=1800, lr=9.0055e-05, gnorm=1.464, clip=0, loss_scale=32, train_wall=18, wall=355
+2020-10-13 18:36:02 | INFO | train_inner | epoch 005:    326 / 394 loss=8.156, nll_loss=7.337, ppl=161.65, wps=37488.3, ups=4.97, wpb=7542.4, bsz=191, num_updates=1900, lr=9.50525e-05, gnorm=1.42, clip=0, loss_scale=32, train_wall=20, wall=375
+2020-10-13 18:36:15 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:36:16 | INFO | valid | epoch 005 | valid on 'valid' subset | loss 7.201 | nll_loss 6.199 | ppl 73.47 | wps 57562.3 | wpb 1984.1 | bsz 74.6 | num_updates 1968 | best_loss 7.201
+2020-10-13 18:36:16 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:36:20 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 5 @ 1968 updates, score 7.201) (writing took 4.485528878001787 seconds)
+2020-10-13 18:36:20 | INFO | fairseq_cli.train | end of epoch 5 (average epoch stats below)
+2020-10-13 18:36:20 | INFO | train | epoch 005 | loss 8.243 | nll_loss 7.436 | ppl 173.21 | wps 36763.8 | ups 4.83 | wpb 7603.9 | bsz 198.6 | num_updates 1968 | lr 9.84508e-05 | gnorm 1.376 | clip 0 | loss_scale 32 | train_wall 76 | wall 394
+2020-10-13 18:36:20 | INFO | fairseq.trainer | begin training epoch 6
+2020-10-13 18:36:27 | INFO | train_inner | epoch 006:     32 / 394 loss=8.067, nll_loss=7.234, ppl=150.51, wps=30714.5, ups=4, wpb=7684.9, bsz=204.2, num_updates=2000, lr=0.00010005, gnorm=1.269, clip=0, loss_scale=32, train_wall=20, wall=401
+2020-10-13 18:36:46 | INFO | train_inner | epoch 006:    132 / 394 loss=7.966, nll_loss=7.117, ppl=138.83, wps=38140.8, ups=5.04, wpb=7572.7, bsz=201.6, num_updates=2100, lr=0.000105048, gnorm=1.351, clip=0, loss_scale=32, train_wall=20, wall=420
+2020-10-13 18:37:06 | INFO | train_inner | epoch 006:    232 / 394 loss=7.872, nll_loss=7.01, ppl=128.9, wps=37875.8, ups=5.06, wpb=7483.9, bsz=193.4, num_updates=2200, lr=0.000110045, gnorm=1.328, clip=0, loss_scale=32, train_wall=20, wall=440
+2020-10-13 18:37:24 | INFO | train_inner | epoch 006:    332 / 394 loss=7.816, nll_loss=6.945, ppl=123.19, wps=43436.9, ups=5.68, wpb=7648.4, bsz=199.6, num_updates=2300, lr=0.000115043, gnorm=1.297, clip=0, loss_scale=32, train_wall=17, wall=458
+2020-10-13 18:37:36 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:37:36 | INFO | valid | epoch 006 | valid on 'valid' subset | loss 7.001 | nll_loss 5.964 | ppl 62.43 | wps 57295.4 | wpb 1984.1 | bsz 74.6 | num_updates 2362 | best_loss 7.001
+2020-10-13 18:37:36 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:37:40 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 6 @ 2362 updates, score 7.001) (writing took 3.6956670150029822 seconds)
+2020-10-13 18:37:40 | INFO | fairseq_cli.train | end of epoch 6 (average epoch stats below)
+2020-10-13 18:37:40 | INFO | train | epoch 006 | loss 7.877 | nll_loss 7.014 | ppl 129.28 | wps 37479.4 | ups 4.93 | wpb 7603.9 | bsz 198.6 | num_updates 2362 | lr 0.000118141 | gnorm 1.301 | clip 0 | loss_scale 32 | train_wall 75 | wall 474
+2020-10-13 18:37:40 | INFO | fairseq.trainer | begin training epoch 7
+2020-10-13 18:37:48 | INFO | train_inner | epoch 007:     38 / 394 loss=7.741, nll_loss=6.858, ppl=115.99, wps=32112.9, ups=4.14, wpb=7748.6, bsz=201.2, num_updates=2400, lr=0.00012004, gnorm=1.245, clip=0, loss_scale=32, train_wall=20, wall=482
+2020-10-13 18:38:08 | INFO | train_inner | epoch 007:    138 / 394 loss=7.674, nll_loss=6.78, ppl=109.9, wps=37083.4, ups=4.96, wpb=7476.1, bsz=206.2, num_updates=2500, lr=0.000125037, gnorm=1.356, clip=0, loss_scale=32, train_wall=20, wall=502
+2020-10-13 18:38:28 | INFO | train_inner | epoch 007:    238 / 394 loss=7.617, nll_loss=6.715, ppl=105.07, wps=38260.1, ups=4.96, wpb=7710, bsz=202.3, num_updates=2600, lr=0.000130035, gnorm=1.217, clip=0, loss_scale=32, train_wall=20, wall=522
+2020-10-13 18:38:48 | INFO | train_inner | epoch 007:    338 / 394 loss=7.579, nll_loss=6.671, ppl=101.87, wps=37618.7, ups=4.97, wpb=7569.2, bsz=196.7, num_updates=2700, lr=0.000135032, gnorm=1.253, clip=0, loss_scale=32, train_wall=20, wall=542
+2020-10-13 18:39:00 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:39:00 | INFO | valid | epoch 007 | valid on 'valid' subset | loss 6.876 | nll_loss 5.816 | ppl 56.35 | wps 56552.2 | wpb 1984.1 | bsz 74.6 | num_updates 2756 | best_loss 6.876
+2020-10-13 18:39:00 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:39:07 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 7 @ 2756 updates, score 6.876) (writing took 6.673993894000887 seconds)
+2020-10-13 18:39:07 | INFO | fairseq_cli.train | end of epoch 7 (average epoch stats below)
+2020-10-13 18:39:07 | INFO | train | epoch 007 | loss 7.619 | nll_loss 6.717 | ppl 105.21 | wps 34589.9 | ups 4.55 | wpb 7603.9 | bsz 198.6 | num_updates 2756 | lr 0.000137831 | gnorm 1.267 | clip 0 | loss_scale 32 | train_wall 79 | wall 561
+2020-10-13 18:39:07 | INFO | fairseq.trainer | begin training epoch 8
+2020-10-13 18:39:16 | INFO | train_inner | epoch 008:     44 / 394 loss=7.508, nll_loss=6.59, ppl=96.33, wps=28394.8, ups=3.68, wpb=7706.6, bsz=189.4, num_updates=2800, lr=0.00014003, gnorm=1.181, clip=0, loss_scale=32, train_wall=20, wall=569
+2020-10-13 18:39:36 | INFO | train_inner | epoch 008:    144 / 394 loss=7.445, nll_loss=6.518, ppl=91.62, wps=38441.2, ups=4.99, wpb=7699.4, bsz=204, num_updates=2900, lr=0.000145028, gnorm=1.214, clip=0, loss_scale=32, train_wall=20, wall=589
+2020-10-13 18:39:56 | INFO | train_inner | epoch 008:    244 / 394 loss=7.407, nll_loss=6.474, ppl=88.87, wps=37254, ups=4.99, wpb=7458.4, bsz=194.3, num_updates=3000, lr=0.000150025, gnorm=1.156, clip=0, loss_scale=32, train_wall=20, wall=609
+2020-10-13 18:40:16 | INFO | train_inner | epoch 008:    344 / 394 loss=7.382, nll_loss=6.444, ppl=87.05, wps=37666.5, ups=4.96, wpb=7590, bsz=200.1, num_updates=3100, lr=0.000155023, gnorm=1.137, clip=0, loss_scale=32, train_wall=20, wall=630
+2020-10-13 18:40:26 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:40:26 | INFO | valid | epoch 008 | valid on 'valid' subset | loss 6.753 | nll_loss 5.67 | ppl 50.93 | wps 58348.4 | wpb 1984.1 | bsz 74.6 | num_updates 3150 | best_loss 6.753
+2020-10-13 18:40:26 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:40:31 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 8 @ 3150 updates, score 6.753) (writing took 4.603365119997761 seconds)
+2020-10-13 18:40:31 | INFO | fairseq_cli.train | end of epoch 8 (average epoch stats below)
+2020-10-13 18:40:31 | INFO | train | epoch 008 | loss 7.409 | nll_loss 6.476 | ppl 89.01 | wps 35645.7 | ups 4.69 | wpb 7603.9 | bsz 198.6 | num_updates 3150 | lr 0.000157521 | gnorm 1.158 | clip 0 | loss_scale 32 | train_wall 78 | wall 645
+2020-10-13 18:40:31 | INFO | fairseq.trainer | begin training epoch 9
+2020-10-13 18:40:41 | INFO | train_inner | epoch 009:     50 / 394 loss=7.311, nll_loss=6.363, ppl=82.29, wps=30198.9, ups=3.98, wpb=7592.3, bsz=185.1, num_updates=3200, lr=0.00016002, gnorm=1.075, clip=0, loss_scale=32, train_wall=20, wall=655
+2020-10-13 18:40:58 | INFO | train_inner | epoch 009:    150 / 394 loss=7.256, nll_loss=6.3, ppl=78.82, wps=43352, ups=5.71, wpb=7586.6, bsz=200.7, num_updates=3300, lr=0.000165018, gnorm=1.116, clip=0, loss_scale=32, train_wall=17, wall=672
+2020-10-13 18:41:18 | INFO | train_inner | epoch 009:    250 / 394 loss=7.245, nll_loss=6.286, ppl=78.02, wps=38667, ups=4.97, wpb=7782, bsz=200.4, num_updates=3400, lr=0.000170015, gnorm=1.088, clip=0, loss_scale=32, train_wall=20, wall=692
+2020-10-13 18:41:39 | INFO | train_inner | epoch 009:    350 / 394 loss=7.225, nll_loss=6.263, ppl=76.79, wps=37094.2, ups=4.99, wpb=7429.7, bsz=195, num_updates=3500, lr=0.000175013, gnorm=1.141, clip=0, loss_scale=32, train_wall=20, wall=712
+2020-10-13 18:41:47 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:41:48 | INFO | valid | epoch 009 | valid on 'valid' subset | loss 6.6 | nll_loss 5.486 | ppl 44.82 | wps 56142.8 | wpb 1984.1 | bsz 74.6 | num_updates 3544 | best_loss 6.6
+2020-10-13 18:41:48 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:41:53 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 9 @ 3544 updates, score 6.6) (writing took 4.880362114003219 seconds)
+2020-10-13 18:41:53 | INFO | fairseq_cli.train | end of epoch 9 (average epoch stats below)
+2020-10-13 18:41:53 | INFO | train | epoch 009 | loss 7.24 | nll_loss 6.282 | ppl 77.79 | wps 36585.8 | ups 4.81 | wpb 7603.9 | bsz 198.6 | num_updates 3544 | lr 0.000177211 | gnorm 1.099 | clip 0 | loss_scale 32 | train_wall 76 | wall 727
+2020-10-13 18:41:53 | INFO | fairseq.trainer | begin training epoch 10
+2020-10-13 18:42:04 | INFO | train_inner | epoch 010:     56 / 394 loss=7.146, nll_loss=6.174, ppl=72.21, wps=30665.7, ups=3.95, wpb=7759.3, bsz=220.2, num_updates=3600, lr=0.00018001, gnorm=1.078, clip=0, loss_scale=32, train_wall=20, wall=738
+2020-10-13 18:42:23 | INFO | train_inner | epoch 010:    156 / 394 loss=7.11, nll_loss=6.132, ppl=70.13, wps=37611.1, ups=5.1, wpb=7379.3, bsz=197.4, num_updates=3700, lr=0.000185008, gnorm=1.06, clip=0, loss_scale=32, train_wall=19, wall=757
+2020-10-13 18:42:41 | INFO | train_inner | epoch 010:    256 / 394 loss=7.101, nll_loss=6.121, ppl=69.59, wps=44100, ups=5.72, wpb=7709.5, bsz=204.5, num_updates=3800, lr=0.000190005, gnorm=0.978, clip=0, loss_scale=32, train_wall=17, wall=775
+2020-10-13 18:43:00 | INFO | train_inner | epoch 010:    356 / 394 loss=7.086, nll_loss=6.103, ppl=68.76, wps=38795.7, ups=5.15, wpb=7539.1, bsz=186.9, num_updates=3900, lr=0.000195003, gnorm=1.028, clip=0, loss_scale=32, train_wall=19, wall=794
+2020-10-13 18:43:08 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:43:08 | INFO | valid | epoch 010 | valid on 'valid' subset | loss 6.583 | nll_loss 5.472 | ppl 44.37 | wps 58411.3 | wpb 1984.1 | bsz 74.6 | num_updates 3938 | best_loss 6.583
+2020-10-13 18:43:08 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:43:12 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 10 @ 3938 updates, score 6.583) (writing took 3.777135600998008 seconds)
+2020-10-13 18:43:12 | INFO | fairseq_cli.train | end of epoch 10 (average epoch stats below)
+2020-10-13 18:43:12 | INFO | train | epoch 010 | loss 7.099 | nll_loss 6.119 | ppl 69.51 | wps 37761.8 | ups 4.97 | wpb 7603.9 | bsz 198.6 | num_updates 3938 | lr 0.000196902 | gnorm 1.033 | clip 0 | loss_scale 32 | train_wall 75 | wall 806
+2020-10-13 18:43:12 | INFO | fairseq.trainer | begin training epoch 11
+2020-10-13 18:43:25 | INFO | train_inner | epoch 011:     62 / 394 loss=7.013, nll_loss=6.021, ppl=64.92, wps=31217.2, ups=4.13, wpb=7558.8, bsz=193, num_updates=4000, lr=0.0002, gnorm=1.041, clip=0, loss_scale=32, train_wall=20, wall=818
+2020-10-13 18:43:45 | INFO | train_inner | epoch 011:    162 / 394 loss=7, nll_loss=6.006, ppl=64.26, wps=37753.4, ups=4.94, wpb=7634.7, bsz=200.1, num_updates=4100, lr=0.000197546, gnorm=0.997, clip=0, loss_scale=32, train_wall=20, wall=839
+2020-10-13 18:44:05 | INFO | train_inner | epoch 011:    262 / 394 loss=6.978, nll_loss=5.979, ppl=63.1, wps=38357.9, ups=4.96, wpb=7736.7, bsz=199.8, num_updates=4200, lr=0.00019518, gnorm=0.99, clip=0, loss_scale=32, train_wall=20, wall=859
+2020-10-13 18:44:25 | INFO | train_inner | epoch 011:    362 / 394 loss=6.96, nll_loss=5.958, ppl=62.18, wps=37587, ups=4.98, wpb=7541.8, bsz=199.6, num_updates=4300, lr=0.000192897, gnorm=0.975, clip=0, loss_scale=32, train_wall=20, wall=879
+2020-10-13 18:44:29 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:44:29 | INFO | valid | epoch 011 | valid on 'valid' subset | loss 6.447 | nll_loss 5.326 | ppl 40.12 | wps 86789.7 | wpb 1984.1 | bsz 74.6 | num_updates 4332 | best_loss 6.447
+2020-10-13 18:44:29 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:44:33 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 11 @ 4332 updates, score 6.447) (writing took 3.591220896996674 seconds)
+2020-10-13 18:44:33 | INFO | fairseq_cli.train | end of epoch 11 (average epoch stats below)
+2020-10-13 18:44:33 | INFO | train | epoch 011 | loss 6.977 | nll_loss 5.978 | ppl 63.05 | wps 37009.1 | ups 4.87 | wpb 7603.9 | bsz 198.6 | num_updates 4332 | lr 0.000192183 | gnorm 0.997 | clip 0 | loss_scale 32 | train_wall 76 | wall 887
+2020-10-13 18:44:33 | INFO | fairseq.trainer | begin training epoch 12
+2020-10-13 18:44:47 | INFO | train_inner | epoch 012:     68 / 394 loss=6.882, nll_loss=5.87, ppl=58.5, wps=35406.9, ups=4.65, wpb=7616.8, bsz=201.1, num_updates=4400, lr=0.000190693, gnorm=0.951, clip=0, loss_scale=32, train_wall=17, wall=900
+2020-10-13 18:45:06 | INFO | train_inner | epoch 012:    168 / 394 loss=6.87, nll_loss=5.857, ppl=57.95, wps=38391.1, ups=5.05, wpb=7605.6, bsz=201, num_updates=4500, lr=0.000188562, gnorm=0.988, clip=0, loss_scale=32, train_wall=20, wall=920
+2020-10-13 18:45:26 | INFO | train_inner | epoch 012:    268 / 394 loss=6.887, nll_loss=5.874, ppl=58.66, wps=37933.5, ups=5.06, wpb=7494.5, bsz=196.4, num_updates=4600, lr=0.000186501, gnorm=0.975, clip=0, loss_scale=32, train_wall=20, wall=940
+2020-10-13 18:45:46 | INFO | train_inner | epoch 012:    368 / 394 loss=6.847, nll_loss=5.829, ppl=56.85, wps=38736.5, ups=5.07, wpb=7646.9, bsz=192.2, num_updates=4700, lr=0.000184506, gnorm=0.915, clip=0, loss_scale=32, train_wall=20, wall=960
+2020-10-13 18:45:51 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:45:51 | INFO | valid | epoch 012 | valid on 'valid' subset | loss 6.376 | nll_loss 5.233 | ppl 37.6 | wps 57926.2 | wpb 1984.1 | bsz 74.6 | num_updates 4726 | best_loss 6.376
+2020-10-13 18:45:51 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:45:55 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 12 @ 4726 updates, score 6.376) (writing took 3.902366094000172 seconds)
+2020-10-13 18:45:55 | INFO | fairseq_cli.train | end of epoch 12 (average epoch stats below)
+2020-10-13 18:45:55 | INFO | train | epoch 012 | loss 6.864 | nll_loss 5.85 | ppl 57.66 | wps 36372.3 | ups 4.78 | wpb 7603.9 | bsz 198.6 | num_updates 4726 | lr 0.000183998 | gnorm 0.957 | clip 0 | loss_scale 32 | train_wall 77 | wall 969
+2020-10-13 18:45:55 | INFO | fairseq.trainer | begin training epoch 13
+2020-10-13 18:46:10 | INFO | train_inner | epoch 013:     74 / 394 loss=6.793, nll_loss=5.768, ppl=54.5, wps=31121.2, ups=4.12, wpb=7549.5, bsz=196, num_updates=4800, lr=0.000182574, gnorm=0.929, clip=0, loss_scale=32, train_wall=20, wall=984
+2020-10-13 18:46:27 | INFO | train_inner | epoch 013:    174 / 394 loss=6.786, nll_loss=5.76, ppl=54.2, wps=45413.8, ups=5.98, wpb=7595.5, bsz=198.5, num_updates=4900, lr=0.000180702, gnorm=0.932, clip=0, loss_scale=32, train_wall=17, wall=1001
+2020-10-13 18:46:47 | INFO | train_inner | epoch 013:    274 / 394 loss=6.758, nll_loss=5.728, ppl=53.01, wps=38186, ups=5.06, wpb=7550.7, bsz=199, num_updates=5000, lr=0.000178885, gnorm=0.915, clip=0, loss_scale=32, train_wall=20, wall=1021
+2020-10-13 18:47:06 | INFO | train_inner | epoch 013:    374 / 394 loss=6.777, nll_loss=5.748, ppl=53.73, wps=38908, ups=5.06, wpb=7690.1, bsz=193.9, num_updates=5100, lr=0.000177123, gnorm=0.94, clip=0, loss_scale=32, train_wall=20, wall=1040
+2020-10-13 18:47:10 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:47:11 | INFO | valid | epoch 013 | valid on 'valid' subset | loss 6.315 | nll_loss 5.174 | ppl 36.09 | wps 57037.4 | wpb 1984.1 | bsz 74.6 | num_updates 5120 | best_loss 6.315
+2020-10-13 18:47:11 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:47:14 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 13 @ 5120 updates, score 6.315) (writing took 3.697424536992912 seconds)
+2020-10-13 18:47:14 | INFO | fairseq_cli.train | end of epoch 13 (average epoch stats below)
+2020-10-13 18:47:14 | INFO | train | epoch 013 | loss 6.772 | nll_loss 5.744 | ppl 53.59 | wps 37862.7 | ups 4.98 | wpb 7603.9 | bsz 198.6 | num_updates 5120 | lr 0.000176777 | gnorm 0.923 | clip 0 | loss_scale 32 | train_wall 74 | wall 1048
+2020-10-13 18:47:14 | INFO | fairseq.trainer | begin training epoch 14
+2020-10-13 18:47:31 | INFO | train_inner | epoch 014:     80 / 394 loss=6.702, nll_loss=5.664, ppl=50.71, wps=31466.1, ups=4.1, wpb=7668.6, bsz=205.3, num_updates=5200, lr=0.000175412, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=1065
+2020-10-13 18:47:51 | INFO | train_inner | epoch 014:    180 / 394 loss=6.705, nll_loss=5.667, ppl=50.79, wps=37516.1, ups=4.96, wpb=7563.9, bsz=202.6, num_updates=5300, lr=0.000173749, gnorm=0.941, clip=0, loss_scale=32, train_wall=20, wall=1085
+2020-10-13 18:48:09 | INFO | train_inner | epoch 014:    280 / 394 loss=6.692, nll_loss=5.651, ppl=50.25, wps=42853.5, ups=5.62, wpb=7624.3, bsz=190.8, num_updates=5400, lr=0.000172133, gnorm=0.881, clip=0, loss_scale=32, train_wall=18, wall=1103
+2020-10-13 18:48:29 | INFO | train_inner | epoch 014:    380 / 394 loss=6.69, nll_loss=5.65, ppl=50.2, wps=37636.4, ups=4.95, wpb=7599.5, bsz=208.5, num_updates=5500, lr=0.000170561, gnorm=0.93, clip=0, loss_scale=32, train_wall=20, wall=1123
+2020-10-13 18:48:32 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:48:32 | INFO | valid | epoch 014 | valid on 'valid' subset | loss 6.275 | nll_loss 5.116 | ppl 34.68 | wps 58544.7 | wpb 1984.1 | bsz 74.6 | num_updates 5514 | best_loss 6.275
+2020-10-13 18:48:32 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:48:36 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 14 @ 5514 updates, score 6.275) (writing took 3.707357504994434 seconds)
+2020-10-13 18:48:36 | INFO | fairseq_cli.train | end of epoch 14 (average epoch stats below)
+2020-10-13 18:48:36 | INFO | train | epoch 014 | loss 6.695 | nll_loss 5.655 | ppl 50.39 | wps 36820.2 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 5514 | lr 0.000170344 | gnorm 0.914 | clip 0 | loss_scale 32 | train_wall 77 | wall 1130
+2020-10-13 18:48:36 | INFO | fairseq.trainer | begin training epoch 15
+2020-10-13 18:48:53 | INFO | train_inner | epoch 015:     86 / 394 loss=6.628, nll_loss=5.579, ppl=47.81, wps=31671.7, ups=4.09, wpb=7735.4, bsz=183.9, num_updates=5600, lr=0.000169031, gnorm=0.867, clip=0, loss_scale=32, train_wall=20, wall=1147
+2020-10-13 18:49:14 | INFO | train_inner | epoch 015:    186 / 394 loss=6.634, nll_loss=5.585, ppl=48.01, wps=38094.6, ups=4.96, wpb=7684.5, bsz=203.9, num_updates=5700, lr=0.000167542, gnorm=0.913, clip=0, loss_scale=32, train_wall=20, wall=1167
+2020-10-13 18:49:34 | INFO | train_inner | epoch 015:    286 / 394 loss=6.633, nll_loss=5.584, ppl=47.97, wps=37597, ups=4.98, wpb=7552, bsz=201.6, num_updates=5800, lr=0.000166091, gnorm=0.878, clip=0, loss_scale=32, train_wall=20, wall=1188
+2020-10-13 18:49:52 | INFO | train_inner | epoch 015:    386 / 394 loss=6.616, nll_loss=5.564, ppl=47.32, wps=41681.6, ups=5.58, wpb=7471.2, bsz=202.4, num_updates=5900, lr=0.000164677, gnorm=0.892, clip=0, loss_scale=32, train_wall=18, wall=1205
+2020-10-13 18:49:53 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:49:53 | INFO | valid | epoch 015 | valid on 'valid' subset | loss 6.242 | nll_loss 5.09 | ppl 34.05 | wps 57317.2 | wpb 1984.1 | bsz 74.6 | num_updates 5908 | best_loss 6.242
+2020-10-13 18:49:53 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:49:57 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 15 @ 5908 updates, score 6.242) (writing took 3.7046095030018478 seconds)
+2020-10-13 18:49:57 | INFO | fairseq_cli.train | end of epoch 15 (average epoch stats below)
+2020-10-13 18:49:57 | INFO | train | epoch 015 | loss 6.625 | nll_loss 5.575 | ppl 47.68 | wps 36918.5 | ups 4.86 | wpb 7603.9 | bsz 198.6 | num_updates 5908 | lr 0.000164566 | gnorm 0.888 | clip 0 | loss_scale 32 | train_wall 76 | wall 1211
+2020-10-13 18:49:57 | INFO | fairseq.trainer | begin training epoch 16
+2020-10-13 18:50:16 | INFO | train_inner | epoch 016:     92 / 394 loss=6.567, nll_loss=5.509, ppl=45.53, wps=31462.1, ups=4.16, wpb=7558.2, bsz=210.5, num_updates=6000, lr=0.000163299, gnorm=0.904, clip=0, loss_scale=32, train_wall=20, wall=1229
+2020-10-13 18:50:36 | INFO | train_inner | epoch 016:    192 / 394 loss=6.555, nll_loss=5.495, ppl=45.09, wps=37796.2, ups=4.96, wpb=7624, bsz=203.2, num_updates=6100, lr=0.000161955, gnorm=0.888, clip=0, loss_scale=32, train_wall=20, wall=1250
+2020-10-13 18:50:56 | INFO | train_inner | epoch 016:    292 / 394 loss=6.571, nll_loss=5.512, ppl=45.63, wps=38303.6, ups=4.97, wpb=7711.6, bsz=187.2, num_updates=6200, lr=0.000160644, gnorm=0.855, clip=0, loss_scale=32, train_wall=20, wall=1270
+2020-10-13 18:51:16 | INFO | train_inner | epoch 016:    392 / 394 loss=6.564, nll_loss=5.504, ppl=45.39, wps=37285.8, ups=4.98, wpb=7489.2, bsz=192.7, num_updates=6300, lr=0.000159364, gnorm=0.883, clip=0, loss_scale=32, train_wall=20, wall=1290
+2020-10-13 18:51:16 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:51:17 | INFO | valid | epoch 016 | valid on 'valid' subset | loss 6.197 | nll_loss 5.032 | ppl 32.72 | wps 57886 | wpb 1984.1 | bsz 74.6 | num_updates 6302 | best_loss 6.197
+2020-10-13 18:51:17 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:51:20 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 16 @ 6302 updates, score 6.197) (writing took 3.7145719309992273 seconds)
+2020-10-13 18:51:20 | INFO | fairseq_cli.train | end of epoch 16 (average epoch stats below)
+2020-10-13 18:51:20 | INFO | train | epoch 016 | loss 6.564 | nll_loss 5.504 | ppl 45.38 | wps 35893.9 | ups 4.72 | wpb 7603.9 | bsz 198.6 | num_updates 6302 | lr 0.000159339 | gnorm 0.881 | clip 0 | loss_scale 32 | train_wall 79 | wall 1294
+2020-10-13 18:51:20 | INFO | fairseq.trainer | begin training epoch 17
+2020-10-13 18:51:38 | INFO | train_inner | epoch 017:     98 / 394 loss=6.514, nll_loss=5.447, ppl=43.62, wps=35311.2, ups=4.6, wpb=7675, bsz=187.2, num_updates=6400, lr=0.000158114, gnorm=0.853, clip=0, loss_scale=32, train_wall=17, wall=1312
+2020-10-13 18:51:57 | INFO | train_inner | epoch 017:    198 / 394 loss=6.502, nll_loss=5.433, ppl=43.21, wps=38412.8, ups=5.1, wpb=7538.9, bsz=202.6, num_updates=6500, lr=0.000156893, gnorm=0.883, clip=0, loss_scale=32, train_wall=19, wall=1331
+2020-10-13 18:52:17 | INFO | train_inner | epoch 017:    298 / 394 loss=6.507, nll_loss=5.439, ppl=43.37, wps=38603.1, ups=5.08, wpb=7606.3, bsz=198.7, num_updates=6600, lr=0.0001557, gnorm=0.878, clip=0, loss_scale=32, train_wall=20, wall=1351
+2020-10-13 18:52:36 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:52:36 | INFO | valid | epoch 017 | valid on 'valid' subset | loss 6.174 | nll_loss 5.003 | ppl 32.06 | wps 57647.2 | wpb 1984.1 | bsz 74.6 | num_updates 6696 | best_loss 6.174
+2020-10-13 18:52:36 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:52:40 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 17 @ 6696 updates, score 6.174) (writing took 3.693870169001457 seconds)
+2020-10-13 18:52:40 | INFO | fairseq_cli.train | end of epoch 17 (average epoch stats below)
+2020-10-13 18:52:40 | INFO | train | epoch 017 | loss 6.51 | nll_loss 5.443 | ppl 43.5 | wps 37648.2 | ups 4.95 | wpb 7603.9 | bsz 198.6 | num_updates 6696 | lr 0.00015458 | gnorm 0.879 | clip 0 | loss_scale 32 | train_wall 75 | wall 1374
+2020-10-13 18:52:40 | INFO | fairseq.trainer | begin training epoch 18
+2020-10-13 18:52:41 | INFO | train_inner | epoch 018:      4 / 394 loss=6.515, nll_loss=5.448, ppl=43.65, wps=31858.7, ups=4.18, wpb=7628.9, bsz=207.5, num_updates=6700, lr=0.000154533, gnorm=0.897, clip=0, loss_scale=32, train_wall=20, wall=1375
+2020-10-13 18:53:01 | INFO | train_inner | epoch 018:    104 / 394 loss=6.454, nll_loss=5.379, ppl=41.61, wps=38251.4, ups=5.03, wpb=7609.4, bsz=207.8, num_updates=6800, lr=0.000153393, gnorm=0.864, clip=0, loss_scale=32, train_wall=20, wall=1395
+2020-10-13 18:53:21 | INFO | train_inner | epoch 018:    204 / 394 loss=6.459, nll_loss=5.384, ppl=41.75, wps=37678.1, ups=5, wpb=7538.9, bsz=200, num_updates=6900, lr=0.000152277, gnorm=0.87, clip=0, loss_scale=32, train_wall=20, wall=1415
+2020-10-13 18:53:39 | INFO | train_inner | epoch 018:    304 / 394 loss=6.467, nll_loss=5.392, ppl=42, wps=42745.8, ups=5.66, wpb=7556.4, bsz=190.7, num_updates=7000, lr=0.000151186, gnorm=0.878, clip=0, loss_scale=32, train_wall=18, wall=1432
+2020-10-13 18:53:56 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:53:57 | INFO | valid | epoch 018 | valid on 'valid' subset | loss 6.174 | nll_loss 5.006 | ppl 32.14 | wps 57340.4 | wpb 1984.1 | bsz 74.6 | num_updates 7090 | best_loss 6.174
+2020-10-13 18:53:57 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:54:01 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 18 @ 7090 updates, score 6.174) (writing took 3.8200528109955485 seconds)
+2020-10-13 18:54:01 | INFO | fairseq_cli.train | end of epoch 18 (average epoch stats below)
+2020-10-13 18:54:01 | INFO | train | epoch 018 | loss 6.461 | nll_loss 5.386 | ppl 41.81 | wps 37200.1 | ups 4.89 | wpb 7603.9 | bsz 198.6 | num_updates 7090 | lr 0.000150223 | gnorm 0.865 | clip 0 | loss_scale 32 | train_wall 76 | wall 1454
+2020-10-13 18:54:01 | INFO | fairseq.trainer | begin training epoch 19
+2020-10-13 18:54:03 | INFO | train_inner | epoch 019:     10 / 394 loss=6.464, nll_loss=5.388, ppl=41.88, wps=31648.9, ups=4.13, wpb=7654.1, bsz=195.7, num_updates=7100, lr=0.000150117, gnorm=0.865, clip=0, loss_scale=32, train_wall=20, wall=1457
+2020-10-13 18:54:23 | INFO | train_inner | epoch 019:    110 / 394 loss=6.428, nll_loss=5.349, ppl=40.76, wps=37899.1, ups=4.97, wpb=7621.3, bsz=201.4, num_updates=7200, lr=0.000149071, gnorm=0.871, clip=0, loss_scale=32, train_wall=20, wall=1477
+2020-10-13 18:54:43 | INFO | train_inner | epoch 019:    210 / 394 loss=6.412, nll_loss=5.33, ppl=40.21, wps=37849.6, ups=4.96, wpb=7633.2, bsz=203.3, num_updates=7300, lr=0.000148047, gnorm=0.865, clip=0, loss_scale=32, train_wall=20, wall=1497
+2020-10-13 18:55:03 | INFO | train_inner | epoch 019:    310 / 394 loss=6.418, nll_loss=5.336, ppl=40.38, wps=37745.9, ups=4.93, wpb=7660.4, bsz=189.1, num_updates=7400, lr=0.000147043, gnorm=0.853, clip=0, loss_scale=32, train_wall=20, wall=1517
+2020-10-13 18:55:18 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:55:18 | INFO | valid | epoch 019 | valid on 'valid' subset | loss 6.16 | nll_loss 4.99 | ppl 31.78 | wps 61167.3 | wpb 1984.1 | bsz 74.6 | num_updates 7484 | best_loss 6.16
+2020-10-13 18:55:18 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:55:22 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 19 @ 7484 updates, score 6.16) (writing took 3.76677935099724 seconds)
+2020-10-13 18:55:22 | INFO | fairseq_cli.train | end of epoch 19 (average epoch stats below)
+2020-10-13 18:55:22 | INFO | train | epoch 019 | loss 6.42 | nll_loss 5.339 | ppl 40.46 | wps 36732.7 | ups 4.83 | wpb 7603.9 | bsz 198.6 | num_updates 7484 | lr 0.000146215 | gnorm 0.867 | clip 0 | loss_scale 32 | train_wall 77 | wall 1536
+2020-10-13 18:55:22 | INFO | fairseq.trainer | begin training epoch 20
+2020-10-13 18:55:25 | INFO | train_inner | epoch 020:     16 / 394 loss=6.406, nll_loss=5.322, ppl=40, wps=34019.3, ups=4.53, wpb=7515.6, bsz=200.3, num_updates=7500, lr=0.000146059, gnorm=0.853, clip=0, loss_scale=32, train_wall=18, wall=1539
+2020-10-13 18:55:45 | INFO | train_inner | epoch 020:    116 / 394 loss=6.371, nll_loss=5.283, ppl=38.94, wps=38437.4, ups=5.06, wpb=7601.7, bsz=197.2, num_updates=7600, lr=0.000145095, gnorm=0.847, clip=0, loss_scale=32, train_wall=20, wall=1559
+2020-10-13 18:56:05 | INFO | train_inner | epoch 020:    216 / 394 loss=6.375, nll_loss=5.287, ppl=39.04, wps=38343, ups=5.04, wpb=7602.2, bsz=202.9, num_updates=7700, lr=0.00014415, gnorm=0.859, clip=0, loss_scale=32, train_wall=20, wall=1579
+2020-10-13 18:56:25 | INFO | train_inner | epoch 020:    316 / 394 loss=6.395, nll_loss=5.308, ppl=39.61, wps=39080.2, ups=5.03, wpb=7769, bsz=204.6, num_updates=7800, lr=0.000143223, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=1599
+2020-10-13 18:56:40 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:56:41 | INFO | valid | epoch 020 | valid on 'valid' subset | loss 6.113 | nll_loss 4.937 | ppl 30.63 | wps 56800.4 | wpb 1984.1 | bsz 74.6 | num_updates 7878 | best_loss 6.113
+2020-10-13 18:56:41 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:56:44 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 20 @ 7878 updates, score 6.113) (writing took 3.8770583189980243 seconds)
+2020-10-13 18:56:44 | INFO | fairseq_cli.train | end of epoch 20 (average epoch stats below)
+2020-10-13 18:56:44 | INFO | train | epoch 020 | loss 6.377 | nll_loss 5.288 | ppl 39.08 | wps 36364.9 | ups 4.78 | wpb 7603.9 | bsz 198.6 | num_updates 7878 | lr 0.000142512 | gnorm 0.862 | clip 0 | loss_scale 32 | train_wall 77 | wall 1618
+2020-10-13 18:56:45 | INFO | fairseq.trainer | begin training epoch 21
+2020-10-13 18:56:49 | INFO | train_inner | epoch 021:     22 / 394 loss=6.364, nll_loss=5.274, ppl=38.68, wps=31182, ups=4.15, wpb=7520.4, bsz=192.1, num_updates=7900, lr=0.000142314, gnorm=0.853, clip=0, loss_scale=32, train_wall=20, wall=1623
+2020-10-13 18:57:07 | INFO | train_inner | epoch 021:    122 / 394 loss=6.331, nll_loss=5.236, ppl=37.69, wps=41672.6, ups=5.43, wpb=7676.7, bsz=197.6, num_updates=8000, lr=0.000141421, gnorm=0.849, clip=0, loss_scale=32, train_wall=18, wall=1641
+2020-10-13 18:57:27 | INFO | train_inner | epoch 021:    222 / 394 loss=6.338, nll_loss=5.243, ppl=37.87, wps=38507.3, ups=5.06, wpb=7605.6, bsz=203.6, num_updates=8100, lr=0.000140546, gnorm=0.867, clip=0, loss_scale=32, train_wall=20, wall=1661
+2020-10-13 18:57:47 | INFO | train_inner | epoch 021:    322 / 394 loss=6.343, nll_loss=5.249, ppl=38.02, wps=38268.5, ups=5.1, wpb=7508.7, bsz=188.6, num_updates=8200, lr=0.000139686, gnorm=0.866, clip=0, loss_scale=32, train_wall=19, wall=1681
+2020-10-13 18:58:01 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:58:01 | INFO | valid | epoch 021 | valid on 'valid' subset | loss 6.121 | nll_loss 4.938 | ppl 30.66 | wps 58257.6 | wpb 1984.1 | bsz 74.6 | num_updates 8272 | best_loss 6.113
+2020-10-13 18:58:01 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:58:04 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 21 @ 8272 updates, score 6.121) (writing took 2.182918898004573 seconds)
+2020-10-13 18:58:04 | INFO | fairseq_cli.train | end of epoch 21 (average epoch stats below)
+2020-10-13 18:58:04 | INFO | train | epoch 021 | loss 6.338 | nll_loss 5.244 | ppl 37.89 | wps 37908.8 | ups 4.99 | wpb 7603.9 | bsz 198.6 | num_updates 8272 | lr 0.000139077 | gnorm 0.861 | clip 0 | loss_scale 32 | train_wall 76 | wall 1697
+2020-10-13 18:58:04 | INFO | fairseq.trainer | begin training epoch 22
+2020-10-13 18:58:09 | INFO | train_inner | epoch 022:     28 / 394 loss=6.324, nll_loss=5.228, ppl=37.47, wps=33765.6, ups=4.46, wpb=7578.5, bsz=202.7, num_updates=8300, lr=0.000138842, gnorm=0.841, clip=0, loss_scale=64, train_wall=20, wall=1703
+2020-10-13 18:58:29 | INFO | train_inner | epoch 022:    128 / 394 loss=6.289, nll_loss=5.187, ppl=36.43, wps=37212.2, ups=4.96, wpb=7497.6, bsz=197, num_updates=8400, lr=0.000138013, gnorm=0.862, clip=0, loss_scale=64, train_wall=20, wall=1723
+2020-10-13 18:58:48 | INFO | train_inner | epoch 022:    228 / 394 loss=6.292, nll_loss=5.19, ppl=36.5, wps=39817.8, ups=5.33, wpb=7465.6, bsz=188.9, num_updates=8500, lr=0.000137199, gnorm=0.843, clip=0, loss_scale=64, train_wall=19, wall=1742
+2020-10-13 18:59:08 | INFO | train_inner | epoch 022:    328 / 394 loss=6.322, nll_loss=5.224, ppl=37.39, wps=37925.5, ups=4.95, wpb=7666.6, bsz=201, num_updates=8600, lr=0.000136399, gnorm=0.851, clip=0, loss_scale=64, train_wall=20, wall=1762
+2020-10-13 18:59:22 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 18:59:22 | INFO | valid | epoch 022 | valid on 'valid' subset | loss 6.1 | nll_loss 4.912 | ppl 30.1 | wps 56082.7 | wpb 1984.1 | bsz 74.6 | num_updates 8666 | best_loss 6.1
+2020-10-13 18:59:22 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 18:59:26 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 22 @ 8666 updates, score 6.1) (writing took 4.389256056994782 seconds)
+2020-10-13 18:59:26 | INFO | fairseq_cli.train | end of epoch 22 (average epoch stats below)
+2020-10-13 18:59:26 | INFO | train | epoch 022 | loss 6.301 | nll_loss 5.201 | ppl 36.78 | wps 36151.3 | ups 4.75 | wpb 7603.9 | bsz 198.6 | num_updates 8666 | lr 0.000135878 | gnorm 0.847 | clip 0 | loss_scale 64 | train_wall 77 | wall 1780
+2020-10-13 18:59:26 | INFO | fairseq.trainer | begin training epoch 23
+2020-10-13 18:59:33 | INFO | train_inner | epoch 023:     34 / 394 loss=6.297, nll_loss=5.196, ppl=36.66, wps=30820.8, ups=4, wpb=7714.4, bsz=203.8, num_updates=8700, lr=0.000135613, gnorm=0.853, clip=0, loss_scale=64, train_wall=20, wall=1787
+2020-10-13 18:59:53 | INFO | train_inner | epoch 023:    134 / 394 loss=6.267, nll_loss=5.161, ppl=35.79, wps=38226.5, ups=4.98, wpb=7673.1, bsz=197.8, num_updates=8800, lr=0.00013484, gnorm=0.852, clip=0, loss_scale=64, train_wall=20, wall=1807
+2020-10-13 19:00:14 | INFO | train_inner | epoch 023:    234 / 394 loss=6.263, nll_loss=5.157, ppl=35.67, wps=37526.8, ups=4.97, wpb=7544.1, bsz=198.1, num_updates=8900, lr=0.00013408, gnorm=0.866, clip=0, loss_scale=64, train_wall=20, wall=1827
+2020-10-13 19:00:32 | INFO | train_inner | epoch 023:    334 / 394 loss=6.272, nll_loss=5.167, ppl=35.92, wps=40871.8, ups=5.39, wpb=7587.5, bsz=201.4, num_updates=9000, lr=0.000133333, gnorm=0.859, clip=0, loss_scale=64, train_wall=18, wall=1846
+2020-10-13 19:00:44 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:00:44 | INFO | valid | epoch 023 | valid on 'valid' subset | loss 6.105 | nll_loss 4.927 | ppl 30.43 | wps 59466.9 | wpb 1984.1 | bsz 74.6 | num_updates 9060 | best_loss 6.1
+2020-10-13 19:00:44 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:00:46 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 23 @ 9060 updates, score 6.105) (writing took 2.078043675996014 seconds)
+2020-10-13 19:00:46 | INFO | fairseq_cli.train | end of epoch 23 (average epoch stats below)
+2020-10-13 19:00:46 | INFO | train | epoch 023 | loss 6.268 | nll_loss 5.163 | ppl 35.82 | wps 37406.8 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 9060 | lr 0.000132891 | gnorm 0.854 | clip 0 | loss_scale 64 | train_wall 77 | wall 1860
+2020-10-13 19:00:47 | INFO | fairseq.trainer | begin training epoch 24
+2020-10-13 19:00:55 | INFO | train_inner | epoch 024:     40 / 394 loss=6.255, nll_loss=5.148, ppl=35.45, wps=34656.5, ups=4.46, wpb=7775.4, bsz=208.6, num_updates=9100, lr=0.000132599, gnorm=0.846, clip=0, loss_scale=64, train_wall=20, wall=1868
+2020-10-13 19:01:14 | INFO | train_inner | epoch 024:    140 / 394 loss=6.241, nll_loss=5.131, ppl=35.04, wps=38953.1, ups=5.07, wpb=7677.8, bsz=199.3, num_updates=9200, lr=0.000131876, gnorm=0.845, clip=0, loss_scale=64, train_wall=20, wall=1888
+2020-10-13 19:01:34 | INFO | train_inner | epoch 024:    240 / 394 loss=6.236, nll_loss=5.125, ppl=34.9, wps=38715.6, ups=5.07, wpb=7639.6, bsz=187.9, num_updates=9300, lr=0.000131165, gnorm=0.864, clip=0, loss_scale=64, train_wall=20, wall=1908
+2020-10-13 19:01:54 | INFO | train_inner | epoch 024:    340 / 394 loss=6.245, nll_loss=5.135, ppl=35.15, wps=38313.8, ups=5.07, wpb=7555, bsz=206.3, num_updates=9400, lr=0.000130466, gnorm=0.871, clip=0, loss_scale=64, train_wall=20, wall=1928
+2020-10-13 19:02:04 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:02:05 | INFO | valid | epoch 024 | valid on 'valid' subset | loss 6.081 | nll_loss 4.888 | ppl 29.61 | wps 57595.6 | wpb 1984.1 | bsz 74.6 | num_updates 9454 | best_loss 6.081
+2020-10-13 19:02:05 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:02:09 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 24 @ 9454 updates, score 6.081) (writing took 3.8498925380044966 seconds)
+2020-10-13 19:02:09 | INFO | fairseq_cli.train | end of epoch 24 (average epoch stats below)
+2020-10-13 19:02:09 | INFO | train | epoch 024 | loss 6.239 | nll_loss 5.129 | ppl 34.99 | wps 36509.1 | ups 4.8 | wpb 7603.9 | bsz 198.6 | num_updates 9454 | lr 0.000130092 | gnorm 0.862 | clip 0 | loss_scale 64 | train_wall 77 | wall 1942
+2020-10-13 19:02:09 | INFO | fairseq.trainer | begin training epoch 25
+2020-10-13 19:02:17 | INFO | train_inner | epoch 025:     46 / 394 loss=6.21, nll_loss=5.096, ppl=34.2, wps=32892.1, ups=4.34, wpb=7580.3, bsz=194.3, num_updates=9500, lr=0.000129777, gnorm=0.841, clip=0, loss_scale=64, train_wall=19, wall=1951
+2020-10-13 19:02:37 | INFO | train_inner | epoch 025:    146 / 394 loss=6.198, nll_loss=5.082, ppl=33.87, wps=37701.5, ups=4.97, wpb=7578.8, bsz=196.4, num_updates=9600, lr=0.000129099, gnorm=0.841, clip=0, loss_scale=64, train_wall=20, wall=1971
+2020-10-13 19:02:57 | INFO | train_inner | epoch 025:    246 / 394 loss=6.227, nll_loss=5.114, ppl=34.62, wps=38023.9, ups=4.98, wpb=7628.6, bsz=186.6, num_updates=9700, lr=0.000128432, gnorm=0.849, clip=0, loss_scale=64, train_wall=20, wall=1991
+2020-10-13 19:03:17 | INFO | train_inner | epoch 025:    346 / 394 loss=6.218, nll_loss=5.103, ppl=34.38, wps=37981, ups=5, wpb=7593.9, bsz=206.9, num_updates=9800, lr=0.000127775, gnorm=0.863, clip=0, loss_scale=64, train_wall=20, wall=2011
+2020-10-13 19:03:26 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:03:27 | INFO | valid | epoch 025 | valid on 'valid' subset | loss 6.074 | nll_loss 4.878 | ppl 29.4 | wps 56833.1 | wpb 1984.1 | bsz 74.6 | num_updates 9848 | best_loss 6.074
+2020-10-13 19:03:27 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:03:31 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 25 @ 9848 updates, score 6.074) (writing took 3.6833844089997 seconds)
+2020-10-13 19:03:31 | INFO | fairseq_cli.train | end of epoch 25 (average epoch stats below)
+2020-10-13 19:03:31 | INFO | train | epoch 025 | loss 6.207 | nll_loss 5.092 | ppl 34.1 | wps 36536.5 | ups 4.8 | wpb 7603.9 | bsz 198.6 | num_updates 9848 | lr 0.000127464 | gnorm 0.848 | clip 0 | loss_scale 64 | train_wall 77 | wall 2024
+2020-10-13 19:03:31 | INFO | fairseq.trainer | begin training epoch 26
+2020-10-13 19:03:41 | INFO | train_inner | epoch 026:     52 / 394 loss=6.175, nll_loss=5.056, ppl=33.26, wps=30828.2, ups=4.13, wpb=7467.3, bsz=205.2, num_updates=9900, lr=0.000127128, gnorm=0.858, clip=0, loss_scale=64, train_wall=20, wall=2035
+2020-10-13 19:04:00 | INFO | train_inner | epoch 026:    152 / 394 loss=6.172, nll_loss=5.051, ppl=33.15, wps=41256.4, ups=5.44, wpb=7584.9, bsz=206, num_updates=10000, lr=0.000126491, gnorm=0.864, clip=0, loss_scale=64, train_wall=18, wall=2053
+2020-10-13 19:04:19 | INFO | train_inner | epoch 026:    252 / 394 loss=6.193, nll_loss=5.075, ppl=33.7, wps=38314.5, ups=5.05, wpb=7592.3, bsz=199.7, num_updates=10100, lr=0.000125863, gnorm=0.89, clip=0, loss_scale=64, train_wall=20, wall=2073
+2020-10-13 19:04:39 | INFO | train_inner | epoch 026:    352 / 394 loss=6.184, nll_loss=5.064, ppl=33.44, wps=38624.4, ups=5.05, wpb=7641.9, bsz=194.5, num_updates=10200, lr=0.000125245, gnorm=0.866, clip=0, loss_scale=64, train_wall=20, wall=2093
+2020-10-13 19:04:47 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:04:48 | INFO | valid | epoch 026 | valid on 'valid' subset | loss 6.091 | nll_loss 4.914 | ppl 30.15 | wps 56250.9 | wpb 1984.1 | bsz 74.6 | num_updates 10242 | best_loss 6.074
+2020-10-13 19:04:48 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:04:50 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 26 @ 10242 updates, score 6.091) (writing took 2.138106897000398 seconds)
+2020-10-13 19:04:50 | INFO | fairseq_cli.train | end of epoch 26 (average epoch stats below)
+2020-10-13 19:04:50 | INFO | train | epoch 026 | loss 6.181 | nll_loss 5.061 | ppl 33.38 | wps 37718.5 | ups 4.96 | wpb 7603.9 | bsz 198.6 | num_updates 10242 | lr 0.000124988 | gnorm 0.868 | clip 0 | loss_scale 64 | train_wall 76 | wall 2104
+2020-10-13 19:04:50 | INFO | fairseq.trainer | begin training epoch 27
+2020-10-13 19:05:02 | INFO | train_inner | epoch 027:     58 / 394 loss=6.163, nll_loss=5.041, ppl=32.92, wps=34114.3, ups=4.44, wpb=7680.9, bsz=189.3, num_updates=10300, lr=0.000124635, gnorm=0.819, clip=0, loss_scale=64, train_wall=20, wall=2116
+2020-10-13 19:05:08 | INFO | fairseq.trainer | NOTE: overflow detected, setting loss scale to: 32.0
+2020-10-13 19:05:22 | INFO | train_inner | epoch 027:    159 / 394 loss=6.159, nll_loss=5.036, ppl=32.81, wps=37726, ups=5, wpb=7552, bsz=198, num_updates=10400, lr=0.000124035, gnorm=0.875, clip=0, loss_scale=32, train_wall=20, wall=2136
+2020-10-13 19:05:41 | INFO | train_inner | epoch 027:    259 / 394 loss=6.153, nll_loss=5.029, ppl=32.64, wps=38185.9, ups=5.07, wpb=7539, bsz=198.2, num_updates=10500, lr=0.000123443, gnorm=0.872, clip=0, loss_scale=32, train_wall=20, wall=2155
+2020-10-13 19:06:00 | INFO | train_inner | epoch 027:    359 / 394 loss=6.166, nll_loss=5.044, ppl=32.98, wps=40576.5, ups=5.32, wpb=7623.4, bsz=198.3, num_updates=10600, lr=0.000122859, gnorm=0.838, clip=0, loss_scale=32, train_wall=19, wall=2174
+2020-10-13 19:06:07 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:06:08 | INFO | valid | epoch 027 | valid on 'valid' subset | loss 6.067 | nll_loss 4.873 | ppl 29.3 | wps 56495.2 | wpb 1984.1 | bsz 74.6 | num_updates 10635 | best_loss 6.067
+2020-10-13 19:06:08 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:06:11 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 27 @ 10635 updates, score 6.067) (writing took 3.798404102002678 seconds)
+2020-10-13 19:06:11 | INFO | fairseq_cli.train | end of epoch 27 (average epoch stats below)
+2020-10-13 19:06:11 | INFO | train | epoch 027 | loss 6.154 | nll_loss 5.03 | ppl 32.67 | wps 36718.1 | ups 4.83 | wpb 7606.1 | bsz 198.4 | num_updates 10635 | lr 0.000122657 | gnorm 0.851 | clip 0 | loss_scale 32 | train_wall 77 | wall 2185
+2020-10-13 19:06:11 | INFO | fairseq.trainer | begin training epoch 28
+2020-10-13 19:06:25 | INFO | train_inner | epoch 028:     65 / 394 loss=6.123, nll_loss=4.994, ppl=31.88, wps=31455, ups=4.1, wpb=7665.9, bsz=200.6, num_updates=10700, lr=0.000122284, gnorm=0.842, clip=0, loss_scale=32, train_wall=20, wall=2198
+2020-10-13 19:06:45 | INFO | train_inner | epoch 028:    165 / 394 loss=6.121, nll_loss=4.991, ppl=31.8, wps=38260, ups=4.98, wpb=7684.8, bsz=198.2, num_updates=10800, lr=0.000121716, gnorm=0.844, clip=0, loss_scale=32, train_wall=20, wall=2219
+2020-10-13 19:07:05 | INFO | train_inner | epoch 028:    265 / 394 loss=6.126, nll_loss=4.997, ppl=31.94, wps=37235, ups=4.98, wpb=7480, bsz=200.8, num_updates=10900, lr=0.000121157, gnorm=0.869, clip=0, loss_scale=32, train_wall=20, wall=2239
+2020-10-13 19:07:25 | INFO | train_inner | epoch 028:    365 / 394 loss=6.124, nll_loss=4.995, ppl=31.89, wps=36749, ups=4.9, wpb=7505.1, bsz=196.3, num_updates=11000, lr=0.000120605, gnorm=0.869, clip=0, loss_scale=32, train_wall=20, wall=2259
+2020-10-13 19:07:30 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:07:30 | INFO | valid | epoch 028 | valid on 'valid' subset | loss 6.088 | nll_loss 4.902 | ppl 29.9 | wps 84175.7 | wpb 1984.1 | bsz 74.6 | num_updates 11029 | best_loss 6.067
+2020-10-13 19:07:30 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:07:33 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 28 @ 11029 updates, score 6.088) (writing took 2.5347812510008225 seconds)
+2020-10-13 19:07:33 | INFO | fairseq_cli.train | end of epoch 28 (average epoch stats below)
+2020-10-13 19:07:33 | INFO | train | epoch 028 | loss 6.127 | nll_loss 4.999 | ppl 31.97 | wps 36794.5 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 11029 | lr 0.000120446 | gnorm 0.854 | clip 0 | loss_scale 32 | train_wall 78 | wall 2267
+2020-10-13 19:07:33 | INFO | fairseq.trainer | begin training epoch 29
+2020-10-13 19:07:47 | INFO | train_inner | epoch 029:     71 / 394 loss=6.114, nll_loss=4.984, ppl=31.65, wps=35475.3, ups=4.58, wpb=7741.4, bsz=202.1, num_updates=11100, lr=0.00012006, gnorm=0.83, clip=0, loss_scale=32, train_wall=19, wall=2281
+2020-10-13 19:08:07 | INFO | train_inner | epoch 029:    171 / 394 loss=6.092, nll_loss=4.959, ppl=31.09, wps=37388.2, ups=5.01, wpb=7461.5, bsz=203, num_updates=11200, lr=0.000119523, gnorm=0.878, clip=0, loss_scale=32, train_wall=20, wall=2301
+2020-10-13 19:08:27 | INFO | train_inner | epoch 029:    271 / 394 loss=6.108, nll_loss=4.975, ppl=31.46, wps=38702.7, ups=5.06, wpb=7656.3, bsz=198.3, num_updates=11300, lr=0.000118993, gnorm=0.846, clip=0, loss_scale=32, train_wall=20, wall=2321
+2020-10-13 19:08:47 | INFO | train_inner | epoch 029:    371 / 394 loss=6.109, nll_loss=4.977, ppl=31.49, wps=38498.9, ups=4.99, wpb=7710.5, bsz=198.1, num_updates=11400, lr=0.00011847, gnorm=0.839, clip=0, loss_scale=32, train_wall=20, wall=2341
+2020-10-13 19:08:51 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:08:52 | INFO | valid | epoch 029 | valid on 'valid' subset | loss 6.068 | nll_loss 4.861 | ppl 29.06 | wps 54216.6 | wpb 1984.1 | bsz 74.6 | num_updates 11423 | best_loss 6.067
+2020-10-13 19:08:52 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:08:54 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 29 @ 11423 updates, score 6.068) (writing took 2.481455394998193 seconds)
+2020-10-13 19:08:54 | INFO | fairseq_cli.train | end of epoch 29 (average epoch stats below)
+2020-10-13 19:08:54 | INFO | train | epoch 029 | loss 6.101 | nll_loss 4.968 | ppl 31.29 | wps 36787.7 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 11423 | lr 0.00011835 | gnorm 0.853 | clip 0 | loss_scale 32 | train_wall 78 | wall 2348
+2020-10-13 19:08:54 | INFO | fairseq.trainer | begin training epoch 30
+2020-10-13 19:09:10 | INFO | train_inner | epoch 030:     77 / 394 loss=6.067, nll_loss=4.93, ppl=30.49, wps=32965.7, ups=4.37, wpb=7546.5, bsz=203.2, num_updates=11500, lr=0.000117954, gnorm=0.875, clip=0, loss_scale=32, train_wall=20, wall=2364
+2020-10-13 19:09:27 | INFO | train_inner | epoch 030:    177 / 394 loss=6.086, nll_loss=4.95, ppl=30.92, wps=43011.2, ups=5.7, wpb=7546.8, bsz=199.6, num_updates=11600, lr=0.000117444, gnorm=0.865, clip=0, loss_scale=32, train_wall=17, wall=2381
+2020-10-13 19:09:47 | INFO | train_inner | epoch 030:    277 / 394 loss=6.094, nll_loss=4.959, ppl=31.1, wps=37656.2, ups=4.97, wpb=7571.9, bsz=188.8, num_updates=11700, lr=0.000116941, gnorm=0.868, clip=0, loss_scale=32, train_wall=20, wall=2401
+2020-10-13 19:10:07 | INFO | train_inner | epoch 030:    377 / 394 loss=6.08, nll_loss=4.943, ppl=30.75, wps=38145.2, ups=4.97, wpb=7678.6, bsz=193.6, num_updates=11800, lr=0.000116445, gnorm=0.833, clip=0, loss_scale=32, train_wall=20, wall=2421
+2020-10-13 19:10:11 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:10:11 | INFO | valid | epoch 030 | valid on 'valid' subset | loss 6.071 | nll_loss 4.878 | ppl 29.4 | wps 57707.2 | wpb 1984.1 | bsz 74.6 | num_updates 11817 | best_loss 6.067
+2020-10-13 19:10:11 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:10:14 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 30 @ 11817 updates, score 6.071) (writing took 2.8110238179942826 seconds)
+2020-10-13 19:10:14 | INFO | fairseq_cli.train | end of epoch 30 (average epoch stats below)
+2020-10-13 19:10:14 | INFO | train | epoch 030 | loss 6.079 | nll_loss 4.942 | ppl 30.74 | wps 37569.4 | ups 4.94 | wpb 7603.9 | bsz 198.6 | num_updates 11817 | lr 0.000116361 | gnorm 0.858 | clip 0 | loss_scale 32 | train_wall 76 | wall 2428
+2020-10-13 19:10:14 | INFO | fairseq.trainer | begin training epoch 31
+2020-10-13 19:10:31 | INFO | train_inner | epoch 031:     83 / 394 loss=6.028, nll_loss=4.884, ppl=29.54, wps=32263.3, ups=4.29, wpb=7521.8, bsz=201.6, num_updates=11900, lr=0.000115954, gnorm=0.853, clip=0, loss_scale=32, train_wall=20, wall=2445
+2020-10-13 19:10:51 | INFO | train_inner | epoch 031:    183 / 394 loss=6.067, nll_loss=4.928, ppl=30.43, wps=37820.3, ups=4.96, wpb=7617.6, bsz=181.9, num_updates=12000, lr=0.00011547, gnorm=0.862, clip=0, loss_scale=32, train_wall=20, wall=2465
+2020-10-13 19:11:09 | INFO | train_inner | epoch 031:    283 / 394 loss=6.065, nll_loss=4.926, ppl=30.39, wps=41210.6, ups=5.39, wpb=7649.2, bsz=192.8, num_updates=12100, lr=0.000114992, gnorm=0.863, clip=0, loss_scale=32, train_wall=18, wall=2483
+2020-10-13 19:11:29 | INFO | train_inner | epoch 031:    383 / 394 loss=6.063, nll_loss=4.923, ppl=30.34, wps=38794.2, ups=5.06, wpb=7659.4, bsz=222.6, num_updates=12200, lr=0.00011452, gnorm=0.851, clip=0, loss_scale=32, train_wall=20, wall=2503
+2020-10-13 19:11:31 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:11:32 | INFO | valid | epoch 031 | valid on 'valid' subset | loss 6.078 | nll_loss 4.882 | ppl 29.48 | wps 56695.7 | wpb 1984.1 | bsz 74.6 | num_updates 12211 | best_loss 6.067
+2020-10-13 19:11:32 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:11:35 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 31 @ 12211 updates, score 6.078) (writing took 3.3582827360005467 seconds)
+2020-10-13 19:11:35 | INFO | fairseq_cli.train | end of epoch 31 (average epoch stats below)
+2020-10-13 19:11:35 | INFO | train | epoch 031 | loss 6.056 | nll_loss 4.915 | ppl 30.17 | wps 36928.6 | ups 4.86 | wpb 7603.9 | bsz 198.6 | num_updates 12211 | lr 0.000114468 | gnorm 0.859 | clip 0 | loss_scale 32 | train_wall 77 | wall 2509
+2020-10-13 19:11:35 | INFO | fairseq.trainer | begin training epoch 32
+2020-10-13 19:11:53 | INFO | train_inner | epoch 032:     89 / 394 loss=6.008, nll_loss=4.86, ppl=29.05, wps=31817.2, ups=4.22, wpb=7543.9, bsz=191.8, num_updates=12300, lr=0.000114053, gnorm=0.866, clip=0, loss_scale=32, train_wall=20, wall=2527
+2020-10-13 19:12:13 | INFO | train_inner | epoch 032:    189 / 394 loss=6.038, nll_loss=4.894, ppl=29.73, wps=38407.1, ups=5.05, wpb=7606.1, bsz=196.4, num_updates=12400, lr=0.000113592, gnorm=0.859, clip=0, loss_scale=32, train_wall=20, wall=2547
+2020-10-13 19:12:32 | INFO | train_inner | epoch 032:    289 / 394 loss=6.045, nll_loss=4.903, ppl=29.91, wps=38418.9, ups=5.07, wpb=7582.3, bsz=204.7, num_updates=12500, lr=0.000113137, gnorm=0.876, clip=0, loss_scale=32, train_wall=20, wall=2566
+2020-10-13 19:12:51 | INFO | train_inner | epoch 032:    389 / 394 loss=6.047, nll_loss=4.904, ppl=29.94, wps=41893.5, ups=5.45, wpb=7688.9, bsz=202.7, num_updates=12600, lr=0.000112687, gnorm=0.872, clip=0, loss_scale=32, train_wall=18, wall=2585
+2020-10-13 19:12:52 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:12:52 | INFO | valid | epoch 032 | valid on 'valid' subset | loss 6.067 | nll_loss 4.861 | ppl 29.06 | wps 52987.9 | wpb 1984.1 | bsz 74.6 | num_updates 12605 | best_loss 6.067
+2020-10-13 19:12:52 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:12:56 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_best.pt (epoch 32 @ 12605 updates, score 6.067) (writing took 3.758980809005152 seconds)
+2020-10-13 19:12:56 | INFO | fairseq_cli.train | end of epoch 32 (average epoch stats below)
+2020-10-13 19:12:56 | INFO | train | epoch 032 | loss 6.035 | nll_loss 4.891 | ppl 29.67 | wps 37068.5 | ups 4.87 | wpb 7603.9 | bsz 198.6 | num_updates 12605 | lr 0.000112665 | gnorm 0.868 | clip 0 | loss_scale 32 | train_wall 76 | wall 2590
+2020-10-13 19:12:56 | INFO | fairseq.trainer | begin training epoch 33
+2020-10-13 19:13:15 | INFO | train_inner | epoch 033:     95 / 394 loss=5.996, nll_loss=4.846, ppl=28.77, wps=30813.8, ups=4.07, wpb=7575.2, bsz=192.2, num_updates=12700, lr=0.000112243, gnorm=0.871, clip=0, loss_scale=32, train_wall=20, wall=2609
+2020-10-13 19:13:36 | INFO | train_inner | epoch 033:    195 / 394 loss=6.015, nll_loss=4.867, ppl=29.19, wps=37797.8, ups=4.92, wpb=7679.1, bsz=213.3, num_updates=12800, lr=0.000111803, gnorm=0.856, clip=0, loss_scale=32, train_wall=20, wall=2630
+2020-10-13 19:13:56 | INFO | train_inner | epoch 033:    295 / 394 loss=6.015, nll_loss=4.867, ppl=29.19, wps=37117.7, ups=4.92, wpb=7541.4, bsz=192.9, num_updates=12900, lr=0.000111369, gnorm=0.891, clip=0, loss_scale=32, train_wall=20, wall=2650
+2020-10-13 19:14:16 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:14:16 | INFO | valid | epoch 033 | valid on 'valid' subset | loss 6.087 | nll_loss 4.893 | ppl 29.72 | wps 57612.2 | wpb 1984.1 | bsz 74.6 | num_updates 12999 | best_loss 6.067
+2020-10-13 19:14:16 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:14:18 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 33 @ 12999 updates, score 6.087) (writing took 2.1814188120042672 seconds)
+2020-10-13 19:14:18 | INFO | fairseq_cli.train | end of epoch 33 (average epoch stats below)
+2020-10-13 19:14:18 | INFO | train | epoch 033 | loss 6.014 | nll_loss 4.866 | ppl 29.16 | wps 36348.4 | ups 4.78 | wpb 7603.9 | bsz 198.6 | num_updates 12999 | lr 0.000110944 | gnorm 0.87 | clip 0 | loss_scale 32 | train_wall 79 | wall 2672
+2020-10-13 19:14:18 | INFO | fairseq.trainer | begin training epoch 34
+2020-10-13 19:14:19 | INFO | train_inner | epoch 034:      1 / 394 loss=6.033, nll_loss=4.887, ppl=29.58, wps=33545.1, ups=4.41, wpb=7613, bsz=195, num_updates=13000, lr=0.00011094, gnorm=0.864, clip=0, loss_scale=32, train_wall=20, wall=2673
+2020-10-13 19:14:37 | INFO | train_inner | epoch 034:    101 / 394 loss=5.969, nll_loss=4.816, ppl=28.16, wps=40555.4, ups=5.41, wpb=7494.6, bsz=193.9, num_updates=13100, lr=0.000110516, gnorm=0.877, clip=0, loss_scale=32, train_wall=18, wall=2691
+2020-10-13 19:14:57 | INFO | train_inner | epoch 034:    201 / 394 loss=5.99, nll_loss=4.838, ppl=28.6, wps=38820.6, ups=5.04, wpb=7695.9, bsz=198.7, num_updates=13200, lr=0.000110096, gnorm=0.856, clip=0, loss_scale=32, train_wall=20, wall=2711
+2020-10-13 19:15:17 | INFO | train_inner | epoch 034:    301 / 394 loss=5.996, nll_loss=4.845, ppl=28.74, wps=38619.2, ups=5.09, wpb=7590.3, bsz=202.9, num_updates=13300, lr=0.000109682, gnorm=0.881, clip=0, loss_scale=32, train_wall=20, wall=2731
+2020-10-13 19:15:35 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:15:35 | INFO | valid | epoch 034 | valid on 'valid' subset | loss 6.084 | nll_loss 4.889 | ppl 29.64 | wps 60100.3 | wpb 1984.1 | bsz 74.6 | num_updates 13393 | best_loss 6.067
+2020-10-13 19:15:35 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:15:37 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 34 @ 13393 updates, score 6.084) (writing took 2.0959545980003895 seconds)
+2020-10-13 19:15:37 | INFO | fairseq_cli.train | end of epoch 34 (average epoch stats below)
+2020-10-13 19:15:37 | INFO | train | epoch 034 | loss 5.993 | nll_loss 4.841 | ppl 28.66 | wps 37892.1 | ups 4.98 | wpb 7603.9 | bsz 198.6 | num_updates 13393 | lr 0.0001093 | gnorm 0.869 | clip 0 | loss_scale 32 | train_wall 76 | wall 2751
+2020-10-13 19:15:37 | INFO | fairseq.trainer | begin training epoch 35
+2020-10-13 19:15:39 | INFO | train_inner | epoch 035:      7 / 394 loss=6.014, nll_loss=4.865, ppl=29.14, wps=34077.5, ups=4.45, wpb=7653.3, bsz=199.3, num_updates=13400, lr=0.000109272, gnorm=0.861, clip=0, loss_scale=32, train_wall=20, wall=2753
+2020-10-13 19:15:59 | INFO | train_inner | epoch 035:    107 / 394 loss=5.952, nll_loss=4.795, ppl=27.77, wps=37736.1, ups=4.97, wpb=7588.2, bsz=204, num_updates=13500, lr=0.000108866, gnorm=0.884, clip=0, loss_scale=32, train_wall=20, wall=2773
+2020-10-13 19:16:19 | INFO | train_inner | epoch 035:    207 / 394 loss=5.968, nll_loss=4.813, ppl=28.1, wps=37926.2, ups=4.96, wpb=7648.5, bsz=202.3, num_updates=13600, lr=0.000108465, gnorm=0.886, clip=0, loss_scale=32, train_wall=20, wall=2793
+2020-10-13 19:16:38 | INFO | train_inner | epoch 035:    307 / 394 loss=5.986, nll_loss=4.833, ppl=28.49, wps=40066.2, ups=5.35, wpb=7491.7, bsz=184.2, num_updates=13700, lr=0.000108069, gnorm=0.867, clip=0, loss_scale=32, train_wall=19, wall=2812
+2020-10-13 19:16:56 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:16:56 | INFO | valid | epoch 035 | valid on 'valid' subset | loss 6.082 | nll_loss 4.881 | ppl 29.46 | wps 58765.7 | wpb 1984.1 | bsz 74.6 | num_updates 13787 | best_loss 6.067
+2020-10-13 19:16:56 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:16:58 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 35 @ 13787 updates, score 6.082) (writing took 2.392538086998684 seconds)
+2020-10-13 19:16:58 | INFO | fairseq_cli.train | end of epoch 35 (average epoch stats below)
+2020-10-13 19:16:58 | INFO | train | epoch 035 | loss 5.973 | nll_loss 4.818 | ppl 28.21 | wps 37019.5 | ups 4.87 | wpb 7603.9 | bsz 198.6 | num_updates 13787 | lr 0.000107727 | gnorm 0.878 | clip 0 | loss_scale 32 | train_wall 77 | wall 2832
+2020-10-13 19:16:58 | INFO | fairseq.trainer | begin training epoch 36
+2020-10-13 19:17:01 | INFO | train_inner | epoch 036:     13 / 394 loss=5.974, nll_loss=4.819, ppl=28.23, wps=33184.5, ups=4.35, wpb=7635.1, bsz=207.6, num_updates=13800, lr=0.000107676, gnorm=0.881, clip=0, loss_scale=32, train_wall=20, wall=2835
+2020-10-13 19:17:21 | INFO | train_inner | epoch 036:    113 / 394 loss=5.937, nll_loss=4.777, ppl=27.42, wps=38243.2, ups=5.07, wpb=7541.9, bsz=199.5, num_updates=13900, lr=0.000107288, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=2855
+2020-10-13 19:17:41 | INFO | train_inner | epoch 036:    213 / 394 loss=5.957, nll_loss=4.8, ppl=27.86, wps=38452.9, ups=5.05, wpb=7610.3, bsz=202.5, num_updates=14000, lr=0.000106904, gnorm=0.879, clip=0, loss_scale=32, train_wall=20, wall=2875
+2020-10-13 19:18:00 | INFO | train_inner | epoch 036:    313 / 394 loss=5.959, nll_loss=4.8, ppl=27.86, wps=38771.6, ups=5.07, wpb=7648.4, bsz=189.8, num_updates=14100, lr=0.000106525, gnorm=0.875, clip=0, loss_scale=32, train_wall=20, wall=2894
+2020-10-13 19:18:15 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:18:15 | INFO | valid | epoch 036 | valid on 'valid' subset | loss 6.082 | nll_loss 4.887 | ppl 29.59 | wps 59153.2 | wpb 1984.1 | bsz 74.6 | num_updates 14181 | best_loss 6.067
+2020-10-13 19:18:15 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:18:17 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 36 @ 14181 updates, score 6.082) (writing took 2.0109210519949556 seconds)
+2020-10-13 19:18:17 | INFO | fairseq_cli.train | end of epoch 36 (average epoch stats below)
+2020-10-13 19:18:17 | INFO | train | epoch 036 | loss 5.953 | nll_loss 4.795 | ppl 27.76 | wps 38154 | ups 5.02 | wpb 7603.9 | bsz 198.6 | num_updates 14181 | lr 0.00010622 | gnorm 0.881 | clip 0 | loss_scale 32 | train_wall 75 | wall 2911
+2020-10-13 19:18:17 | INFO | fairseq.trainer | begin training epoch 37
+2020-10-13 19:18:21 | INFO | train_inner | epoch 037:     19 / 394 loss=5.963, nll_loss=4.805, ppl=27.96, wps=37660.3, ups=4.9, wpb=7691.4, bsz=200.6, num_updates=14200, lr=0.000106149, gnorm=0.872, clip=0, loss_scale=32, train_wall=18, wall=2915
+2020-10-13 19:18:40 | INFO | train_inner | epoch 037:    119 / 394 loss=5.922, nll_loss=4.759, ppl=27.08, wps=38762.8, ups=5.09, wpb=7615.1, bsz=193.6, num_updates=14300, lr=0.000105777, gnorm=0.868, clip=0, loss_scale=32, train_wall=20, wall=2934
+2020-10-13 19:19:00 | INFO | train_inner | epoch 037:    219 / 394 loss=5.927, nll_loss=4.765, ppl=27.18, wps=38410.4, ups=5.06, wpb=7589.8, bsz=202.6, num_updates=14400, lr=0.000105409, gnorm=0.86, clip=0, loss_scale=32, train_wall=20, wall=2954
+2020-10-13 19:19:20 | INFO | train_inner | epoch 037:    319 / 394 loss=5.948, nll_loss=4.788, ppl=27.62, wps=38589, ups=5.06, wpb=7631.2, bsz=195.3, num_updates=14500, lr=0.000105045, gnorm=0.891, clip=0, loss_scale=32, train_wall=20, wall=2974
+2020-10-13 19:19:35 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:19:35 | INFO | valid | epoch 037 | valid on 'valid' subset | loss 6.079 | nll_loss 4.875 | ppl 29.35 | wps 57988.3 | wpb 1984.1 | bsz 74.6 | num_updates 14575 | best_loss 6.067
+2020-10-13 19:19:35 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:19:37 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 37 @ 14575 updates, score 6.079) (writing took 2.0082920720014954 seconds)
+2020-10-13 19:19:37 | INFO | fairseq_cli.train | end of epoch 37 (average epoch stats below)
+2020-10-13 19:19:37 | INFO | train | epoch 037 | loss 5.935 | nll_loss 4.774 | ppl 27.36 | wps 37381.3 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 14575 | lr 0.000104775 | gnorm 0.878 | clip 0 | loss_scale 32 | train_wall 77 | wall 2991
+2020-10-13 19:19:37 | INFO | fairseq.trainer | begin training epoch 38
+2020-10-13 19:19:42 | INFO | train_inner | epoch 038:     25 / 394 loss=5.933, nll_loss=4.772, ppl=27.32, wps=34079.9, ups=4.51, wpb=7548.4, bsz=205.7, num_updates=14600, lr=0.000104685, gnorm=0.878, clip=0, loss_scale=32, train_wall=20, wall=2996
+2020-10-13 19:20:01 | INFO | train_inner | epoch 038:    125 / 394 loss=5.915, nll_loss=4.75, ppl=26.91, wps=41725.9, ups=5.42, wpb=7695.2, bsz=193.4, num_updates=14700, lr=0.000104328, gnorm=0.881, clip=0, loss_scale=32, train_wall=18, wall=3014
+2020-10-13 19:20:21 | INFO | train_inner | epoch 038:    225 / 394 loss=5.912, nll_loss=4.747, ppl=26.86, wps=38110.4, ups=4.98, wpb=7650.9, bsz=211.9, num_updates=14800, lr=0.000103975, gnorm=0.888, clip=0, loss_scale=32, train_wall=20, wall=3035
+2020-10-13 19:20:41 | INFO | train_inner | epoch 038:    325 / 394 loss=5.925, nll_loss=4.761, ppl=27.12, wps=37131.6, ups=4.97, wpb=7472.1, bsz=191.3, num_updates=14900, lr=0.000103626, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=3055
+2020-10-13 19:20:55 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:20:55 | INFO | valid | epoch 038 | valid on 'valid' subset | loss 6.09 | nll_loss 4.887 | ppl 29.6 | wps 56756.2 | wpb 1984.1 | bsz 74.6 | num_updates 14969 | best_loss 6.067
+2020-10-13 19:20:55 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:20:57 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 38 @ 14969 updates, score 6.09) (writing took 2.45660849900014 seconds)
+2020-10-13 19:20:57 | INFO | fairseq_cli.train | end of epoch 38 (average epoch stats below)
+2020-10-13 19:20:57 | INFO | train | epoch 038 | loss 5.917 | nll_loss 4.752 | ppl 26.95 | wps 37283.8 | ups 4.9 | wpb 7603.9 | bsz 198.6 | num_updates 14969 | lr 0.000103386 | gnorm 0.884 | clip 0 | loss_scale 32 | train_wall 77 | wall 3071
+2020-10-13 19:20:57 | INFO | fairseq.trainer | begin training epoch 39
+2020-10-13 19:21:04 | INFO | train_inner | epoch 039:     31 / 394 loss=5.905, nll_loss=4.738, ppl=26.69, wps=33222.1, ups=4.38, wpb=7585.9, bsz=184.4, num_updates=15000, lr=0.00010328, gnorm=0.874, clip=0, loss_scale=32, train_wall=20, wall=3078
+2020-10-13 19:21:23 | INFO | train_inner | epoch 039:    131 / 394 loss=5.891, nll_loss=4.721, ppl=26.38, wps=38719.2, ups=5.1, wpb=7591.9, bsz=181.2, num_updates=15100, lr=0.000102937, gnorm=0.882, clip=0, loss_scale=32, train_wall=19, wall=3097
+2020-10-13 19:21:42 | INFO | train_inner | epoch 039:    231 / 394 loss=5.905, nll_loss=4.738, ppl=26.68, wps=41004.4, ups=5.36, wpb=7654.5, bsz=209.3, num_updates=15200, lr=0.000102598, gnorm=0.88, clip=0, loss_scale=32, train_wall=19, wall=3116
+2020-10-13 19:22:02 | INFO | train_inner | epoch 039:    331 / 394 loss=5.908, nll_loss=4.742, ppl=26.76, wps=37138.7, ups=4.96, wpb=7483.9, bsz=207.3, num_updates=15300, lr=0.000102262, gnorm=0.92, clip=0, loss_scale=32, train_wall=20, wall=3136
+2020-10-13 19:22:15 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:22:15 | INFO | valid | epoch 039 | valid on 'valid' subset | loss 6.1 | nll_loss 4.897 | ppl 29.79 | wps 57745.3 | wpb 1984.1 | bsz 74.6 | num_updates 15363 | best_loss 6.067
+2020-10-13 19:22:15 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:22:17 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 39 @ 15363 updates, score 6.1) (writing took 2.143853289002436 seconds)
+2020-10-13 19:22:17 | INFO | fairseq_cli.train | end of epoch 39 (average epoch stats below)
+2020-10-13 19:22:17 | INFO | train | epoch 039 | loss 5.901 | nll_loss 4.733 | ppl 26.6 | wps 37541.7 | ups 4.94 | wpb 7603.9 | bsz 198.6 | num_updates 15363 | lr 0.000102052 | gnorm 0.892 | clip 0 | loss_scale 32 | train_wall 77 | wall 3151
+2020-10-13 19:22:17 | INFO | fairseq.trainer | begin training epoch 40
+2020-10-13 19:22:25 | INFO | train_inner | epoch 040:     37 / 394 loss=5.905, nll_loss=4.738, ppl=26.69, wps=34216.8, ups=4.41, wpb=7756.2, bsz=205, num_updates=15400, lr=0.000101929, gnorm=0.887, clip=0, loss_scale=32, train_wall=20, wall=3159
+2020-10-13 19:22:44 | INFO | train_inner | epoch 040:    137 / 394 loss=5.87, nll_loss=4.697, ppl=25.95, wps=38124.6, ups=5.07, wpb=7522.2, bsz=200.8, num_updates=15500, lr=0.0001016, gnorm=0.905, clip=0, loss_scale=32, train_wall=20, wall=3178
+2020-10-13 19:23:04 | INFO | train_inner | epoch 040:    237 / 394 loss=5.871, nll_loss=4.699, ppl=25.98, wps=38055.7, ups=5.04, wpb=7552.2, bsz=203.8, num_updates=15600, lr=0.000101274, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=3198
+2020-10-13 19:23:24 | INFO | train_inner | epoch 040:    337 / 394 loss=5.893, nll_loss=4.722, ppl=26.39, wps=38176.4, ups=5.05, wpb=7557.3, bsz=183.2, num_updates=15700, lr=0.000100951, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=3218
+2020-10-13 19:23:34 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:23:35 | INFO | valid | epoch 040 | valid on 'valid' subset | loss 6.098 | nll_loss 4.882 | ppl 29.49 | wps 58547.3 | wpb 1984.1 | bsz 74.6 | num_updates 15757 | best_loss 6.067
+2020-10-13 19:23:35 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:23:37 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 40 @ 15757 updates, score 6.098) (writing took 2.011054000002332 seconds)
+2020-10-13 19:23:37 | INFO | fairseq_cli.train | end of epoch 40 (average epoch stats below)
+2020-10-13 19:23:37 | INFO | train | epoch 040 | loss 5.883 | nll_loss 4.712 | ppl 26.21 | wps 37754 | ups 4.97 | wpb 7603.9 | bsz 198.6 | num_updates 15757 | lr 0.000100768 | gnorm 0.896 | clip 0 | loss_scale 32 | train_wall 76 | wall 3230
+2020-10-13 19:23:37 | INFO | fairseq.trainer | begin training epoch 41
+2020-10-13 19:23:45 | INFO | train_inner | epoch 041:     43 / 394 loss=5.876, nll_loss=4.705, ppl=26.08, wps=36007.9, ups=4.71, wpb=7648.7, bsz=200, num_updates=15800, lr=0.000100631, gnorm=0.915, clip=0, loss_scale=32, train_wall=19, wall=3239
+2020-10-13 19:24:05 | INFO | train_inner | epoch 041:    143 / 394 loss=5.866, nll_loss=4.692, ppl=25.85, wps=38494.3, ups=4.98, wpb=7722.7, bsz=187.3, num_updates=15900, lr=0.000100314, gnorm=0.867, clip=0, loss_scale=32, train_wall=20, wall=3259
+2020-10-13 19:24:25 | INFO | train_inner | epoch 041:    243 / 394 loss=5.872, nll_loss=4.699, ppl=25.97, wps=37960.2, ups=5, wpb=7587.4, bsz=200.5, num_updates=16000, lr=0.0001, gnorm=0.911, clip=0, loss_scale=32, train_wall=20, wall=3279
+2020-10-13 19:24:45 | INFO | train_inner | epoch 041:    343 / 394 loss=5.867, nll_loss=4.693, ppl=25.87, wps=38592.1, ups=5.06, wpb=7630.2, bsz=216.4, num_updates=16100, lr=9.9689e-05, gnorm=0.887, clip=0, loss_scale=32, train_wall=20, wall=3299
+2020-10-13 19:24:55 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:24:56 | INFO | valid | epoch 041 | valid on 'valid' subset | loss 6.091 | nll_loss 4.875 | ppl 29.35 | wps 54894.6 | wpb 1984.1 | bsz 74.6 | num_updates 16151 | best_loss 6.067
+2020-10-13 19:24:56 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:24:58 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 41 @ 16151 updates, score 6.091) (writing took 2.3904361449967837 seconds)
+2020-10-13 19:24:58 | INFO | fairseq_cli.train | end of epoch 41 (average epoch stats below)
+2020-10-13 19:24:58 | INFO | train | epoch 041 | loss 5.865 | nll_loss 4.691 | ppl 25.83 | wps 36812.1 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 16151 | lr 9.95314e-05 | gnorm 0.893 | clip 0 | loss_scale 32 | train_wall 78 | wall 3312
+2020-10-13 19:24:58 | INFO | fairseq.trainer | begin training epoch 42
+2020-10-13 19:25:08 | INFO | train_inner | epoch 042:     49 / 394 loss=5.858, nll_loss=4.683, ppl=25.68, wps=33134.8, ups=4.36, wpb=7602.8, bsz=196.9, num_updates=16200, lr=9.93808e-05, gnorm=0.888, clip=0, loss_scale=32, train_wall=20, wall=3322
+2020-10-13 19:25:27 | INFO | train_inner | epoch 042:    149 / 394 loss=5.85, nll_loss=4.673, ppl=25.52, wps=41173.5, ups=5.38, wpb=7657.4, bsz=198.4, num_updates=16300, lr=9.90755e-05, gnorm=0.887, clip=0, loss_scale=32, train_wall=18, wall=3341
+2020-10-13 19:25:47 | INFO | train_inner | epoch 042:    249 / 394 loss=5.836, nll_loss=4.657, ppl=25.23, wps=37302.7, ups=4.98, wpb=7496.9, bsz=202.3, num_updates=16400, lr=9.8773e-05, gnorm=0.9, clip=0, loss_scale=32, train_wall=20, wall=3361
+2020-10-13 19:26:07 | INFO | train_inner | epoch 042:    349 / 394 loss=5.854, nll_loss=4.678, ppl=25.59, wps=37877.3, ups=4.99, wpb=7591.8, bsz=195.5, num_updates=16500, lr=9.84732e-05, gnorm=0.898, clip=0, loss_scale=32, train_wall=20, wall=3381
+2020-10-13 19:26:16 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:26:16 | INFO | valid | epoch 042 | valid on 'valid' subset | loss 6.117 | nll_loss 4.919 | ppl 30.26 | wps 56943.1 | wpb 1984.1 | bsz 74.6 | num_updates 16545 | best_loss 6.067
+2020-10-13 19:26:16 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:26:18 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 42 @ 16545 updates, score 6.117) (writing took 2.4511070610024035 seconds)
+2020-10-13 19:26:18 | INFO | fairseq_cli.train | end of epoch 42 (average epoch stats below)
+2020-10-13 19:26:18 | INFO | train | epoch 042 | loss 5.848 | nll_loss 4.671 | ppl 25.48 | wps 37218.5 | ups 4.89 | wpb 7603.9 | bsz 198.6 | num_updates 16545 | lr 9.83392e-05 | gnorm 0.893 | clip 0 | loss_scale 32 | train_wall 77 | wall 3392
+2020-10-13 19:26:18 | INFO | fairseq.trainer | begin training epoch 43
+2020-10-13 19:26:30 | INFO | train_inner | epoch 043:     55 / 394 loss=5.827, nll_loss=4.647, ppl=25.06, wps=33180.8, ups=4.4, wpb=7539.9, bsz=202.3, num_updates=16600, lr=9.81761e-05, gnorm=0.892, clip=0, loss_scale=32, train_wall=20, wall=3403
+2020-10-13 19:26:50 | INFO | train_inner | epoch 043:    155 / 394 loss=5.819, nll_loss=4.638, ppl=24.9, wps=38080.8, ups=4.95, wpb=7689.1, bsz=198.5, num_updates=16700, lr=9.78818e-05, gnorm=0.889, clip=0, loss_scale=32, train_wall=20, wall=3424
+2020-10-13 19:27:08 | INFO | train_inner | epoch 043:    255 / 394 loss=5.842, nll_loss=4.663, ppl=25.34, wps=40968.1, ups=5.39, wpb=7599.1, bsz=198.7, num_updates=16800, lr=9.759e-05, gnorm=0.903, clip=0, loss_scale=32, train_wall=18, wall=3442
+2020-10-13 19:27:28 | INFO | train_inner | epoch 043:    355 / 394 loss=5.837, nll_loss=4.658, ppl=25.24, wps=37599.6, ups=4.97, wpb=7569.2, bsz=193.6, num_updates=16900, lr=9.73009e-05, gnorm=0.906, clip=0, loss_scale=32, train_wall=20, wall=3462
+2020-10-13 19:27:36 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:27:37 | INFO | valid | epoch 043 | valid on 'valid' subset | loss 6.108 | nll_loss 4.904 | ppl 29.94 | wps 59044.5 | wpb 1984.1 | bsz 74.6 | num_updates 16939 | best_loss 6.067
+2020-10-13 19:27:37 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:27:39 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 43 @ 16939 updates, score 6.108) (writing took 2.4749957300009555 seconds)
+2020-10-13 19:27:39 | INFO | fairseq_cli.train | end of epoch 43 (average epoch stats below)
+2020-10-13 19:27:39 | INFO | train | epoch 043 | loss 5.831 | nll_loss 4.651 | ppl 25.12 | wps 37155.6 | ups 4.89 | wpb 7603.9 | bsz 198.6 | num_updates 16939 | lr 9.71888e-05 | gnorm 0.895 | clip 0 | loss_scale 32 | train_wall 77 | wall 3473
+2020-10-13 19:27:39 | INFO | fairseq.trainer | begin training epoch 44
+2020-10-13 19:27:51 | INFO | train_inner | epoch 044:     61 / 394 loss=5.827, nll_loss=4.647, ppl=25.05, wps=33836.1, ups=4.37, wpb=7735.9, bsz=202.6, num_updates=17000, lr=9.70143e-05, gnorm=0.896, clip=0, loss_scale=32, train_wall=20, wall=3485
+2020-10-13 19:28:11 | INFO | train_inner | epoch 044:    161 / 394 loss=5.799, nll_loss=4.614, ppl=24.49, wps=38452.8, ups=5.08, wpb=7566.3, bsz=204.2, num_updates=17100, lr=9.67302e-05, gnorm=0.941, clip=0, loss_scale=32, train_wall=20, wall=3505
+2020-10-13 19:28:31 | INFO | train_inner | epoch 044:    261 / 394 loss=5.816, nll_loss=4.633, ppl=24.82, wps=38124.6, ups=5.09, wpb=7493.3, bsz=206.5, num_updates=17200, lr=9.64486e-05, gnorm=0.915, clip=0, loss_scale=32, train_wall=20, wall=3525
+2020-10-13 19:28:49 | INFO | train_inner | epoch 044:    361 / 394 loss=5.835, nll_loss=4.654, ppl=25.18, wps=41291.5, ups=5.45, wpb=7573.4, bsz=181.1, num_updates=17300, lr=9.61694e-05, gnorm=0.899, clip=0, loss_scale=32, train_wall=18, wall=3543
+2020-10-13 19:28:55 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:28:56 | INFO | valid | epoch 044 | valid on 'valid' subset | loss 6.083 | nll_loss 4.86 | ppl 29.05 | wps 57798.2 | wpb 1984.1 | bsz 74.6 | num_updates 17333 | best_loss 6.067
+2020-10-13 19:28:56 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:28:58 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 44 @ 17333 updates, score 6.083) (writing took 2.0689524429981248 seconds)
+2020-10-13 19:28:58 | INFO | fairseq_cli.train | end of epoch 44 (average epoch stats below)
+2020-10-13 19:28:58 | INFO | train | epoch 044 | loss 5.817 | nll_loss 4.635 | ppl 24.84 | wps 38005.4 | ups 5 | wpb 7603.9 | bsz 198.6 | num_updates 17333 | lr 9.60778e-05 | gnorm 0.916 | clip 0 | loss_scale 32 | train_wall 76 | wall 3552
+2020-10-13 19:28:58 | INFO | fairseq.trainer | begin training epoch 45
+2020-10-13 19:29:12 | INFO | train_inner | epoch 045:     67 / 394 loss=5.802, nll_loss=4.617, ppl=24.55, wps=34247.9, ups=4.43, wpb=7724, bsz=196.4, num_updates=17400, lr=9.58927e-05, gnorm=0.892, clip=0, loss_scale=32, train_wall=20, wall=3565
+2020-10-13 19:29:32 | INFO | train_inner | epoch 045:    167 / 394 loss=5.79, nll_loss=4.603, ppl=24.3, wps=37971, ups=4.97, wpb=7645.6, bsz=185.5, num_updates=17500, lr=9.56183e-05, gnorm=0.895, clip=0, loss_scale=32, train_wall=20, wall=3586
+2020-10-13 19:29:52 | INFO | train_inner | epoch 045:    267 / 394 loss=5.81, nll_loss=4.625, ppl=24.68, wps=37908.2, ups=4.99, wpb=7601, bsz=192.8, num_updates=17600, lr=9.53463e-05, gnorm=0.922, clip=0, loss_scale=32, train_wall=20, wall=3606
+2020-10-13 19:30:12 | INFO | train_inner | epoch 045:    367 / 394 loss=5.825, nll_loss=4.643, ppl=24.99, wps=37466, ups=4.94, wpb=7584.9, bsz=216.9, num_updates=17700, lr=9.50765e-05, gnorm=0.947, clip=0, loss_scale=32, train_wall=20, wall=3626
+2020-10-13 19:30:17 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:30:18 | INFO | valid | epoch 045 | valid on 'valid' subset | loss 6.108 | nll_loss 4.882 | ppl 29.49 | wps 56174.4 | wpb 1984.1 | bsz 74.6 | num_updates 17727 | best_loss 6.067
+2020-10-13 19:30:18 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:30:20 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 45 @ 17727 updates, score 6.108) (writing took 2.0295976940033142 seconds)
+2020-10-13 19:30:20 | INFO | fairseq_cli.train | end of epoch 45 (average epoch stats below)
+2020-10-13 19:30:20 | INFO | train | epoch 045 | loss 5.8 | nll_loss 4.615 | ppl 24.5 | wps 36574.6 | ups 4.81 | wpb 7603.9 | bsz 198.6 | num_updates 17727 | lr 9.50041e-05 | gnorm 0.917 | clip 0 | loss_scale 32 | train_wall 79 | wall 3634
+2020-10-13 19:30:20 | INFO | fairseq.trainer | begin training epoch 46
+2020-10-13 19:30:33 | INFO | train_inner | epoch 046:     73 / 394 loss=5.771, nll_loss=4.583, ppl=23.96, wps=35952.7, ups=4.74, wpb=7589.9, bsz=209.8, num_updates=17800, lr=9.48091e-05, gnorm=0.913, clip=0, loss_scale=32, train_wall=18, wall=3647
+2020-10-13 19:30:53 | INFO | train_inner | epoch 046:    173 / 394 loss=5.792, nll_loss=4.604, ppl=24.33, wps=37943.4, ups=5.04, wpb=7530.6, bsz=200, num_updates=17900, lr=9.45439e-05, gnorm=0.933, clip=0, loss_scale=32, train_wall=20, wall=3667
+2020-10-13 19:31:13 | INFO | train_inner | epoch 046:    273 / 394 loss=5.785, nll_loss=4.597, ppl=24.2, wps=37801, ups=4.98, wpb=7583.2, bsz=199.2, num_updates=18000, lr=9.42809e-05, gnorm=0.932, clip=0, loss_scale=32, train_wall=20, wall=3687
+2020-10-13 19:31:33 | INFO | train_inner | epoch 046:    373 / 394 loss=5.786, nll_loss=4.597, ppl=24.19, wps=38294, ups=5.03, wpb=7606.6, bsz=190.1, num_updates=18100, lr=9.40201e-05, gnorm=0.918, clip=0, loss_scale=32, train_wall=20, wall=3707
+2020-10-13 19:31:37 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:31:37 | INFO | valid | epoch 046 | valid on 'valid' subset | loss 6.128 | nll_loss 4.921 | ppl 30.29 | wps 57952.7 | wpb 1984.1 | bsz 74.6 | num_updates 18121 | best_loss 6.067
+2020-10-13 19:31:37 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:31:40 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 46 @ 18121 updates, score 6.128) (writing took 2.5191695550020086 seconds)
+2020-10-13 19:31:40 | INFO | fairseq_cli.train | end of epoch 46 (average epoch stats below)
+2020-10-13 19:31:40 | INFO | train | epoch 046 | loss 5.787 | nll_loss 4.598 | ppl 24.23 | wps 37446.5 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 18121 | lr 9.39656e-05 | gnorm 0.92 | clip 0 | loss_scale 32 | train_wall 76 | wall 3714
+2020-10-13 19:31:40 | INFO | fairseq.trainer | begin training epoch 47
+2020-10-13 19:31:55 | INFO | train_inner | epoch 047:     79 / 394 loss=5.758, nll_loss=4.566, ppl=23.69, wps=33654.6, ups=4.42, wpb=7622.4, bsz=197.3, num_updates=18200, lr=9.37614e-05, gnorm=0.909, clip=0, loss_scale=32, train_wall=19, wall=3729
+2020-10-13 19:32:15 | INFO | train_inner | epoch 047:    179 / 394 loss=5.768, nll_loss=4.577, ppl=23.86, wps=38682.2, ups=5.1, wpb=7581.2, bsz=187.4, num_updates=18300, lr=9.35049e-05, gnorm=0.93, clip=0, loss_scale=32, train_wall=19, wall=3749
+2020-10-13 19:32:34 | INFO | train_inner | epoch 047:    279 / 394 loss=5.774, nll_loss=4.583, ppl=23.97, wps=41000.5, ups=5.42, wpb=7568.8, bsz=200.4, num_updates=18400, lr=9.32505e-05, gnorm=0.916, clip=0, loss_scale=32, train_wall=18, wall=3767
+2020-10-13 19:32:53 | INFO | train_inner | epoch 047:    379 / 394 loss=5.787, nll_loss=4.599, ppl=24.23, wps=38807, ups=5.07, wpb=7652.6, bsz=212.6, num_updates=18500, lr=9.29981e-05, gnorm=0.938, clip=0, loss_scale=32, train_wall=20, wall=3787
+2020-10-13 19:32:56 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:32:57 | INFO | valid | epoch 047 | valid on 'valid' subset | loss 6.108 | nll_loss 4.901 | ppl 29.87 | wps 57274.8 | wpb 1984.1 | bsz 74.6 | num_updates 18515 | best_loss 6.067
+2020-10-13 19:32:57 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:32:59 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 47 @ 18515 updates, score 6.108) (writing took 2.0092917069996474 seconds)
+2020-10-13 19:32:59 | INFO | fairseq_cli.train | end of epoch 47 (average epoch stats below)
+2020-10-13 19:32:59 | INFO | train | epoch 047 | loss 5.771 | nll_loss 4.58 | ppl 23.92 | wps 38031.8 | ups 5 | wpb 7603.9 | bsz 198.6 | num_updates 18515 | lr 9.29604e-05 | gnorm 0.925 | clip 0 | loss_scale 32 | train_wall 76 | wall 3793
+2020-10-13 19:32:59 | INFO | fairseq.trainer | begin training epoch 48
+2020-10-13 19:33:15 | INFO | train_inner | epoch 048:     85 / 394 loss=5.745, nll_loss=4.55, ppl=23.43, wps=33952.5, ups=4.51, wpb=7528.6, bsz=187.9, num_updates=18600, lr=9.27478e-05, gnorm=0.916, clip=0, loss_scale=64, train_wall=20, wall=3809
+2020-10-13 19:33:35 | INFO | train_inner | epoch 048:    185 / 394 loss=5.748, nll_loss=4.554, ppl=23.49, wps=38230.9, ups=5.08, wpb=7530.9, bsz=202.6, num_updates=18700, lr=9.24995e-05, gnorm=0.922, clip=0, loss_scale=64, train_wall=20, wall=3829
+2020-10-13 19:33:55 | INFO | train_inner | epoch 048:    285 / 394 loss=5.762, nll_loss=4.569, ppl=23.73, wps=38873.3, ups=5.05, wpb=7699.3, bsz=192.7, num_updates=18800, lr=9.22531e-05, gnorm=0.904, clip=0, loss_scale=64, train_wall=20, wall=3849
+2020-10-13 19:34:13 | INFO | train_inner | epoch 048:    385 / 394 loss=5.77, nll_loss=4.578, ppl=23.88, wps=41828.5, ups=5.44, wpb=7685.3, bsz=205.2, num_updates=18900, lr=9.20087e-05, gnorm=0.912, clip=0, loss_scale=64, train_wall=18, wall=3867
+2020-10-13 19:34:15 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:34:15 | INFO | valid | epoch 048 | valid on 'valid' subset | loss 6.157 | nll_loss 4.957 | ppl 31.07 | wps 56619.7 | wpb 1984.1 | bsz 74.6 | num_updates 18909 | best_loss 6.067
+2020-10-13 19:34:15 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:34:18 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 48 @ 18909 updates, score 6.157) (writing took 2.5612315819962532 seconds)
+2020-10-13 19:34:18 | INFO | fairseq_cli.train | end of epoch 48 (average epoch stats below)
+2020-10-13 19:34:18 | INFO | train | epoch 048 | loss 5.754 | nll_loss 4.56 | ppl 23.58 | wps 37721.1 | ups 4.96 | wpb 7603.9 | bsz 198.6 | num_updates 18909 | lr 9.19868e-05 | gnorm 0.914 | clip 0 | loss_scale 64 | train_wall 76 | wall 3872
+2020-10-13 19:34:18 | INFO | fairseq.trainer | begin training epoch 49
+2020-10-13 19:34:36 | INFO | train_inner | epoch 049:     91 / 394 loss=5.72, nll_loss=4.522, ppl=22.97, wps=33730.1, ups=4.39, wpb=7679.4, bsz=189.5, num_updates=19000, lr=9.17663e-05, gnorm=0.906, clip=0, loss_scale=64, train_wall=20, wall=3890
+2020-10-13 19:34:56 | INFO | train_inner | epoch 049:    191 / 394 loss=5.74, nll_loss=4.544, ppl=23.33, wps=38514.1, ups=5.07, wpb=7600.3, bsz=191.2, num_updates=19100, lr=9.15258e-05, gnorm=0.928, clip=0, loss_scale=64, train_wall=20, wall=3910
+2020-10-13 19:35:16 | INFO | train_inner | epoch 049:    291 / 394 loss=5.742, nll_loss=4.547, ppl=23.37, wps=38291, ups=5.07, wpb=7554.9, bsz=213.7, num_updates=19200, lr=9.12871e-05, gnorm=0.927, clip=0, loss_scale=64, train_wall=20, wall=3929
+2020-10-13 19:35:35 | INFO | train_inner | epoch 049:    391 / 394 loss=5.757, nll_loss=4.563, ppl=23.63, wps=38279.4, ups=5.05, wpb=7577.4, bsz=203.1, num_updates=19300, lr=9.10503e-05, gnorm=0.934, clip=0, loss_scale=64, train_wall=20, wall=3949
+2020-10-13 19:35:36 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:35:36 | INFO | valid | epoch 049 | valid on 'valid' subset | loss 6.121 | nll_loss 4.904 | ppl 29.94 | wps 58951.4 | wpb 1984.1 | bsz 74.6 | num_updates 19303 | best_loss 6.067
+2020-10-13 19:35:36 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:35:39 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 49 @ 19303 updates, score 6.121) (writing took 2.751718343999528 seconds)
+2020-10-13 19:35:39 | INFO | fairseq_cli.train | end of epoch 49 (average epoch stats below)
+2020-10-13 19:35:39 | INFO | train | epoch 049 | loss 5.74 | nll_loss 4.544 | ppl 23.32 | wps 36986.5 | ups 4.86 | wpb 7603.9 | bsz 198.6 | num_updates 19303 | lr 9.10432e-05 | gnorm 0.924 | clip 0 | loss_scale 64 | train_wall 77 | wall 3953
+2020-10-13 19:35:39 | INFO | fairseq.trainer | begin training epoch 50
+2020-10-13 19:35:57 | INFO | train_inner | epoch 050:     97 / 394 loss=5.711, nll_loss=4.511, ppl=22.79, wps=34601.6, ups=4.6, wpb=7517.7, bsz=194.8, num_updates=19400, lr=9.08153e-05, gnorm=0.956, clip=0, loss_scale=64, train_wall=18, wall=3971
+2020-10-13 19:36:17 | INFO | train_inner | epoch 050:    197 / 394 loss=5.728, nll_loss=4.529, ppl=23.09, wps=38494.9, ups=5.07, wpb=7587.5, bsz=200.6, num_updates=19500, lr=9.05822e-05, gnorm=0.933, clip=0, loss_scale=64, train_wall=20, wall=3991
+2020-10-13 19:36:37 | INFO | train_inner | epoch 050:    297 / 394 loss=5.722, nll_loss=4.522, ppl=22.98, wps=38541.1, ups=5.06, wpb=7624.2, bsz=199.7, num_updates=19600, lr=9.03508e-05, gnorm=0.932, clip=0, loss_scale=64, train_wall=20, wall=4010
+2020-10-13 19:36:56 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:36:56 | INFO | valid | epoch 050 | valid on 'valid' subset | loss 6.107 | nll_loss 4.882 | ppl 29.5 | wps 57168.6 | wpb 1984.1 | bsz 74.6 | num_updates 19697 | best_loss 6.067
+2020-10-13 19:36:56 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:36:58 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 50 @ 19697 updates, score 6.107) (writing took 2.0878130060009426 seconds)
+2020-10-13 19:36:58 | INFO | fairseq_cli.train | end of epoch 50 (average epoch stats below)
+2020-10-13 19:36:58 | INFO | train | epoch 050 | loss 5.727 | nll_loss 4.529 | ppl 23.08 | wps 37868.1 | ups 4.98 | wpb 7603.9 | bsz 198.6 | num_updates 19697 | lr 9.0128e-05 | gnorm 0.94 | clip 0 | loss_scale 64 | train_wall 76 | wall 4032
+2020-10-13 19:36:58 | INFO | fairseq.trainer | begin training epoch 51
+2020-10-13 19:36:59 | INFO | train_inner | epoch 051:      3 / 394 loss=5.748, nll_loss=4.551, ppl=23.45, wps=34373.2, ups=4.49, wpb=7656.1, bsz=195.8, num_updates=19700, lr=9.01212e-05, gnorm=0.937, clip=0, loss_scale=64, train_wall=20, wall=4033
+2020-10-13 19:37:19 | INFO | train_inner | epoch 051:    103 / 394 loss=5.697, nll_loss=4.493, ppl=22.52, wps=38384.4, ups=5.05, wpb=7601, bsz=188.2, num_updates=19800, lr=8.98933e-05, gnorm=0.937, clip=0, loss_scale=64, train_wall=20, wall=4053
+2020-10-13 19:37:37 | INFO | train_inner | epoch 051:    203 / 394 loss=5.722, nll_loss=4.521, ppl=22.96, wps=42724.9, ups=5.55, wpb=7693.6, bsz=198.8, num_updates=19900, lr=8.96672e-05, gnorm=0.924, clip=0, loss_scale=64, train_wall=18, wall=4071
+2020-10-13 19:37:57 | INFO | train_inner | epoch 051:    303 / 394 loss=5.713, nll_loss=4.512, ppl=22.81, wps=37337.5, ups=4.97, wpb=7512.6, bsz=208.2, num_updates=20000, lr=8.94427e-05, gnorm=0.947, clip=0, loss_scale=64, train_wall=20, wall=4091
+2020-10-13 19:38:15 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:38:15 | INFO | valid | epoch 051 | valid on 'valid' subset | loss 6.12 | nll_loss 4.901 | ppl 29.88 | wps 58565.3 | wpb 1984.1 | bsz 74.6 | num_updates 20091 | best_loss 6.067
+2020-10-13 19:38:15 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:38:18 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 51 @ 20091 updates, score 6.12) (writing took 2.7221958009977243 seconds)
+2020-10-13 19:38:18 | INFO | fairseq_cli.train | end of epoch 51 (average epoch stats below)
+2020-10-13 19:38:18 | INFO | train | epoch 051 | loss 5.713 | nll_loss 4.512 | ppl 22.81 | wps 37467.2 | ups 4.93 | wpb 7603.9 | bsz 198.6 | num_updates 20091 | lr 8.92399e-05 | gnorm 0.935 | clip 0 | loss_scale 64 | train_wall 76 | wall 4112
+2020-10-13 19:38:18 | INFO | fairseq.trainer | begin training epoch 52
+2020-10-13 19:38:20 | INFO | train_inner | epoch 052:      9 / 394 loss=5.716, nll_loss=4.515, ppl=22.87, wps=32813.5, ups=4.29, wpb=7644.8, bsz=200.8, num_updates=20100, lr=8.92199e-05, gnorm=0.93, clip=0, loss_scale=64, train_wall=20, wall=4114
+2020-10-13 19:38:40 | INFO | train_inner | epoch 052:    109 / 394 loss=5.675, nll_loss=4.467, ppl=22.12, wps=37947.3, ups=5.07, wpb=7490, bsz=187.4, num_updates=20200, lr=8.89988e-05, gnorm=0.955, clip=0, loss_scale=64, train_wall=20, wall=4134
+2020-10-13 19:39:00 | INFO | train_inner | epoch 052:    209 / 394 loss=5.699, nll_loss=4.495, ppl=22.55, wps=38675.4, ups=5.05, wpb=7654.7, bsz=208.2, num_updates=20300, lr=8.87794e-05, gnorm=0.948, clip=0, loss_scale=64, train_wall=20, wall=4154
+2020-10-13 19:39:19 | INFO | train_inner | epoch 052:    309 / 394 loss=5.71, nll_loss=4.506, ppl=22.73, wps=40261.8, ups=5.26, wpb=7654.6, bsz=188.7, num_updates=20400, lr=8.85615e-05, gnorm=0.93, clip=0, loss_scale=64, train_wall=19, wall=4173
+2020-10-13 19:39:35 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:39:35 | INFO | valid | epoch 052 | valid on 'valid' subset | loss 6.121 | nll_loss 4.897 | ppl 29.79 | wps 58404.7 | wpb 1984.1 | bsz 74.6 | num_updates 20485 | best_loss 6.067
+2020-10-13 19:39:35 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:39:37 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 52 @ 20485 updates, score 6.121) (writing took 2.389708732996951 seconds)
+2020-10-13 19:39:37 | INFO | fairseq_cli.train | end of epoch 52 (average epoch stats below)
+2020-10-13 19:39:37 | INFO | train | epoch 052 | loss 5.698 | nll_loss 4.494 | ppl 22.54 | wps 37849.5 | ups 4.98 | wpb 7603.9 | bsz 198.6 | num_updates 20485 | lr 8.83776e-05 | gnorm 0.942 | clip 0 | loss_scale 64 | train_wall 76 | wall 4191
+2020-10-13 19:39:37 | INFO | fairseq.trainer | begin training epoch 53
+2020-10-13 19:39:40 | INFO | train_inner | epoch 053:     15 / 394 loss=5.706, nll_loss=4.503, ppl=22.67, wps=34880.2, ups=4.59, wpb=7594.2, bsz=207.2, num_updates=20500, lr=8.83452e-05, gnorm=0.94, clip=0, loss_scale=64, train_wall=19, wall=4194
+2020-10-13 19:40:00 | INFO | train_inner | epoch 053:    115 / 394 loss=5.664, nll_loss=4.454, ppl=21.92, wps=38669, ups=5.05, wpb=7650.6, bsz=199.3, num_updates=20600, lr=8.81305e-05, gnorm=0.951, clip=0, loss_scale=64, train_wall=20, wall=4214
+2020-10-13 19:40:20 | INFO | train_inner | epoch 053:    215 / 394 loss=5.682, nll_loss=4.475, ppl=22.24, wps=38954.3, ups=5.05, wpb=7713.1, bsz=218.7, num_updates=20700, lr=8.79174e-05, gnorm=0.951, clip=0, loss_scale=64, train_wall=20, wall=4234
+2020-10-13 19:40:40 | INFO | train_inner | epoch 053:    315 / 394 loss=5.698, nll_loss=4.492, ppl=22.51, wps=37703.2, ups=5.07, wpb=7440.2, bsz=181.5, num_updates=20800, lr=8.77058e-05, gnorm=0.956, clip=0, loss_scale=64, train_wall=20, wall=4254
+2020-10-13 19:40:55 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:40:56 | INFO | valid | epoch 053 | valid on 'valid' subset | loss 6.133 | nll_loss 4.907 | ppl 30.01 | wps 56669.9 | wpb 1984.1 | bsz 74.6 | num_updates 20879 | best_loss 6.067
+2020-10-13 19:40:56 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:40:59 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 53 @ 20879 updates, score 6.133) (writing took 3.071093637998274 seconds)
+2020-10-13 19:40:59 | INFO | fairseq_cli.train | end of epoch 53 (average epoch stats below)
+2020-10-13 19:40:59 | INFO | train | epoch 053 | loss 5.685 | nll_loss 4.478 | ppl 22.29 | wps 36779.7 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 20879 | lr 8.75397e-05 | gnorm 0.954 | clip 0 | loss_scale 64 | train_wall 77 | wall 4273
+2020-10-13 19:40:59 | INFO | fairseq.trainer | begin training epoch 54
+2020-10-13 19:41:03 | INFO | train_inner | epoch 054:     21 / 394 loss=5.7, nll_loss=4.495, ppl=22.55, wps=33315.4, ups=4.35, wpb=7664.8, bsz=192.8, num_updates=20900, lr=8.74957e-05, gnorm=0.955, clip=0, loss_scale=64, train_wall=19, wall=4277
+2020-10-13 19:41:21 | INFO | train_inner | epoch 054:    121 / 394 loss=5.658, nll_loss=4.447, ppl=21.81, wps=40397.8, ups=5.35, wpb=7550.4, bsz=194, num_updates=21000, lr=8.72872e-05, gnorm=0.951, clip=0, loss_scale=64, train_wall=19, wall=4295
+2020-10-13 19:41:41 | INFO | train_inner | epoch 054:    221 / 394 loss=5.668, nll_loss=4.458, ppl=21.98, wps=37818.1, ups=4.98, wpb=7600.9, bsz=200.5, num_updates=21100, lr=8.70801e-05, gnorm=0.969, clip=0, loss_scale=64, train_wall=20, wall=4315
+2020-10-13 19:42:01 | INFO | train_inner | epoch 054:    321 / 394 loss=5.681, nll_loss=4.472, ppl=22.2, wps=38211.2, ups=5.01, wpb=7629.2, bsz=201.8, num_updates=21200, lr=8.68744e-05, gnorm=0.953, clip=0, loss_scale=64, train_wall=20, wall=4335
+2020-10-13 19:42:16 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:42:16 | INFO | valid | epoch 054 | valid on 'valid' subset | loss 6.154 | nll_loss 4.94 | ppl 30.69 | wps 55753.1 | wpb 1984.1 | bsz 74.6 | num_updates 21273 | best_loss 6.067
+2020-10-13 19:42:16 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:42:19 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 54 @ 21273 updates, score 6.154) (writing took 2.5619773419966805 seconds)
+2020-10-13 19:42:19 | INFO | fairseq_cli.train | end of epoch 54 (average epoch stats below)
+2020-10-13 19:42:19 | INFO | train | epoch 054 | loss 5.673 | nll_loss 4.464 | ppl 22.06 | wps 37330.7 | ups 4.91 | wpb 7603.9 | bsz 198.6 | num_updates 21273 | lr 8.67253e-05 | gnorm 0.959 | clip 0 | loss_scale 64 | train_wall 77 | wall 4353
+2020-10-13 19:42:19 | INFO | fairseq.trainer | begin training epoch 55
+2020-10-13 19:42:24 | INFO | train_inner | epoch 055:     27 / 394 loss=5.667, nll_loss=4.456, ppl=21.95, wps=33182.8, ups=4.35, wpb=7625.3, bsz=202.6, num_updates=21300, lr=8.66703e-05, gnorm=0.963, clip=0, loss_scale=64, train_wall=20, wall=4358
+2020-10-13 19:42:44 | INFO | train_inner | epoch 055:    127 / 394 loss=5.637, nll_loss=4.423, ppl=21.46, wps=38268.3, ups=5.06, wpb=7565.3, bsz=204.6, num_updates=21400, lr=8.64675e-05, gnorm=0.961, clip=0, loss_scale=64, train_wall=20, wall=4378
+2020-10-13 19:43:03 | INFO | train_inner | epoch 055:    227 / 394 loss=5.669, nll_loss=4.459, ppl=21.99, wps=41558.8, ups=5.44, wpb=7642.1, bsz=191.2, num_updates=21500, lr=8.62662e-05, gnorm=0.948, clip=0, loss_scale=64, train_wall=18, wall=4397
+2020-10-13 19:43:23 | INFO | train_inner | epoch 055:    327 / 394 loss=5.666, nll_loss=4.455, ppl=21.93, wps=37461.3, ups=4.97, wpb=7536.4, bsz=202.8, num_updates=21600, lr=8.60663e-05, gnorm=0.957, clip=0, loss_scale=64, train_wall=20, wall=4417
+2020-10-13 19:43:36 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:43:37 | INFO | valid | epoch 055 | valid on 'valid' subset | loss 6.142 | nll_loss 4.924 | ppl 30.36 | wps 57384 | wpb 1984.1 | bsz 74.6 | num_updates 21667 | best_loss 6.067
+2020-10-13 19:43:37 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:43:39 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 55 @ 21667 updates, score 6.142) (writing took 2.0610339240010944 seconds)
+2020-10-13 19:43:39 | INFO | fairseq_cli.train | end of epoch 55 (average epoch stats below)
+2020-10-13 19:43:39 | INFO | train | epoch 055 | loss 5.659 | nll_loss 4.447 | ppl 21.81 | wps 37633.3 | ups 4.95 | wpb 7603.9 | bsz 198.6 | num_updates 21667 | lr 8.59331e-05 | gnorm 0.957 | clip 0 | loss_scale 64 | train_wall 76 | wall 4433
+2020-10-13 19:43:39 | INFO | fairseq.trainer | begin training epoch 56
+2020-10-13 19:43:45 | INFO | train_inner | epoch 056:     33 / 394 loss=5.66, nll_loss=4.449, ppl=21.84, wps=33765.3, ups=4.42, wpb=7630.7, bsz=192.4, num_updates=21700, lr=8.58678e-05, gnorm=0.962, clip=0, loss_scale=64, train_wall=20, wall=4439
+2020-10-13 19:44:06 | INFO | train_inner | epoch 056:    133 / 394 loss=5.628, nll_loss=4.412, ppl=21.29, wps=37352.3, ups=4.95, wpb=7541.2, bsz=203, num_updates=21800, lr=8.56706e-05, gnorm=0.956, clip=0, loss_scale=64, train_wall=20, wall=4459
+2020-10-13 19:44:25 | INFO | train_inner | epoch 056:    233 / 394 loss=5.653, nll_loss=4.439, ppl=21.69, wps=38405.2, ups=5.01, wpb=7669.4, bsz=197.6, num_updates=21900, lr=8.54748e-05, gnorm=0.967, clip=0, loss_scale=64, train_wall=20, wall=4479
+2020-10-13 19:44:44 | INFO | train_inner | epoch 056:    333 / 394 loss=5.66, nll_loss=4.448, ppl=21.83, wps=41153.7, ups=5.41, wpb=7605.1, bsz=197, num_updates=22000, lr=8.52803e-05, gnorm=0.963, clip=0, loss_scale=64, train_wall=18, wall=4498
+2020-10-13 19:44:56 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:44:57 | INFO | valid | epoch 056 | valid on 'valid' subset | loss 6.168 | nll_loss 4.951 | ppl 30.93 | wps 57220.8 | wpb 1984.1 | bsz 74.6 | num_updates 22061 | best_loss 6.067
+2020-10-13 19:44:57 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:44:59 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 56 @ 22061 updates, score 6.168) (writing took 2.106720833995496 seconds)
+2020-10-13 19:44:59 | INFO | fairseq_cli.train | end of epoch 56 (average epoch stats below)
+2020-10-13 19:44:59 | INFO | train | epoch 056 | loss 5.647 | nll_loss 4.433 | ppl 21.61 | wps 37417.6 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 22061 | lr 8.51623e-05 | gnorm 0.959 | clip 0 | loss_scale 64 | train_wall 77 | wall 4513
+2020-10-13 19:44:59 | INFO | fairseq.trainer | begin training epoch 57
+2020-10-13 19:45:07 | INFO | train_inner | epoch 057:     39 / 394 loss=5.641, nll_loss=4.428, ppl=21.52, wps=33332.4, ups=4.42, wpb=7537.7, bsz=204.4, num_updates=22100, lr=8.50871e-05, gnorm=0.964, clip=0, loss_scale=64, train_wall=20, wall=4520
+2020-10-13 19:45:27 | INFO | train_inner | epoch 057:    139 / 394 loss=5.62, nll_loss=4.402, ppl=21.15, wps=37806.4, ups=4.98, wpb=7585.3, bsz=205.7, num_updates=22200, lr=8.48953e-05, gnorm=0.981, clip=0, loss_scale=64, train_wall=20, wall=4541
+2020-10-13 19:45:47 | INFO | train_inner | epoch 057:    239 / 394 loss=5.644, nll_loss=4.429, ppl=21.54, wps=37834.1, ups=4.95, wpb=7641, bsz=195.2, num_updates=22300, lr=8.47047e-05, gnorm=0.971, clip=0, loss_scale=64, train_wall=20, wall=4561
+2020-10-13 19:46:07 | INFO | train_inner | epoch 057:    339 / 394 loss=5.646, nll_loss=4.431, ppl=21.57, wps=37625.9, ups=4.98, wpb=7557.5, bsz=194.5, num_updates=22400, lr=8.45154e-05, gnorm=0.987, clip=0, loss_scale=64, train_wall=20, wall=4581
+2020-10-13 19:46:18 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:46:18 | INFO | valid | epoch 057 | valid on 'valid' subset | loss 6.145 | nll_loss 4.919 | ppl 30.26 | wps 56994.9 | wpb 1984.1 | bsz 74.6 | num_updates 22455 | best_loss 6.067
+2020-10-13 19:46:18 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:46:20 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 57 @ 22455 updates, score 6.145) (writing took 2.02326613200421 seconds)
+2020-10-13 19:46:20 | INFO | fairseq_cli.train | end of epoch 57 (average epoch stats below)
+2020-10-13 19:46:20 | INFO | train | epoch 057 | loss 5.634 | nll_loss 4.417 | ppl 21.37 | wps 36643.1 | ups 4.82 | wpb 7603.9 | bsz 198.6 | num_updates 22455 | lr 8.44119e-05 | gnorm 0.975 | clip 0 | loss_scale 64 | train_wall 79 | wall 4594
+2020-10-13 19:46:20 | INFO | fairseq.trainer | begin training epoch 58
+2020-10-13 19:46:28 | INFO | train_inner | epoch 058:     45 / 394 loss=5.617, nll_loss=4.398, ppl=21.09, wps=36092.1, ups=4.72, wpb=7641.7, bsz=189.9, num_updates=22500, lr=8.43274e-05, gnorm=0.961, clip=0, loss_scale=64, train_wall=19, wall=4602
+2020-10-13 19:46:48 | INFO | train_inner | epoch 058:    145 / 394 loss=5.599, nll_loss=4.378, ppl=20.79, wps=38484.7, ups=5.1, wpb=7551, bsz=194.2, num_updates=22600, lr=8.41406e-05, gnorm=0.962, clip=0, loss_scale=64, train_wall=19, wall=4622
+2020-10-13 19:47:07 | INFO | train_inner | epoch 058:    245 / 394 loss=5.61, nll_loss=4.39, ppl=20.96, wps=38339.9, ups=5.08, wpb=7540.3, bsz=195.3, num_updates=22700, lr=8.39551e-05, gnorm=0.959, clip=0, loss_scale=64, train_wall=20, wall=4641
+2020-10-13 19:47:27 | INFO | train_inner | epoch 058:    345 / 394 loss=5.652, nll_loss=4.437, ppl=21.66, wps=38872.1, ups=5.04, wpb=7707, bsz=203.2, num_updates=22800, lr=8.37708e-05, gnorm=0.951, clip=0, loss_scale=64, train_wall=20, wall=4661
+2020-10-13 19:47:37 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:47:37 | INFO | valid | epoch 058 | valid on 'valid' subset | loss 6.168 | nll_loss 4.948 | ppl 30.87 | wps 57919 | wpb 1984.1 | bsz 74.6 | num_updates 22849 | best_loss 6.067
+2020-10-13 19:47:37 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:47:39 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 58 @ 22849 updates, score 6.168) (writing took 2.1415116599964676 seconds)
+2020-10-13 19:47:39 | INFO | fairseq_cli.train | end of epoch 58 (average epoch stats below)
+2020-10-13 19:47:39 | INFO | train | epoch 058 | loss 5.62 | nll_loss 4.402 | ppl 21.14 | wps 37947.6 | ups 4.99 | wpb 7603.9 | bsz 198.6 | num_updates 22849 | lr 8.36809e-05 | gnorm 0.961 | clip 0 | loss_scale 64 | train_wall 76 | wall 4673
+2020-10-13 19:47:39 | INFO | fairseq.trainer | begin training epoch 59
+2020-10-13 19:47:50 | INFO | train_inner | epoch 059:     51 / 394 loss=5.595, nll_loss=4.374, ppl=20.73, wps=33349.6, ups=4.44, wpb=7513.6, bsz=213.2, num_updates=22900, lr=8.35877e-05, gnorm=0.992, clip=0, loss_scale=64, train_wall=20, wall=4684
+2020-10-13 19:48:09 | INFO | train_inner | epoch 059:    151 / 394 loss=5.591, nll_loss=4.368, ppl=20.64, wps=38623.2, ups=5.12, wpb=7539, bsz=196.8, num_updates=23000, lr=8.34058e-05, gnorm=0.98, clip=0, loss_scale=64, train_wall=19, wall=4703
+2020-10-13 19:48:29 | INFO | train_inner | epoch 059:    251 / 394 loss=5.609, nll_loss=4.387, ppl=20.92, wps=39589.9, ups=5.16, wpb=7667.4, bsz=192.8, num_updates=23100, lr=8.3225e-05, gnorm=0.969, clip=0, loss_scale=64, train_wall=19, wall=4723
+2020-10-13 19:48:48 | INFO | train_inner | epoch 059:    351 / 394 loss=5.646, nll_loss=4.43, ppl=21.55, wps=39049.7, ups=5.04, wpb=7745.9, bsz=197.2, num_updates=23200, lr=8.30455e-05, gnorm=0.961, clip=0, loss_scale=64, train_wall=20, wall=4742
+2020-10-13 19:48:57 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:48:57 | INFO | valid | epoch 059 | valid on 'valid' subset | loss 6.147 | nll_loss 4.919 | ppl 30.25 | wps 56669.5 | wpb 1984.1 | bsz 74.6 | num_updates 23243 | best_loss 6.067
+2020-10-13 19:48:57 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:49:00 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 59 @ 23243 updates, score 6.147) (writing took 2.3372756540047703 seconds)
+2020-10-13 19:49:00 | INFO | fairseq_cli.train | end of epoch 59 (average epoch stats below)
+2020-10-13 19:49:00 | INFO | train | epoch 059 | loss 5.608 | nll_loss 4.387 | ppl 20.92 | wps 37304.3 | ups 4.91 | wpb 7603.9 | bsz 198.6 | num_updates 23243 | lr 8.29686e-05 | gnorm 0.977 | clip 0 | loss_scale 64 | train_wall 77 | wall 4754
+2020-10-13 19:49:00 | INFO | fairseq.trainer | begin training epoch 60
+2020-10-13 19:49:11 | INFO | train_inner | epoch 060:     57 / 394 loss=5.603, nll_loss=4.381, ppl=20.83, wps=33636.9, ups=4.36, wpb=7715.7, bsz=206.4, num_updates=23300, lr=8.28671e-05, gnorm=0.967, clip=0, loss_scale=64, train_wall=20, wall=4765
+2020-10-13 19:49:32 | INFO | train_inner | epoch 060:    157 / 394 loss=5.58, nll_loss=4.355, ppl=20.46, wps=36915.8, ups=4.94, wpb=7467.4, bsz=182.3, num_updates=23400, lr=8.26898e-05, gnorm=0.984, clip=0, loss_scale=64, train_wall=20, wall=4786
+2020-10-13 19:49:52 | INFO | train_inner | epoch 060:    257 / 394 loss=5.6, nll_loss=4.376, ppl=20.77, wps=38049.6, ups=4.95, wpb=7689.3, bsz=205.2, num_updates=23500, lr=8.25137e-05, gnorm=0.982, clip=0, loss_scale=64, train_wall=20, wall=4806
+2020-10-13 19:50:10 | INFO | train_inner | epoch 060:    357 / 394 loss=5.612, nll_loss=4.39, ppl=20.97, wps=41095.4, ups=5.45, wpb=7545.5, bsz=202.4, num_updates=23600, lr=8.23387e-05, gnorm=0.997, clip=0, loss_scale=64, train_wall=18, wall=4824
+2020-10-13 19:50:17 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:50:18 | INFO | valid | epoch 060 | valid on 'valid' subset | loss 6.206 | nll_loss 4.99 | ppl 31.78 | wps 58575.1 | wpb 1984.1 | bsz 74.6 | num_updates 23637 | best_loss 6.067
+2020-10-13 19:50:18 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:50:21 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 60 @ 23637 updates, score 6.206) (writing took 2.881933160999324 seconds)
+2020-10-13 19:50:21 | INFO | fairseq_cli.train | end of epoch 60 (average epoch stats below)
+2020-10-13 19:50:21 | INFO | train | epoch 060 | loss 5.596 | nll_loss 4.372 | ppl 20.71 | wps 36961.6 | ups 4.86 | wpb 7603.9 | bsz 198.6 | num_updates 23637 | lr 8.22742e-05 | gnorm 0.982 | clip 0 | loss_scale 64 | train_wall 77 | wall 4835
+2020-10-13 19:50:21 | INFO | fairseq.trainer | begin training epoch 61
+2020-10-13 19:50:33 | INFO | train_inner | epoch 061:     63 / 394 loss=5.577, nll_loss=4.352, ppl=20.42, wps=32387.5, ups=4.3, wpb=7526.9, bsz=207.6, num_updates=23700, lr=8.21648e-05, gnorm=0.991, clip=0, loss_scale=64, train_wall=20, wall=4847
+2020-10-13 19:50:54 | INFO | train_inner | epoch 061:    163 / 394 loss=5.577, nll_loss=4.35, ppl=20.4, wps=38526.6, ups=4.98, wpb=7730.6, bsz=193.2, num_updates=23800, lr=8.1992e-05, gnorm=0.967, clip=0, loss_scale=64, train_wall=20, wall=4867
+2020-10-13 19:51:14 | INFO | train_inner | epoch 061:    263 / 394 loss=5.588, nll_loss=4.363, ppl=20.58, wps=37736.4, ups=4.98, wpb=7583.6, bsz=195.5, num_updates=23900, lr=8.18203e-05, gnorm=0.99, clip=0, loss_scale=64, train_wall=20, wall=4888
+2020-10-13 19:51:34 | INFO | train_inner | epoch 061:    363 / 394 loss=5.6, nll_loss=4.377, ppl=20.78, wps=38038.5, ups=4.97, wpb=7660, bsz=208.2, num_updates=24000, lr=8.16497e-05, gnorm=0.981, clip=0, loss_scale=64, train_wall=20, wall=4908
+2020-10-13 19:51:40 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:51:40 | INFO | valid | epoch 061 | valid on 'valid' subset | loss 6.179 | nll_loss 4.961 | ppl 31.14 | wps 59197 | wpb 1984.1 | bsz 74.6 | num_updates 24031 | best_loss 6.067
+2020-10-13 19:51:40 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:51:44 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 61 @ 24031 updates, score 6.179) (writing took 3.893161346000852 seconds)
+2020-10-13 19:51:44 | INFO | fairseq_cli.train | end of epoch 61 (average epoch stats below)
+2020-10-13 19:51:44 | INFO | train | epoch 061 | loss 5.583 | nll_loss 4.358 | ppl 20.5 | wps 35924 | ups 4.72 | wpb 7603.9 | bsz 198.6 | num_updates 24031 | lr 8.1597e-05 | gnorm 0.984 | clip 0 | loss_scale 64 | train_wall 78 | wall 4918
+2020-10-13 19:51:44 | INFO | fairseq.trainer | begin training epoch 62
+2020-10-13 19:51:58 | INFO | train_inner | epoch 062:     69 / 394 loss=5.556, nll_loss=4.326, ppl=20.05, wps=30889.1, ups=4.12, wpb=7502.8, bsz=179.3, num_updates=24100, lr=8.14801e-05, gnorm=0.986, clip=0, loss_scale=64, train_wall=20, wall=4932
+2020-10-13 19:52:18 | INFO | train_inner | epoch 062:    169 / 394 loss=5.571, nll_loss=4.343, ppl=20.3, wps=37801.7, ups=5.01, wpb=7552.2, bsz=187.1, num_updates=24200, lr=8.13116e-05, gnorm=0.991, clip=0, loss_scale=64, train_wall=20, wall=4952
+2020-10-13 19:52:38 | INFO | train_inner | epoch 062:    269 / 394 loss=5.584, nll_loss=4.357, ppl=20.5, wps=38314.6, ups=4.97, wpb=7707.6, bsz=209.6, num_updates=24300, lr=8.11441e-05, gnorm=0.988, clip=0, loss_scale=64, train_wall=20, wall=4972
+2020-10-13 19:52:58 | INFO | train_inner | epoch 062:    369 / 394 loss=5.573, nll_loss=4.345, ppl=20.33, wps=37830.1, ups=4.98, wpb=7602.1, bsz=207.1, num_updates=24400, lr=8.09776e-05, gnorm=0.994, clip=0, loss_scale=64, train_wall=20, wall=4992
+2020-10-13 19:53:03 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:53:04 | INFO | valid | epoch 062 | valid on 'valid' subset | loss 6.19 | nll_loss 4.953 | ppl 30.98 | wps 56974.6 | wpb 1984.1 | bsz 74.6 | num_updates 24425 | best_loss 6.067
+2020-10-13 19:53:04 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:53:06 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 62 @ 24425 updates, score 6.19) (writing took 2.082805815996835 seconds)
+2020-10-13 19:53:06 | INFO | fairseq_cli.train | end of epoch 62 (average epoch stats below)
+2020-10-13 19:53:06 | INFO | train | epoch 062 | loss 5.572 | nll_loss 4.344 | ppl 20.3 | wps 36723.3 | ups 4.83 | wpb 7603.9 | bsz 198.6 | num_updates 24425 | lr 8.09362e-05 | gnorm 0.989 | clip 0 | loss_scale 64 | train_wall 78 | wall 5000
+2020-10-13 19:53:06 | INFO | fairseq.trainer | begin training epoch 63
+2020-10-13 19:53:21 | INFO | train_inner | epoch 063:     75 / 394 loss=5.554, nll_loss=4.324, ppl=20.03, wps=33476.4, ups=4.41, wpb=7593.9, bsz=207.3, num_updates=24500, lr=8.08122e-05, gnorm=1.025, clip=0, loss_scale=64, train_wall=20, wall=5015
+2020-10-13 19:53:39 | INFO | train_inner | epoch 063:    175 / 394 loss=5.545, nll_loss=4.312, ppl=19.87, wps=41727.4, ups=5.48, wpb=7617.2, bsz=198.7, num_updates=24600, lr=8.06478e-05, gnorm=0.999, clip=0, loss_scale=64, train_wall=18, wall=5033
+2020-10-13 19:53:59 | INFO | train_inner | epoch 063:    275 / 394 loss=5.577, nll_loss=4.349, ppl=20.38, wps=37746.3, ups=5, wpb=7552.9, bsz=188.6, num_updates=24700, lr=8.04844e-05, gnorm=1.003, clip=0, loss_scale=64, train_wall=20, wall=5053
+2020-10-13 19:54:19 | INFO | train_inner | epoch 063:    375 / 394 loss=5.569, nll_loss=4.34, ppl=20.25, wps=38364.6, ups=5.05, wpb=7591.2, bsz=201.8, num_updates=24800, lr=8.03219e-05, gnorm=0.999, clip=0, loss_scale=64, train_wall=20, wall=5073
+2020-10-13 19:54:23 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:54:23 | INFO | valid | epoch 063 | valid on 'valid' subset | loss 6.193 | nll_loss 4.977 | ppl 31.5 | wps 54892.1 | wpb 1984.1 | bsz 74.6 | num_updates 24819 | best_loss 6.067
+2020-10-13 19:54:23 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:54:25 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 63 @ 24819 updates, score 6.193) (writing took 2.2022434109967435 seconds)
+2020-10-13 19:54:25 | INFO | fairseq_cli.train | end of epoch 63 (average epoch stats below)
+2020-10-13 19:54:25 | INFO | train | epoch 063 | loss 5.562 | nll_loss 4.332 | ppl 20.14 | wps 37632.6 | ups 4.95 | wpb 7603.9 | bsz 198.6 | num_updates 24819 | lr 8.02912e-05 | gnorm 1.005 | clip 0 | loss_scale 64 | train_wall 76 | wall 5079
+2020-10-13 19:54:25 | INFO | fairseq.trainer | begin training epoch 64
+2020-10-13 19:54:42 | INFO | train_inner | epoch 064:     81 / 394 loss=5.547, nll_loss=4.315, ppl=19.91, wps=33666.3, ups=4.38, wpb=7690.6, bsz=197, num_updates=24900, lr=8.01605e-05, gnorm=0.981, clip=0, loss_scale=64, train_wall=20, wall=5096
+2020-10-13 19:55:02 | INFO | train_inner | epoch 064:    181 / 394 loss=5.527, nll_loss=4.292, ppl=19.59, wps=36963.2, ups=4.94, wpb=7486.1, bsz=199.4, num_updates=25000, lr=8e-05, gnorm=1.006, clip=0, loss_scale=64, train_wall=20, wall=5116
+2020-10-13 19:55:21 | INFO | train_inner | epoch 064:    281 / 394 loss=5.567, nll_loss=4.336, ppl=20.2, wps=41744.6, ups=5.39, wpb=7746.8, bsz=198.8, num_updates=25100, lr=7.98405e-05, gnorm=0.991, clip=0, loss_scale=64, train_wall=18, wall=5135
+2020-10-13 19:55:41 | INFO | train_inner | epoch 064:    381 / 394 loss=5.566, nll_loss=4.336, ppl=20.19, wps=37583.4, ups=4.98, wpb=7548.4, bsz=200.3, num_updates=25200, lr=7.96819e-05, gnorm=1.002, clip=0, loss_scale=64, train_wall=20, wall=5155
+2020-10-13 19:55:43 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:55:44 | INFO | valid | epoch 064 | valid on 'valid' subset | loss 6.191 | nll_loss 4.975 | ppl 31.44 | wps 58274.2 | wpb 1984.1 | bsz 74.6 | num_updates 25213 | best_loss 6.067
+2020-10-13 19:55:44 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:55:47 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 64 @ 25213 updates, score 6.191) (writing took 3.0941310490015894 seconds)
+2020-10-13 19:55:47 | INFO | fairseq_cli.train | end of epoch 64 (average epoch stats below)
+2020-10-13 19:55:47 | INFO | train | epoch 064 | loss 5.548 | nll_loss 4.316 | ppl 19.92 | wps 36790.6 | ups 4.84 | wpb 7603.9 | bsz 198.6 | num_updates 25213 | lr 7.96614e-05 | gnorm 0.997 | clip 0 | loss_scale 64 | train_wall 77 | wall 5161
+2020-10-13 19:55:47 | INFO | fairseq.trainer | begin training epoch 65
+2020-10-13 19:56:04 | INFO | train_inner | epoch 065:     87 / 394 loss=5.509, nll_loss=4.271, ppl=19.31, wps=32136.2, ups=4.28, wpb=7504.2, bsz=191.9, num_updates=25300, lr=7.95243e-05, gnorm=1.003, clip=0, loss_scale=64, train_wall=20, wall=5178
+2020-10-13 19:56:24 | INFO | train_inner | epoch 065:    187 / 394 loss=5.526, nll_loss=4.29, ppl=19.56, wps=38995.5, ups=5.08, wpb=7681.7, bsz=206, num_updates=25400, lr=7.93676e-05, gnorm=1.025, clip=0, loss_scale=64, train_wall=20, wall=5198
+2020-10-13 19:56:44 | INFO | train_inner | epoch 065:    287 / 394 loss=5.554, nll_loss=4.321, ppl=19.99, wps=38406.5, ups=5.07, wpb=7581.1, bsz=194.2, num_updates=25500, lr=7.92118e-05, gnorm=1.028, clip=0, loss_scale=64, train_wall=20, wall=5217
+2020-10-13 19:57:03 | INFO | train_inner | epoch 065:    387 / 394 loss=5.563, nll_loss=4.331, ppl=20.13, wps=38655, ups=5.06, wpb=7639.6, bsz=201.8, num_updates=25600, lr=7.90569e-05, gnorm=0.989, clip=0, loss_scale=64, train_wall=20, wall=5237
+2020-10-13 19:57:04 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:57:05 | INFO | valid | epoch 065 | valid on 'valid' subset | loss 6.198 | nll_loss 4.973 | ppl 31.41 | wps 82265.9 | wpb 1984.1 | bsz 74.6 | num_updates 25607 | best_loss 6.067
+2020-10-13 19:57:05 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:57:08 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 65 @ 25607 updates, score 6.198) (writing took 3.043729101998906 seconds)
+2020-10-13 19:57:08 | INFO | fairseq_cli.train | end of epoch 65 (average epoch stats below)
+2020-10-13 19:57:08 | INFO | train | epoch 065 | loss 5.538 | nll_loss 4.304 | ppl 19.75 | wps 37058.8 | ups 4.87 | wpb 7603.9 | bsz 198.6 | num_updates 25607 | lr 7.90461e-05 | gnorm 1.01 | clip 0 | loss_scale 64 | train_wall 77 | wall 5242
+2020-10-13 19:57:08 | INFO | fairseq.trainer | begin training epoch 66
+2020-10-13 19:57:26 | INFO | train_inner | epoch 066:     93 / 394 loss=5.51, nll_loss=4.271, ppl=19.31, wps=33231.1, ups=4.38, wpb=7593.8, bsz=202.6, num_updates=25700, lr=7.8903e-05, gnorm=1.016, clip=0, loss_scale=64, train_wall=19, wall=5260
+2020-10-13 19:57:46 | INFO | train_inner | epoch 066:    193 / 394 loss=5.519, nll_loss=4.282, ppl=19.45, wps=38641, ups=5.06, wpb=7643.5, bsz=191.7, num_updates=25800, lr=7.87499e-05, gnorm=0.998, clip=0, loss_scale=64, train_wall=20, wall=5280
+2020-10-13 19:58:06 | INFO | train_inner | epoch 066:    293 / 394 loss=5.525, nll_loss=4.289, ppl=19.55, wps=38037.8, ups=5.05, wpb=7525.3, bsz=204.8, num_updates=25900, lr=7.85977e-05, gnorm=1.026, clip=0, loss_scale=64, train_wall=20, wall=5300
+2020-10-13 19:58:25 | INFO | train_inner | epoch 066:    393 / 394 loss=5.557, nll_loss=4.323, ppl=20.02, wps=38852.1, ups=5.08, wpb=7643.9, bsz=196.8, num_updates=26000, lr=7.84465e-05, gnorm=0.996, clip=0, loss_scale=64, train_wall=20, wall=5319
+2020-10-13 19:58:26 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:58:26 | INFO | valid | epoch 066 | valid on 'valid' subset | loss 6.178 | nll_loss 4.951 | ppl 30.93 | wps 57041.1 | wpb 1984.1 | bsz 74.6 | num_updates 26001 | best_loss 6.067
+2020-10-13 19:58:26 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:58:28 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 66 @ 26001 updates, score 6.178) (writing took 2.0728129950002767 seconds)
+2020-10-13 19:58:28 | INFO | fairseq_cli.train | end of epoch 66 (average epoch stats below)
+2020-10-13 19:58:28 | INFO | train | epoch 066 | loss 5.527 | nll_loss 4.291 | ppl 19.57 | wps 37267.2 | ups 4.9 | wpb 7603.9 | bsz 198.6 | num_updates 26001 | lr 7.84449e-05 | gnorm 1.009 | clip 0 | loss_scale 64 | train_wall 77 | wall 5322
+2020-10-13 19:58:28 | INFO | fairseq.trainer | begin training epoch 67
+2020-10-13 19:58:48 | INFO | train_inner | epoch 067:     99 / 394 loss=5.496, nll_loss=4.255, ppl=19.09, wps=33312.6, ups=4.41, wpb=7561, bsz=200.3, num_updates=26100, lr=7.8296e-05, gnorm=1.035, clip=0, loss_scale=64, train_wall=20, wall=5342
+2020-10-13 19:59:07 | INFO | train_inner | epoch 067:    199 / 394 loss=5.504, nll_loss=4.264, ppl=19.21, wps=40521.7, ups=5.36, wpb=7563.6, bsz=196, num_updates=26200, lr=7.81465e-05, gnorm=1.023, clip=0, loss_scale=64, train_wall=19, wall=5361
+2020-10-13 19:59:27 | INFO | train_inner | epoch 067:    299 / 394 loss=5.539, nll_loss=4.303, ppl=19.75, wps=38396, ups=4.96, wpb=7746.4, bsz=209.4, num_updates=26300, lr=7.79978e-05, gnorm=1.007, clip=0, loss_scale=64, train_wall=20, wall=5381
+2020-10-13 19:59:46 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 19:59:46 | INFO | valid | epoch 067 | valid on 'valid' subset | loss 6.188 | nll_loss 4.956 | ppl 31.04 | wps 58346.8 | wpb 1984.1 | bsz 74.6 | num_updates 26395 | best_loss 6.067
+2020-10-13 19:59:46 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 19:59:49 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 67 @ 26395 updates, score 6.188) (writing took 2.989556223001273 seconds)
+2020-10-13 19:59:49 | INFO | fairseq_cli.train | end of epoch 67 (average epoch stats below)
+2020-10-13 19:59:49 | INFO | train | epoch 067 | loss 5.516 | nll_loss 4.278 | ppl 19.4 | wps 36858.1 | ups 4.85 | wpb 7603.9 | bsz 198.6 | num_updates 26395 | lr 7.78573e-05 | gnorm 1.023 | clip 0 | loss_scale 64 | train_wall 77 | wall 5403
+2020-10-13 19:59:49 | INFO | fairseq.trainer | begin training epoch 68
+2020-10-13 19:59:50 | INFO | train_inner | epoch 068:      5 / 394 loss=5.524, nll_loss=4.286, ppl=19.5, wps=32042, ups=4.25, wpb=7533.3, bsz=186.8, num_updates=26400, lr=7.78499e-05, gnorm=1.024, clip=0, loss_scale=64, train_wall=20, wall=5404
+2020-10-13 20:00:10 | INFO | train_inner | epoch 068:    105 / 394 loss=5.492, nll_loss=4.25, ppl=19.02, wps=38174.1, ups=5.07, wpb=7529, bsz=183.3, num_updates=26500, lr=7.77029e-05, gnorm=1.018, clip=0, loss_scale=64, train_wall=20, wall=5424
+2020-10-13 20:00:30 | INFO | train_inner | epoch 068:    205 / 394 loss=5.489, nll_loss=4.246, ppl=18.97, wps=38745.4, ups=5.08, wpb=7622.1, bsz=212.8, num_updates=26600, lr=7.75567e-05, gnorm=1.039, clip=0, loss_scale=64, train_wall=20, wall=5444
+2020-10-13 20:00:49 | INFO | train_inner | epoch 068:    305 / 394 loss=5.527, nll_loss=4.289, ppl=19.55, wps=40893.8, ups=5.29, wpb=7724.4, bsz=205.8, num_updates=26700, lr=7.74113e-05, gnorm=1.013, clip=0, loss_scale=64, train_wall=19, wall=5463
+2020-10-13 20:01:06 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:01:07 | INFO | valid | epoch 068 | valid on 'valid' subset | loss 6.21 | nll_loss 4.983 | ppl 31.63 | wps 55365.2 | wpb 1984.1 | bsz 74.6 | num_updates 26789 | best_loss 6.067
+2020-10-13 20:01:07 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:01:09 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 68 @ 26789 updates, score 6.21) (writing took 2.006492951004475 seconds)
+2020-10-13 20:01:09 | INFO | fairseq_cli.train | end of epoch 68 (average epoch stats below)
+2020-10-13 20:01:09 | INFO | train | epoch 068 | loss 5.505 | nll_loss 4.264 | ppl 19.22 | wps 37673.9 | ups 4.95 | wpb 7603.9 | bsz 198.6 | num_updates 26789 | lr 7.72826e-05 | gnorm 1.023 | clip 0 | loss_scale 128 | train_wall 76 | wall 5483
+2020-10-13 20:01:09 | INFO | fairseq.trainer | begin training epoch 69
+2020-10-13 20:01:11 | INFO | train_inner | epoch 069:     11 / 394 loss=5.508, nll_loss=4.268, ppl=19.27, wps=33605.6, ups=4.44, wpb=7562.6, bsz=194.7, num_updates=26800, lr=7.72667e-05, gnorm=1.024, clip=0, loss_scale=128, train_wall=20, wall=5485
+2020-10-13 20:01:21 | INFO | fairseq.trainer | NOTE: overflow detected, setting loss scale to: 64.0
+2020-10-13 20:01:31 | INFO | train_inner | epoch 069:    112 / 394 loss=5.484, nll_loss=4.241, ppl=18.9, wps=37916.6, ups=4.93, wpb=7694.6, bsz=199, num_updates=26900, lr=7.7123e-05, gnorm=1.011, clip=0, loss_scale=64, train_wall=20, wall=5505
+2020-10-13 20:01:52 | INFO | train_inner | epoch 069:    212 / 394 loss=5.493, nll_loss=4.25, ppl=19.03, wps=37831.3, ups=4.94, wpb=7654.9, bsz=195, num_updates=27000, lr=7.698e-05, gnorm=1.028, clip=0, loss_scale=64, train_wall=20, wall=5526
+2020-10-13 20:02:12 | INFO | train_inner | epoch 069:    312 / 394 loss=5.511, nll_loss=4.271, ppl=19.3, wps=37574.5, ups=4.95, wpb=7593.9, bsz=204.8, num_updates=27100, lr=7.68379e-05, gnorm=1.037, clip=0, loss_scale=64, train_wall=20, wall=5546
+2020-10-13 20:02:27 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:02:27 | INFO | valid | epoch 069 | valid on 'valid' subset | loss 6.214 | nll_loss 4.983 | ppl 31.62 | wps 56648.9 | wpb 1984.1 | bsz 74.6 | num_updates 27182 | best_loss 6.067
+2020-10-13 20:02:27 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:02:29 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 69 @ 27182 updates, score 6.214) (writing took 2.063610406999942 seconds)
+2020-10-13 20:02:29 | INFO | fairseq_cli.train | end of epoch 69 (average epoch stats below)
+2020-10-13 20:02:29 | INFO | train | epoch 069 | loss 5.495 | nll_loss 4.253 | ppl 19.07 | wps 37117.5 | ups 4.88 | wpb 7603.9 | bsz 198 | num_updates 27182 | lr 7.67219e-05 | gnorm 1.03 | clip 0 | loss_scale 64 | train_wall 77 | wall 5563
+2020-10-13 20:02:29 | INFO | fairseq.trainer | begin training epoch 70
+2020-10-13 20:02:33 | INFO | train_inner | epoch 070:     18 / 394 loss=5.489, nll_loss=4.246, ppl=18.98, wps=35150.9, ups=4.74, wpb=7418.3, bsz=186.3, num_updates=27200, lr=7.66965e-05, gnorm=1.044, clip=0, loss_scale=64, train_wall=18, wall=5567
+2020-10-13 20:02:53 | INFO | train_inner | epoch 070:    118 / 394 loss=5.473, nll_loss=4.227, ppl=18.73, wps=38279.9, ups=4.96, wpb=7719.3, bsz=192.3, num_updates=27300, lr=7.65559e-05, gnorm=1.019, clip=0, loss_scale=64, train_wall=20, wall=5587
+2020-10-13 20:03:13 | INFO | train_inner | epoch 070:    218 / 394 loss=5.477, nll_loss=4.231, ppl=18.78, wps=37876.4, ups=4.98, wpb=7600.7, bsz=195.9, num_updates=27400, lr=7.64161e-05, gnorm=1.015, clip=0, loss_scale=64, train_wall=20, wall=5607
+2020-10-13 20:03:33 | INFO | train_inner | epoch 070:    318 / 394 loss=5.489, nll_loss=4.245, ppl=18.96, wps=37444, ups=4.97, wpb=7529.2, bsz=203.9, num_updates=27500, lr=7.6277e-05, gnorm=1.029, clip=0, loss_scale=64, train_wall=20, wall=5627
+2020-10-13 20:03:49 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:03:49 | INFO | valid | epoch 070 | valid on 'valid' subset | loss 6.244 | nll_loss 5.027 | ppl 32.6 | wps 61143.8 | wpb 1984.1 | bsz 74.6 | num_updates 27576 | best_loss 6.067
+2020-10-13 20:03:49 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:03:51 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 70 @ 27576 updates, score 6.244) (writing took 2.380202072999964 seconds)
+2020-10-13 20:03:51 | INFO | fairseq_cli.train | end of epoch 70 (average epoch stats below)
+2020-10-13 20:03:51 | INFO | train | epoch 070 | loss 5.483 | nll_loss 4.238 | ppl 18.87 | wps 36497.2 | ups 4.8 | wpb 7603.9 | bsz 198.6 | num_updates 27576 | lr 7.61718e-05 | gnorm 1.026 | clip 0 | loss_scale 64 | train_wall 79 | wall 5645
+2020-10-13 20:03:51 | INFO | fairseq.trainer | begin training epoch 71
+2020-10-13 20:03:56 | INFO | train_inner | epoch 071:     24 / 394 loss=5.494, nll_loss=4.251, ppl=19.04, wps=33339.3, ups=4.36, wpb=7647.6, bsz=210.8, num_updates=27600, lr=7.61387e-05, gnorm=1.043, clip=0, loss_scale=64, train_wall=20, wall=5650
+2020-10-13 20:04:15 | INFO | train_inner | epoch 071:    124 / 394 loss=5.45, nll_loss=4.2, ppl=18.38, wps=40417.8, ups=5.35, wpb=7555.2, bsz=206.6, num_updates=27700, lr=7.60011e-05, gnorm=1.034, clip=0, loss_scale=64, train_wall=19, wall=5669
+2020-10-13 20:04:35 | INFO | train_inner | epoch 071:    224 / 394 loss=5.47, nll_loss=4.222, ppl=18.66, wps=37731.7, ups=4.95, wpb=7621.2, bsz=196.4, num_updates=27800, lr=7.58643e-05, gnorm=1.043, clip=0, loss_scale=64, train_wall=20, wall=5689
+2020-10-13 20:04:55 | INFO | train_inner | epoch 071:    324 / 394 loss=5.488, nll_loss=4.243, ppl=18.94, wps=37538.9, ups=4.97, wpb=7546.5, bsz=191, num_updates=27900, lr=7.57282e-05, gnorm=1.042, clip=0, loss_scale=64, train_wall=20, wall=5709
+2020-10-13 20:05:09 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:05:10 | INFO | valid | epoch 071 | valid on 'valid' subset | loss 6.235 | nll_loss 5.014 | ppl 32.31 | wps 57189.4 | wpb 1984.1 | bsz 74.6 | num_updates 27970 | best_loss 6.067
+2020-10-13 20:05:10 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:05:12 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 71 @ 27970 updates, score 6.235) (writing took 2.1371600659986143 seconds)
+2020-10-13 20:05:12 | INFO | fairseq_cli.train | end of epoch 71 (average epoch stats below)
+2020-10-13 20:05:12 | INFO | train | epoch 071 | loss 5.474 | nll_loss 4.227 | ppl 18.73 | wps 37199 | ups 4.89 | wpb 7603.9 | bsz 198.6 | num_updates 27970 | lr 7.56334e-05 | gnorm 1.037 | clip 0 | loss_scale 64 | train_wall 77 | wall 5726
+2020-10-13 20:05:12 | INFO | fairseq.trainer | begin training epoch 72
+2020-10-13 20:05:18 | INFO | train_inner | epoch 072:     30 / 394 loss=5.476, nll_loss=4.229, ppl=18.76, wps=33724.3, ups=4.4, wpb=7666.3, bsz=202.8, num_updates=28000, lr=7.55929e-05, gnorm=1.029, clip=0, loss_scale=64, train_wall=20, wall=5732
+2020-10-13 20:05:38 | INFO | train_inner | epoch 072:    130 / 394 loss=5.446, nll_loss=4.196, ppl=18.32, wps=38360.2, ups=5.03, wpb=7618.7, bsz=192.8, num_updates=28100, lr=7.54583e-05, gnorm=1.027, clip=0, loss_scale=64, train_wall=20, wall=5752
+2020-10-13 20:05:57 | INFO | train_inner | epoch 072:    230 / 394 loss=5.476, nll_loss=4.229, ppl=18.75, wps=40094.8, ups=5.21, wpb=7698.5, bsz=200, num_updates=28200, lr=7.53244e-05, gnorm=1.04, clip=0, loss_scale=64, train_wall=19, wall=5771
+2020-10-13 20:06:16 | INFO | train_inner | epoch 072:    330 / 394 loss=5.482, nll_loss=4.236, ppl=18.84, wps=40449.8, ups=5.32, wpb=7602.4, bsz=203, num_updates=28300, lr=7.51912e-05, gnorm=1.044, clip=0, loss_scale=64, train_wall=19, wall=5790
+2020-10-13 20:06:29 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:06:29 | INFO | valid | epoch 072 | valid on 'valid' subset | loss 6.236 | nll_loss 5.009 | ppl 32.2 | wps 57134.3 | wpb 1984.1 | bsz 74.6 | num_updates 28364 | best_loss 6.067
+2020-10-13 20:06:29 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:06:31 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 72 @ 28364 updates, score 6.236) (writing took 2.0174699150011293 seconds)
+2020-10-13 20:06:31 | INFO | fairseq_cli.train | end of epoch 72 (average epoch stats below)
+2020-10-13 20:06:31 | INFO | train | epoch 072 | loss 5.463 | nll_loss 4.214 | ppl 18.56 | wps 37820.8 | ups 4.97 | wpb 7603.9 | bsz 198.6 | num_updates 28364 | lr 7.51063e-05 | gnorm 1.045 | clip 0 | loss_scale 64 | train_wall 76 | wall 5805
+2020-10-13 20:06:31 | INFO | fairseq.trainer | begin training epoch 73
+2020-10-13 20:06:39 | INFO | train_inner | epoch 073:     36 / 394 loss=5.451, nll_loss=4.201, ppl=18.39, wps=33409.2, ups=4.42, wpb=7554.7, bsz=191.8, num_updates=28400, lr=7.50587e-05, gnorm=1.052, clip=0, loss_scale=64, train_wall=20, wall=5812
+2020-10-13 20:06:59 | INFO | train_inner | epoch 073:    136 / 394 loss=5.42, nll_loss=4.165, ppl=17.94, wps=37673.3, ups=4.98, wpb=7572.3, bsz=205.5, num_updates=28500, lr=7.49269e-05, gnorm=1.049, clip=0, loss_scale=64, train_wall=20, wall=5833
+2020-10-13 20:07:19 | INFO | train_inner | epoch 073:    236 / 394 loss=5.445, nll_loss=4.193, ppl=18.29, wps=37574.4, ups=4.96, wpb=7575.5, bsz=203.9, num_updates=28600, lr=7.47958e-05, gnorm=1.036, clip=0, loss_scale=64, train_wall=20, wall=5853
+2020-10-13 20:07:39 | INFO | train_inner | epoch 073:    336 / 394 loss=5.472, nll_loss=4.224, ppl=18.68, wps=37925.3, ups=5, wpb=7583.9, bsz=190.2, num_updates=28700, lr=7.46653e-05, gnorm=1.036, clip=0, loss_scale=64, train_wall=20, wall=5873
+2020-10-13 20:07:49 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:07:49 | INFO | valid | epoch 073 | valid on 'valid' subset | loss 6.269 | nll_loss 5.048 | ppl 33.08 | wps 58141.5 | wpb 1984.1 | bsz 74.6 | num_updates 28758 | best_loss 6.067
+2020-10-13 20:07:49 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:07:51 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 73 @ 28758 updates, score 6.269) (writing took 2.0181261069956236 seconds)
+2020-10-13 20:07:51 | INFO | fairseq_cli.train | end of epoch 73 (average epoch stats below)
+2020-10-13 20:07:51 | INFO | train | epoch 073 | loss 5.451 | nll_loss 4.2 | ppl 18.38 | wps 37394.1 | ups 4.92 | wpb 7603.9 | bsz 198.6 | num_updates 28758 | lr 7.459e-05 | gnorm 1.038 | clip 0 | loss_scale 64 | train_wall 77 | wall 5885
+2020-10-13 20:07:51 | INFO | fairseq.trainer | begin training epoch 74
+2020-10-13 20:08:00 | INFO | train_inner | epoch 074:     42 / 394 loss=5.446, nll_loss=4.194, ppl=18.3, wps=35669, ups=4.76, wpb=7494.5, bsz=193.8, num_updates=28800, lr=7.45356e-05, gnorm=1.061, clip=0, loss_scale=64, train_wall=18, wall=5894
+2020-10-13 20:08:20 | INFO | train_inner | epoch 074:    142 / 394 loss=5.435, nll_loss=4.182, ppl=18.15, wps=37708.4, ups=4.96, wpb=7597.3, bsz=200.7, num_updates=28900, lr=7.44065e-05, gnorm=1.041, clip=0, loss_scale=64, train_wall=20, wall=5914
+2020-10-13 20:08:40 | INFO | train_inner | epoch 074:    242 / 394 loss=5.444, nll_loss=4.191, ppl=18.27, wps=38487.7, ups=4.94, wpb=7796.7, bsz=213.1, num_updates=29000, lr=7.42781e-05, gnorm=1.048, clip=0, loss_scale=64, train_wall=20, wall=5934
+2020-10-13 20:09:00 | INFO | train_inner | epoch 074:    342 / 394 loss=5.457, nll_loss=4.206, ppl=18.45, wps=37683.8, ups=4.98, wpb=7569.4, bsz=191, num_updates=29100, lr=7.41504e-05, gnorm=1.051, clip=0, loss_scale=64, train_wall=20, wall=5954
+2020-10-13 20:09:11 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:09:11 | INFO | valid | epoch 074 | valid on 'valid' subset | loss 6.248 | nll_loss 5.021 | ppl 32.46 | wps 57451.7 | wpb 1984.1 | bsz 74.6 | num_updates 29152 | best_loss 6.067
+2020-10-13 20:09:11 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:09:13 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 74 @ 29152 updates, score 6.248) (writing took 2.203158099000575 seconds)
+2020-10-13 20:09:13 | INFO | fairseq_cli.train | end of epoch 74 (average epoch stats below)
+2020-10-13 20:09:13 | INFO | train | epoch 074 | loss 5.442 | nll_loss 4.189 | ppl 18.24 | wps 36515.6 | ups 4.8 | wpb 7603.9 | bsz 198.6 | num_updates 29152 | lr 7.40842e-05 | gnorm 1.05 | clip 0 | loss_scale 64 | train_wall 79 | wall 5967
+2020-10-13 20:09:13 | INFO | fairseq.trainer | begin training epoch 75
+2020-10-13 20:09:23 | INFO | train_inner | epoch 075:     48 / 394 loss=5.436, nll_loss=4.182, ppl=18.16, wps=33097.5, ups=4.38, wpb=7550.4, bsz=187.1, num_updates=29200, lr=7.40233e-05, gnorm=1.051, clip=0, loss_scale=64, train_wall=20, wall=5977
+2020-10-13 20:09:41 | INFO | train_inner | epoch 075:    148 / 394 loss=5.402, nll_loss=4.144, ppl=17.68, wps=41867.8, ups=5.53, wpb=7564.7, bsz=206.1, num_updates=29300, lr=7.38969e-05, gnorm=1.05, clip=0, loss_scale=64, train_wall=18, wall=5995
+2020-10-13 20:10:01 | INFO | train_inner | epoch 075:    248 / 394 loss=5.436, nll_loss=4.182, ppl=18.15, wps=38548.3, ups=5.06, wpb=7622.1, bsz=197.5, num_updates=29400, lr=7.37711e-05, gnorm=1.037, clip=0, loss_scale=64, train_wall=20, wall=6015
+2020-10-13 20:10:21 | INFO | train_inner | epoch 075:    348 / 394 loss=5.449, nll_loss=4.196, ppl=18.33, wps=38389.8, ups=5.06, wpb=7588.1, bsz=201.5, num_updates=29500, lr=7.3646e-05, gnorm=1.066, clip=0, loss_scale=64, train_wall=20, wall=6035
+2020-10-13 20:10:30 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:10:30 | INFO | valid | epoch 075 | valid on 'valid' subset | loss 6.265 | nll_loss 5.041 | ppl 32.91 | wps 57162.5 | wpb 1984.1 | bsz 74.6 | num_updates 29546 | best_loss 6.067
+2020-10-13 20:10:30 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:10:32 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 75 @ 29546 updates, score 6.265) (writing took 2.306704369999352 seconds)
+2020-10-13 20:10:32 | INFO | fairseq_cli.train | end of epoch 75 (average epoch stats below)
+2020-10-13 20:10:32 | INFO | train | epoch 075 | loss 5.432 | nll_loss 4.178 | ppl 18.1 | wps 37851 | ups 4.98 | wpb 7603.9 | bsz 198.6 | num_updates 29546 | lr 7.35886e-05 | gnorm 1.05 | clip 0 | loss_scale 64 | train_wall 76 | wall 6046
+2020-10-13 20:10:33 | INFO | fairseq.trainer | begin training epoch 76
+2020-10-13 20:10:43 | INFO | train_inner | epoch 076:     54 / 394 loss=5.417, nll_loss=4.161, ppl=17.89, wps=33270.5, ups=4.39, wpb=7576.9, bsz=200.7, num_updates=29600, lr=7.35215e-05, gnorm=1.052, clip=0, loss_scale=64, train_wall=20, wall=6057
+2020-10-13 20:11:04 | INFO | train_inner | epoch 076:    154 / 394 loss=5.43, nll_loss=4.175, ppl=18.06, wps=38367.7, ups=4.99, wpb=7696.3, bsz=199.2, num_updates=29700, lr=7.33976e-05, gnorm=1.039, clip=0, loss_scale=64, train_wall=20, wall=6077
+2020-10-13 20:11:21 | INFO | train_inner | epoch 076:    254 / 394 loss=5.42, nll_loss=4.163, ppl=17.91, wps=43145, ups=5.65, wpb=7630.2, bsz=192.9, num_updates=29800, lr=7.32743e-05, gnorm=1.046, clip=0, loss_scale=64, train_wall=18, wall=6095
+2020-10-13 20:11:41 | INFO | train_inner | epoch 076:    354 / 394 loss=5.443, nll_loss=4.189, ppl=18.24, wps=37579.9, ups=4.96, wpb=7570.8, bsz=191, num_updates=29900, lr=7.31517e-05, gnorm=1.057, clip=0, loss_scale=64, train_wall=20, wall=6115
+2020-10-13 20:11:49 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:11:50 | INFO | valid | epoch 076 | valid on 'valid' subset | loss 6.26 | nll_loss 5.026 | ppl 32.59 | wps 59162.7 | wpb 1984.1 | bsz 74.6 | num_updates 29940 | best_loss 6.067
+2020-10-13 20:11:50 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:11:53 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 76 @ 29940 updates, score 6.26) (writing took 3.2595304940041387 seconds)
+2020-10-13 20:11:53 | INFO | fairseq_cli.train | end of epoch 76 (average epoch stats below)
+2020-10-13 20:11:53 | INFO | train | epoch 076 | loss 5.422 | nll_loss 4.166 | ppl 17.95 | wps 37191.1 | ups 4.89 | wpb 7603.9 | bsz 198.6 | num_updates 29940 | lr 7.31028e-05 | gnorm 1.053 | clip 0 | loss_scale 64 | train_wall 76 | wall 6127
+2020-10-13 20:11:53 | INFO | fairseq.trainer | begin training epoch 77
+2020-10-13 20:12:05 | INFO | train_inner | epoch 077:     60 / 394 loss=5.404, nll_loss=4.145, ppl=17.69, wps=31640.5, ups=4.2, wpb=7532.1, bsz=198.5, num_updates=30000, lr=7.30297e-05, gnorm=1.065, clip=0, loss_scale=64, train_wall=20, wall=6139
+2020-10-13 20:12:25 | INFO | train_inner | epoch 077:    160 / 394 loss=5.402, nll_loss=4.142, ppl=17.66, wps=37930.9, ups=4.95, wpb=7664.9, bsz=193.7, num_updates=30100, lr=7.29083e-05, gnorm=1.051, clip=0, loss_scale=64, train_wall=20, wall=6159
+2020-10-13 20:12:46 | INFO | train_inner | epoch 077:    260 / 394 loss=5.412, nll_loss=4.153, ppl=17.79, wps=37767.8, ups=4.95, wpb=7631, bsz=208, num_updates=30200, lr=7.27875e-05, gnorm=1.063, clip=0, loss_scale=64, train_wall=20, wall=6180
+2020-10-13 20:13:06 | INFO | train_inner | epoch 077:    360 / 394 loss=5.446, nll_loss=4.192, ppl=18.28, wps=38018.8, ups=4.95, wpb=7683.3, bsz=199.3, num_updates=30300, lr=7.26672e-05, gnorm=1.077, clip=0, loss_scale=64, train_wall=20, wall=6200
+2020-10-13 20:13:10 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:13:11 | INFO | valid | epoch 077 | valid on 'valid' subset | loss 6.254 | nll_loss 5.026 | ppl 32.58 | wps 58172 | wpb 1984.1 | bsz 74.6 | num_updates 30334 | best_loss 6.067
+2020-10-13 20:13:11 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:13:13 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 77 @ 30334 updates, score 6.254) (writing took 2.3650935190016753 seconds)
+2020-10-13 20:13:13 | INFO | fairseq_cli.train | end of epoch 77 (average epoch stats below)
+2020-10-13 20:13:13 | INFO | train | epoch 077 | loss 5.412 | nll_loss 4.153 | ppl 17.79 | wps 37498.6 | ups 4.93 | wpb 7603.9 | bsz 198.6 | num_updates 30334 | lr 7.26265e-05 | gnorm 1.066 | clip 0 | loss_scale 64 | train_wall 76 | wall 6207
+2020-10-13 20:13:13 | INFO | fairseq.trainer | begin training epoch 78
+2020-10-13 20:13:26 | INFO | train_inner | epoch 078:     66 / 394 loss=5.39, nll_loss=4.129, ppl=17.49, wps=36709.4, ups=4.87, wpb=7532.7, bsz=191.1, num_updates=30400, lr=7.25476e-05, gnorm=1.068, clip=0, loss_scale=64, train_wall=17, wall=6220
+2020-10-13 20:13:46 | INFO | train_inner | epoch 078:    166 / 394 loss=5.39, nll_loss=4.129, ppl=17.49, wps=37699.5, ups=4.97, wpb=7581.8, bsz=199, num_updates=30500, lr=7.24286e-05, gnorm=1.061, clip=0, loss_scale=64, train_wall=20, wall=6240
+2020-10-13 20:14:07 | INFO | train_inner | epoch 078:    266 / 394 loss=5.421, nll_loss=4.163, ppl=17.92, wps=38103.5, ups=4.96, wpb=7675, bsz=201.9, num_updates=30600, lr=7.23102e-05, gnorm=1.08, clip=0, loss_scale=64, train_wall=20, wall=6260
+2020-10-13 20:14:27 | INFO | train_inner | epoch 078:    366 / 394 loss=5.407, nll_loss=4.147, ppl=17.71, wps=37861.3, ups=4.98, wpb=7603.2, bsz=204.5, num_updates=30700, lr=7.21923e-05, gnorm=1.079, clip=0, loss_scale=64, train_wall=20, wall=6281
+2020-10-13 20:14:32 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:14:33 | INFO | valid | epoch 078 | valid on 'valid' subset | loss 6.283 | nll_loss 5.064 | ppl 33.45 | wps 56217.9 | wpb 1984.1 | bsz 74.6 | num_updates 30728 | best_loss 6.067
+2020-10-13 20:14:33 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:14:35 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 78 @ 30728 updates, score 6.283) (writing took 2.0107907999990857 seconds)
+2020-10-13 20:14:35 | INFO | fairseq_cli.train | end of epoch 78 (average epoch stats below)
+2020-10-13 20:14:35 | INFO | train | epoch 078 | loss 5.404 | nll_loss 4.143 | ppl 17.67 | wps 36671.9 | ups 4.82 | wpb 7603.9 | bsz 198.6 | num_updates 30728 | lr 7.21594e-05 | gnorm 1.071 | clip 0 | loss_scale 64 | train_wall 79 | wall 6289
+2020-10-13 20:14:35 | INFO | fairseq.trainer | begin training epoch 79
+2020-10-13 20:14:49 | INFO | train_inner | epoch 079:     72 / 394 loss=5.382, nll_loss=4.119, ppl=17.38, wps=33845.7, ups=4.45, wpb=7602.7, bsz=210.4, num_updates=30800, lr=7.2075e-05, gnorm=1.078, clip=0, loss_scale=64, train_wall=20, wall=6303
+2020-10-13 20:15:08 | INFO | train_inner | epoch 079:    172 / 394 loss=5.388, nll_loss=4.124, ppl=17.44, wps=41005.8, ups=5.38, wpb=7616.1, bsz=191.5, num_updates=30900, lr=7.19583e-05, gnorm=1.067, clip=0, loss_scale=64, train_wall=18, wall=6322
+2020-10-13 20:15:28 | INFO | train_inner | epoch 079:    272 / 394 loss=5.387, nll_loss=4.124, ppl=17.44, wps=37632.6, ups=4.99, wpb=7534.2, bsz=197.6, num_updates=31000, lr=7.18421e-05, gnorm=1.066, clip=0, loss_scale=64, train_wall=20, wall=6342
+2020-10-13 20:15:48 | INFO | train_inner | epoch 079:    372 / 394 loss=5.404, nll_loss=4.143, ppl=17.67, wps=37527.1, ups=4.98, wpb=7529, bsz=194.8, num_updates=31100, lr=7.17265e-05, gnorm=1.077, clip=0, loss_scale=64, train_wall=20, wall=6362
+2020-10-13 20:15:52 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:15:53 | INFO | valid | epoch 079 | valid on 'valid' subset | loss 6.264 | nll_loss 5.033 | ppl 32.74 | wps 58002.1 | wpb 1984.1 | bsz 74.6 | num_updates 31122 | best_loss 6.067
+2020-10-13 20:15:53 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:15:55 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 79 @ 31122 updates, score 6.264) (writing took 1.9974490969980252 seconds)
+2020-10-13 20:15:55 | INFO | fairseq_cli.train | end of epoch 79 (average epoch stats below)
+2020-10-13 20:15:55 | INFO | train | epoch 079 | loss 5.393 | nll_loss 4.131 | ppl 17.52 | wps 37486.4 | ups 4.93 | wpb 7603.9 | bsz 198.6 | num_updates 31122 | lr 7.17012e-05 | gnorm 1.069 | clip 0 | loss_scale 64 | train_wall 77 | wall 6368
+2020-10-13 20:15:55 | INFO | fairseq.trainer | begin training epoch 80
+2020-10-13 20:16:10 | INFO | train_inner | epoch 080:     78 / 394 loss=5.375, nll_loss=4.11, ppl=17.27, wps=34578.9, ups=4.49, wpb=7703.5, bsz=190.6, num_updates=31200, lr=7.16115e-05, gnorm=1.05, clip=0, loss_scale=64, train_wall=20, wall=6384
+2020-10-13 20:16:30 | INFO | train_inner | epoch 080:    178 / 394 loss=5.37, nll_loss=4.104, ppl=17.19, wps=38301.5, ups=5.06, wpb=7566.1, bsz=202.6, num_updates=31300, lr=7.1497e-05, gnorm=1.079, clip=0, loss_scale=64, train_wall=20, wall=6404
+2020-10-13 20:16:48 | INFO | train_inner | epoch 080:    278 / 394 loss=5.389, nll_loss=4.126, ppl=17.45, wps=42397, ups=5.58, wpb=7593.4, bsz=205.6, num_updates=31400, lr=7.13831e-05, gnorm=1.093, clip=0, loss_scale=64, train_wall=18, wall=6422
+2020-10-13 20:17:07 | INFO | train_inner | epoch 080:    378 / 394 loss=5.409, nll_loss=4.148, ppl=17.73, wps=38637, ups=5.09, wpb=7595.6, bsz=194.1, num_updates=31500, lr=7.12697e-05, gnorm=1.083, clip=0, loss_scale=64, train_wall=20, wall=6441
+2020-10-13 20:17:11 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2020-10-13 20:17:11 | INFO | valid | epoch 080 | valid on 'valid' subset | loss 6.271 | nll_loss 5.049 | ppl 33.09 | wps 55687.2 | wpb 1984.1 | bsz 74.6 | num_updates 31516 | best_loss 6.067
+2020-10-13 20:17:11 | INFO | fairseq_cli.train | begin save checkpoint
+2020-10-13 20:17:13 | INFO | fairseq.checkpoint_utils | saved checkpoint fairseq/checkpoints/ted_aze_spm8000/aze_eng_plus_bt_100000_upsample_1/checkpoint_last.pt (epoch 80 @ 31516 updates, score 6.271) (writing took 2.1804435329977423 seconds)
+2020-10-13 20:17:13 | INFO | fairseq_cli.train | end of epoch 80 (average epoch stats below)
+2020-10-13 20:17:13 | INFO | train | epoch 080 | loss 5.383 | nll_loss 4.119 | ppl 17.38 | wps 38141.7 | ups 5.02 | wpb 7603.9 | bsz 198.6 | num_updates 31516 | lr 7.12516e-05 | gnorm 1.08 | clip 0 | loss_scale 64 | train_wall 75 | wall 6447
+2020-10-13 20:17:13 | INFO | fairseq_cli.train | done training in 6446.9 seconds
